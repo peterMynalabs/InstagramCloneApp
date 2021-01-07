@@ -11,12 +11,14 @@
 import UIKit
 
 protocol LoginWireframeInterface: WireframeInterface {
+    func transitionToSignUp()
 }
 
 protocol LoginViewInterface: ViewInterface {
 }
 
 protocol LoginPresenterInterface: PresenterInterface {
+    func pressedButton()
 }
 
 protocol LoginInteractorInterface: InteractorInterface {

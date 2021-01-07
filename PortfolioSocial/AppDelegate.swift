@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -36,6 +37,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UINavigationBar.appearance().barTintColor = .purple
             UINavigationBar.appearance().isTranslucent = false
         }
+        
+        FirebaseApp.configure()
         return true
     }
 

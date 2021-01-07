@@ -6,9 +6,9 @@ target 'PortfolioSocial' do
   use_frameworks!
 
   # Pods for PortfolioSocial
-
-	pod 'Firebase/Auth'
 	pod 'FirebaseUI/Auth'
+	pod 'Firebase'
+
   target 'PortfolioSocialTests' do
     inherit! :search_paths
     # Pods for testing
