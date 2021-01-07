@@ -1,0 +1,6 @@
+framework module Pods_PortfolioSocialTests {
+  umbrella header "Pods-PortfolioSocialTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
