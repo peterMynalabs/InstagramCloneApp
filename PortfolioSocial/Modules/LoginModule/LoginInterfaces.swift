@@ -11,13 +11,20 @@
 import UIKit
 
 protocol LoginWireframeInterface: WireframeInterface {
+    func transitionToProfile()
+    func transitionToNewUser()
 }
 
 protocol LoginViewInterface: ViewInterface {
 }
 
 protocol LoginPresenterInterface: PresenterInterface {
+    func pressedButton()
+    func checkUser(user: FIRUser)
+    func userExists()
+    func transitionToNewUser()
 }
 
 protocol LoginInteractorInterface: InteractorInterface {
+    func getUserState(user: FIRUser)
 }

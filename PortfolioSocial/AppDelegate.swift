@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,11 +15,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-         let initialViewController = LoginWireframe.init()
-        window?.rootViewController = initialViewController.viewController
-        window?.makeKeyAndVisible()
-
+         let initialViewController = TabBarWireframe.init()
+        let wireframeNavigationController = LoginNavigationController()
+        wireframeNavigationController.setRootWireframe(initialViewController, animated: false)
         
+        window?.rootViewController = wireframeNavigationController
+        window?.makeKeyAndVisible()
+        
+       
+
        
         
         if #available(iOS 13.0, *) {
@@ -36,6 +41,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UINavigationBar.appearance().barTintColor = .purple
             UINavigationBar.appearance().isTranslucent = false
         }
+        
+        FirebaseApp.configure()
+       
+
         return true
     }
 

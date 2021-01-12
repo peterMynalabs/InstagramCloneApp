@@ -17,9 +17,16 @@ final class ProfileScreenViewController: ViewController {
     var presenter: ProfileScreenPresenterInterface!
 
     // MARK: - Lifecycle -
-
+   lazy var user = User.current
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .green
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        print(user?.username)
+
     }
 
 }
