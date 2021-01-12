@@ -59,11 +59,11 @@
 		A479AB8525ACA9F4009DF940 /* TabBarInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A479AB8025ACA9F4009DF940 /* TabBarInteractor.swift */; };
 		A479AB8625ACA9F4009DF940 /* TabBarWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A479AB8125ACA9F4009DF940 /* TabBarWireframe.swift */; };
 		A479AC2B25ACD7EC009DF940 /* UserDefaults+isFirstLaunch..swift in Sources */ = {isa = PBXBuildFile; fileRef = A479AC2A25ACD7EC009DF940 /* UserDefaults+isFirstLaunch..swift */; };
-		A4F83C5025AC6014009065A5 /* CreateUsernameInterfaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F83C4B25AC6014009065A5 /* CreateUsernameInterfaces.swift */; };
-		A4F83C5125AC6014009065A5 /* CreateUsernamePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F83C4C25AC6014009065A5 /* CreateUsernamePresenter.swift */; };
-		A4F83C5225AC6014009065A5 /* CreateUsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F83C4D25AC6014009065A5 /* CreateUsernameViewController.swift */; };
-		A4F83C5325AC6014009065A5 /* CreateUsernameInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F83C4E25AC6014009065A5 /* CreateUsernameInteractor.swift */; };
-		A4F83C5425AC6014009065A5 /* CreateUsernameWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F83C4F25AC6014009065A5 /* CreateUsernameWireframe.swift */; };
+		A479AD4525ADD1D9009DF940 /* CreateUserInterfaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = A479AD4025ADD1D9009DF940 /* CreateUserInterfaces.swift */; };
+		A479AD4625ADD1D9009DF940 /* CreateUserPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A479AD4125ADD1D9009DF940 /* CreateUserPresenter.swift */; };
+		A479AD4725ADD1D9009DF940 /* CreateUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A479AD4225ADD1D9009DF940 /* CreateUserViewController.swift */; };
+		A479AD4825ADD1DA009DF940 /* CreateUserInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A479AD4325ADD1D9009DF940 /* CreateUserInteractor.swift */; };
+		A479AD4925ADD1DA009DF940 /* CreateUserWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A479AD4425ADD1D9009DF940 /* CreateUserWireframe.swift */; };
 		E66122AF8E13334697D0B905 /* Pods_PortfolioSocial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF6D0FC111AA4A0208863A54 /* Pods_PortfolioSocial.framework */; };
 		ED15E178CBE6F3C0D39D7263 /* Pods_PortfolioSocial_PortfolioSocialUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B0A36ACA8829E774AD8C78F /* Pods_PortfolioSocial_PortfolioSocialUITests.framework */; };
 /* End PBXBuildFile section */
@@ -163,11 +163,11 @@
 		A479AB8025ACA9F4009DF940 /* TabBarInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarInteractor.swift; sourceTree = "<group>"; };
 		A479AB8125ACA9F4009DF940 /* TabBarWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarWireframe.swift; sourceTree = "<group>"; };
 		A479AC2A25ACD7EC009DF940 /* UserDefaults+isFirstLaunch..swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+isFirstLaunch..swift"; sourceTree = "<group>"; };
-		A4F83C4B25AC6014009065A5 /* CreateUsernameInterfaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateUsernameInterfaces.swift; path = ../../../../../Documents/CreateUsernameInterfaces.swift; sourceTree = "<group>"; };
-		A4F83C4C25AC6014009065A5 /* CreateUsernamePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateUsernamePresenter.swift; path = ../../../../../Documents/CreateUsernamePresenter.swift; sourceTree = "<group>"; };
-		A4F83C4D25AC6014009065A5 /* CreateUsernameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateUsernameViewController.swift; path = ../../../../../Documents/CreateUsernameViewController.swift; sourceTree = "<group>"; };
-		A4F83C4E25AC6014009065A5 /* CreateUsernameInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateUsernameInteractor.swift; path = ../../../../../Documents/CreateUsernameInteractor.swift; sourceTree = "<group>"; };
-		A4F83C4F25AC6014009065A5 /* CreateUsernameWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateUsernameWireframe.swift; path = ../../../../../Documents/CreateUsernameWireframe.swift; sourceTree = "<group>"; };
+		A479AD4025ADD1D9009DF940 /* CreateUserInterfaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserInterfaces.swift; sourceTree = "<group>"; };
+		A479AD4125ADD1D9009DF940 /* CreateUserPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserPresenter.swift; sourceTree = "<group>"; };
+		A479AD4225ADD1D9009DF940 /* CreateUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserViewController.swift; sourceTree = "<group>"; };
+		A479AD4325ADD1D9009DF940 /* CreateUserInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserInteractor.swift; sourceTree = "<group>"; };
+		A479AD4425ADD1D9009DF940 /* CreateUserWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserWireframe.swift; sourceTree = "<group>"; };
 		B29FD5D09D12EF191332194B /* Pods_PortfolioSocialTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PortfolioSocialTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF6D0FC111AA4A0208863A54 /* Pods_PortfolioSocial.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PortfolioSocial.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -402,11 +402,11 @@
 		A4F83C2625AC5FCF009065A5 /* CreateUsernameModule */ = {
 			isa = PBXGroup;
 			children = (
-				A4F83C4B25AC6014009065A5 /* CreateUsernameInterfaces.swift */,
-				A4F83C4C25AC6014009065A5 /* CreateUsernamePresenter.swift */,
-				A4F83C4D25AC6014009065A5 /* CreateUsernameViewController.swift */,
-				A4F83C4E25AC6014009065A5 /* CreateUsernameInteractor.swift */,
-				A4F83C4F25AC6014009065A5 /* CreateUsernameWireframe.swift */,
+				A479AD4025ADD1D9009DF940 /* CreateUserInterfaces.swift */,
+				A479AD4125ADD1D9009DF940 /* CreateUserPresenter.swift */,
+				A479AD4225ADD1D9009DF940 /* CreateUserViewController.swift */,
+				A479AD4325ADD1D9009DF940 /* CreateUserInteractor.swift */,
+				A479AD4425ADD1D9009DF940 /* CreateUserWireframe.swift */,
 			);
 			path = CreateUsernameModule;
 			sourceTree = "<group>";
@@ -699,34 +699,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A479AD4525ADD1D9009DF940 /* CreateUserInterfaces.swift in Sources */,
 				A479AB8225ACA9F4009DF940 /* TabBarInterfaces.swift in Sources */,
 				A42585D025A749B9005EB7BE /* UserModel.swift in Sources */,
 				A425857525A739EA005EB7BE /* HomeFeedInteractor.swift in Sources */,
 				A425852325A73564005EB7BE /* LoginViewController.swift in Sources */,
 				A425851125A73088005EB7BE /* ProfileScreenPresenter.swift in Sources */,
-				A4F83C5325AC6014009065A5 /* CreateUsernameInteractor.swift in Sources */,
 				A425854F25A739C7005EB7BE /* ActivityInterfaces.swift in Sources */,
 				A425842925A614E0005EB7BE /* AppDelegate.swift in Sources */,
 				A425857625A739EA005EB7BE /* HomeFeedWireframe.swift in Sources */,
+				A479AD4925ADD1DA009DF940 /* CreateUserWireframe.swift in Sources */,
 				A42584EF25A72DE0005EB7BE /* ViperBaseClasses.swift in Sources */,
 				A42584E725A72DC7005EB7BE /* SearchViewWireframe.swift in Sources */,
 				A425852225A73564005EB7BE /* LoginPresenter.swift in Sources */,
 				A425855325A739C7005EB7BE /* ActivityWireframe.swift in Sources */,
 				A425851225A73088005EB7BE /* ProfileScreenViewController.swift in Sources */,
 				A425852125A73564005EB7BE /* LoginInterfaces.swift in Sources */,
-				A4F83C5125AC6014009065A5 /* CreateUsernamePresenter.swift in Sources */,
 				A425855225A739C7005EB7BE /* ActivityInteractor.swift in Sources */,
 				A42584E325A72DC7005EB7BE /* SearchViewInterfaces.swift in Sources */,
+				A479AD4725ADD1D9009DF940 /* CreateUserViewController.swift in Sources */,
 				A42585B525A7454A005EB7BE /* UIColor+Extension.swift in Sources */,
+				A479AD4825ADD1DA009DF940 /* CreateUserInteractor.swift in Sources */,
 				A479AB8325ACA9F4009DF940 /* TabBarPresenter.swift in Sources */,
-				A4F83C5225AC6014009065A5 /* CreateUsernameViewController.swift in Sources */,
+				A479AD4625ADD1D9009DF940 /* CreateUserPresenter.swift in Sources */,
 				A425857325A739EA005EB7BE /* HomeFeedPresenter.swift in Sources */,
 				A479AC2B25ACD7EC009DF940 /* UserDefaults+isFirstLaunch..swift in Sources */,
 				A479AB7925ACA340009DF940 /* UserService.swift in Sources */,
 				A42584E625A72DC7005EB7BE /* SearchViewInteractor.swift in Sources */,
 				A425856225A739D8005EB7BE /* AddPostInterfaces.swift in Sources */,
 				A425851325A73088005EB7BE /* ProfileScreenInteractor.swift in Sources */,
-				A4F83C5025AC6014009065A5 /* CreateUsernameInterfaces.swift in Sources */,
 				A425852425A73564005EB7BE /* LoginInteractor.swift in Sources */,
 				A425856325A739D8005EB7BE /* AddPostPresenter.swift in Sources */,
 				A425856525A739D8005EB7BE /* AddPostInteractor.swift in Sources */,
@@ -741,7 +742,6 @@
 				A479AB8625ACA9F4009DF940 /* TabBarWireframe.swift in Sources */,
 				A425851425A73088005EB7BE /* ProfileScreenWireframe.swift in Sources */,
 				A425855125A739C7005EB7BE /* ActivityViewController.swift in Sources */,
-				A4F83C5425AC6014009065A5 /* CreateUsernameWireframe.swift in Sources */,
 				A425852525A73564005EB7BE /* LoginWireframe.swift in Sources */,
 				A425856625A739D8005EB7BE /* AddPostWireframe.swift in Sources */,
 				A479AB8525ACA9F4009DF940 /* TabBarInteractor.swift in Sources */,

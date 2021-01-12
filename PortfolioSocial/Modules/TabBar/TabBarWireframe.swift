@@ -10,6 +10,9 @@
 
 import UIKit
 
+//There is some fishy things happening with NaviagtionControllers that I havent yet fixed. This being the main archtecture of the whole app, What do you think about it?
+
+//I shamelessly stole this (the enum) from a previous project I worked on, not sure wether this is the best way to do it
 
 enum RootTabBarsItem : Int {
     

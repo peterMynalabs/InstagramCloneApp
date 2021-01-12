@@ -21,6 +21,7 @@ final class LoginInteractor {
 
 extension LoginInteractor: LoginInteractorInterface {
     func getUserState(user: FIRUser) {
+        //crap bad bad
         UserDefaults.isFirstLaunch()
         UserDefaults.isloggedIn()
         UserService.show(forUID: user.uid) { (user) in

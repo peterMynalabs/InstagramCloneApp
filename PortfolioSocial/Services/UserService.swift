@@ -9,7 +9,7 @@ import Foundation
 import FirebaseAuth.FIRUser
 import FirebaseDatabase
 
-
+//I have this service as singleton currently, I will prbably refactor this to a protocol later on or maybe even make a GlobalServiceLocator if the number of services becomes bloated, I don't want the interactors to have twenty protocols.
 struct UserService {
     static func create(_ firUser: FIRUser, username: String, completion: @escaping (User?) -> Void) {
         let userAttrs = ["username": username]

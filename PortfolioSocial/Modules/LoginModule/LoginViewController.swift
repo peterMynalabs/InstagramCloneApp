@@ -89,10 +89,16 @@ final class LoginViewController: UIViewController {
         authUI.delegate = self
         let providers = [FUIEmailAuth()]
         authUI.providers = providers
+        //Will add more providers later on
   
         let authViewController = authUI.authViewController()
         
         present(authViewController, animated: true)
+        //Shows loginController for a second after dismissal which sucks
+
+        
+        // I have no clue how to work with non-viper view controllers in a Viper project. There are some resources out there for what to do with WKWebView but they generally involve creating some complicated structure https://github.com/strongself/The-Book-of-VIPER/blob/master/english/webview.md
+        //I tried creating the authviewcontroller in the interactor and passing it back to this view controller but then I needed to add UIKit to the presenter which I read is a big no no, also there where issues with the delegate in that case
     }
 
 }

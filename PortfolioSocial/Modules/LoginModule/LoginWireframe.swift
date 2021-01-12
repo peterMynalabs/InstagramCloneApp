@@ -33,13 +33,11 @@ final class LoginWireframe: BaseWireframe {
 extension LoginWireframe: LoginWireframeInterface {
    
     func transitionToNewUser() {
-      let signUp = CreateUsernameWireframe()
-        navigationController?.pushWireframe(signUp)
+      let register = CreateUserWireframe()
+        navigationController?.pushWireframe(register)
     }
     
     func transitionToProfile() {
-        //let tabBar = TabBarWireframe()
-        //navigationController?.setRootWireframe(tabBar)
         navigationController?.popViewController(animated: true)
     }
 }

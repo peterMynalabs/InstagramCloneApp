@@ -10,8 +10,10 @@
 
 import UIKit
 
+
 final class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
 
+    
     // MARK: - Public properties -
 
     var presenter: TabBarPresenterInterface!
