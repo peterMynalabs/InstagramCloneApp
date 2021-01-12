@@ -16,6 +16,7 @@ protocol LoginWireframeInterface: WireframeInterface {
 }
 
 protocol LoginViewInterface: ViewInterface {
+    func removeAllViews()
 }
 
 protocol LoginPresenterInterface: PresenterInterface {

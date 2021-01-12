@@ -25,12 +25,17 @@ final class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         view.addSubview(topBar)
         topBar.addSubview(topLabel)
         topBar.addSubview(bottomLabel)
         view.addSubview(signUpOrRegister)
         view.backgroundColor = .white
         addFrames()
+    }
+    
+    deinit {
+        self.removeSpinner()
     }
     
     var topBar: UIView = {
@@ -77,8 +82,7 @@ final class LoginViewController: UIViewController {
     }
     
     @objc func onPress() {
-        self.view.backgroundColor = .brown
-        //presenter.pressedButton()
+        presenter.pressedButton()
         setupFirebaseAuth()
     }
     
@@ -92,9 +96,8 @@ final class LoginViewController: UIViewController {
         //Will add more providers later on
   
         let authViewController = authUI.authViewController()
-        
+        authViewController.modalPresentationStyle = .fullScreen
         present(authViewController, animated: true)
-        //Shows loginController for a second after dismissal which sucks
 
         
         // I have no clue how to work with non-viper view controllers in a Viper project. There are some resources out there for what to do with WKWebView but they generally involve creating some complicated structure https://github.com/strongself/The-Book-of-VIPER/blob/master/english/webview.md
@@ -112,7 +115,6 @@ extension LoginViewController: FUIAuthDelegate {
         print("handle user signup / login")
         guard let currentUser = authDataResult?.user
         else { return }
-        
         presenter.checkUser(user: currentUser)
      
         
@@ -123,4 +125,11 @@ extension LoginViewController: FUIAuthDelegate {
 // MARK: - Extensions -
 
 extension LoginViewController: LoginViewInterface {
+    func removeAllViews() {
+        //aihfaoiehfoaheoifhsioehf ugh
+        for view in self.view.subviews{
+            view.removeFromSuperview()
+        }
+        self.showSpinner(onView: view)
+    }
 }

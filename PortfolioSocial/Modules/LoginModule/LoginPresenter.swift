@@ -31,6 +31,7 @@ final class LoginPresenter {
 
 extension LoginPresenter: LoginPresenterInterface {
     func pressedButton() {
+        view.removeAllViews()
     }
 
     func checkUser(user: FIRUser) {

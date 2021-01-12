@@ -34,10 +34,10 @@ extension LoginWireframe: LoginWireframeInterface {
    
     func transitionToNewUser() {
       let register = CreateUserWireframe()
-        navigationController?.pushWireframe(register)
+        navigationController?.pushWireframeWithoutAnimation(register)
     }
     
     func transitionToProfile() {
-        navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: false)
     }
 }
