@@ -22,6 +22,7 @@ final class LoginWireframe: BaseWireframe {
 
         let interactor = LoginInteractor()
         let presenter = LoginPresenter(view: moduleViewController, interactor: interactor, wireframe: self)
+        interactor.presenter = presenter
         moduleViewController.presenter = presenter
     }
 
@@ -30,8 +31,15 @@ final class LoginWireframe: BaseWireframe {
 // MARK: - Extensions -
 
 extension LoginWireframe: LoginWireframeInterface {
-    func transitionToSignUp() {
-        
+   
+    func transitionToNewUser() {
+      let signUp = CreateUsernameWireframe()
+        navigationController?.pushWireframe(signUp)
     }
     
+    func transitionToProfile() {
+        //let tabBar = TabBarWireframe()
+        //navigationController?.setRootWireframe(tabBar)
+        navigationController?.popViewController(animated: true)
+    }
 }

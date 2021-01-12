@@ -9,6 +9,11 @@
 //
 
 import UIKit
+import Foundation
+import FirebaseAuth
+import FirebaseUI
+
+typealias FIRUser = FirebaseAuth.User
 
 final class LoginViewController: UIViewController {
 
@@ -73,9 +78,40 @@ final class LoginViewController: UIViewController {
     
     @objc func onPress() {
         self.view.backgroundColor = .brown
-        presenter.pressedButton()
+        //presenter.pressedButton()
+        setupFirebaseAuth()
+    }
+    
+    func setupFirebaseAuth() {
+        guard let authUI = FUIAuth.defaultAuthUI()
+        else { return }
+                
+        authUI.delegate = self
+        let providers = [FUIEmailAuth()]
+        authUI.providers = providers
+  
+        let authViewController = authUI.authViewController()
+        
+        present(authViewController, animated: true)
     }
 
+}
+extension LoginViewController: FUIAuthDelegate {
+    func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
+        if let error = error {
+            assertionFailure("Error signing in: \(error.localizedDescription)")
+            return
+        }
+        
+        print("handle user signup / login")
+        guard let currentUser = authDataResult?.user
+        else { return }
+        
+        presenter.checkUser(user: currentUser)
+     
+        
+
+    }
 }
 
 // MARK: - Extensions -

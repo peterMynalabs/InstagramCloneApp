@@ -31,7 +31,19 @@ final class LoginPresenter {
 
 extension LoginPresenter: LoginPresenterInterface {
     func pressedButton() {
-        
+    }
+
+    func checkUser(user: FIRUser) {
+        interactor.getUserState(user: user)
     }
     
+    func userExists() {
+        wireframe.transitionToProfile()
+    }
+    
+    func transitionToNewUser() {
+        wireframe.transitionToNewUser()
+    }
 }
+    
+

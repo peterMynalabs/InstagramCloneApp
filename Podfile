@@ -8,6 +8,9 @@ target 'PortfolioSocial' do
   # Pods for PortfolioSocial
 	pod 'FirebaseUI/Auth'
 	pod 'Firebase'
+	pod 'FirebaseUI/Email'
+	pod 'Firebase/Database'
+
 
   target 'PortfolioSocialTests' do
     inherit! :search_paths
