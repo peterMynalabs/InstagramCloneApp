@@ -21,16 +21,12 @@ final class LoginInteractor {
 
 extension LoginInteractor: LoginInteractorInterface {
     func getUserState(user: FIRUser) {
-        //crap bad bad
-        UserDefaults.isFirstLaunch()
-        UserDefaults.isloggedIn()
-        UserService.show(forUID: user.uid) { (user) in
+        UserService.show(forUID: user.uid) { [weak self] (user) in
             if let user = user {
-                User.setCurrent(user)
-                self.presenter?.userExists()
+                User.setCurrent(user, saveToDefaults: true)
+                self?.presenter?.userExists()
             } else {
-                self.presenter?.transitionToNewUser()
-                
+                self?.presenter?.transitionToNewUser()
             }
         }
     }

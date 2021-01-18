@@ -48,6 +48,8 @@ enum RootTabBarsItem : Int {
 final class TabBarWireframe: BaseWireframe {
 
     // MARK: - Private properties -
+    var titles = ["Home","Search", "Post", "Liked", "Profile"]
+
 
     fileprivate weak var view: (UITabBarController)?
    
@@ -60,6 +62,9 @@ final class TabBarWireframe: BaseWireframe {
         super.init(viewController: moduleViewController)
         moduleViewController.viewControllers = RootTabBarsItem.controllers()
         moduleViewController.selectedIndex = 4
+        for i in 0...titles.count - 1 {
+            moduleViewController.viewControllers?[i].title = titles[i]
+        }
         let interactor = TabBarInteractor()
         let presenter = TabBarPresenter(view: moduleViewController, interactor: interactor, wireframe: self)
         moduleViewController.presenter = presenter

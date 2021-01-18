@@ -23,9 +23,9 @@ extension CreateUserInteractor: CreateUserInteractorInterface {
         guard let firUser = Auth.auth().currentUser,
               let username = username,
               !username.isEmpty else { return }
-        UserService.create(firUser, username: username) { (user) in
-            guard let user = user else { return }
-              self.presenter?.transitionToProfile()
+        UserService.create(firUser, username: username) { [weak self] (user) in
+            User.setCurrent(user!, saveToDefaults: true)//yooo
+              self?.presenter?.transitionToProfile()
         }
     }
 }

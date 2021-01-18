@@ -9,43 +9,35 @@
 //
 
 import UIKit
-
+import Firebase
 
 final class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
-
+    
     
     // MARK: - Public properties -
-
+    
     var presenter: TabBarPresenterInterface!
-
+    
     var titles = ["Home","Search", "Post", "Liked", "Profile"]
     // MARK: - Lifecycle -
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self
         tabBar.backgroundColor = .white
+       
     }
     
     override func viewDidAppear(_ animated: Bool) {
-      
-
-        if UserDefaults.isFirstLaunch()  {
-                presenter.showLogin()
-            }
-
         for i in 0...titles.count - 1 {
             viewControllers?[i].title = titles[i]
         }
-       
     }
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         print("Should select viewController: \(viewController.title ?? "") ?")
         return true;
     }
-
-
 }
 
 // MARK: - Extensions -

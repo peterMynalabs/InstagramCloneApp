@@ -15,9 +15,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-         let initialViewController = TabBarWireframe.init()
-        let wireframeNavigationController = LoginNavigationController()
-        wireframeNavigationController.setRootWireframe(initialViewController, animated: false)
+        let defaults = UserDefaults.standard
+        let wireframeNavigationController = RootNavigationController()
+        FirebaseApp.configure()
+
+        
+        if let _ = Auth.auth().currentUser,
+                  let userData = defaults.object(forKey: Constants.UserDefaults.currentUser) as? Data,
+                  let user = try? JSONDecoder().decode(User.self, from: userData) {
+                   User.setCurrent(user)
+            wireframeNavigationController.setRootWireframe(TabBarWireframe.init(), animated: false)
+        } else {
+            wireframeNavigationController.setRootWireframe( LoginWireframe.init(), animated: false)
+        }
         
         window?.rootViewController = wireframeNavigationController
         window?.makeKeyAndVisible()
@@ -41,7 +51,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UINavigationBar.appearance().isTranslucent = false
         }
         
-        FirebaseApp.configure()
        
 
         return true

@@ -38,6 +38,7 @@ extension LoginWireframe: LoginWireframeInterface {
     }
     
     func transitionToProfile() {
-        navigationController?.popViewController(animated: false)
+        let tabBarWireframe = TabBarWireframe.init()
+        navigationController?.setRootWireframeWithoutAnimation(tabBarWireframe)
     }
 }

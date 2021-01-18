@@ -32,6 +32,7 @@ final class CreateUserWireframe: BaseWireframe {
 
 extension CreateUserWireframe: CreateUserWireframeInterface {
     func transitionToProfile() {
-        navigationController?.popToRootViewController(animated: false)
+        let tabBarWireframe = TabBarWireframe.init()
+        navigationController?.setRootWireframeWithoutAnimation(tabBarWireframe)
     }
 }

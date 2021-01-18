@@ -10,10 +10,8 @@ import UIKit
 import FirebaseDatabase.FIRDataSnapshot
 
 
-class LoginNavigationController: UINavigationController {
-}
 
-class User {
+class User: Codable {
 
     let uid: String
     let username: String
@@ -36,16 +34,24 @@ class User {
 
     // 2
     static var current: User? {
-        // 3
-      
-
-        // 4
+        
         return _current
     }
 
     // MARK: - Class Methods
 
     // 5
+    
+    static func setCurrent(_ user: User, saveToDefaults: Bool = false) {
+        if saveToDefaults {
+            if let data = try? JSONEncoder().encode(user) {
+                UserDefaults.standard.set(data, forKey: Constants.UserDefaults.currentUser)
+                print("Hey")
+            }
+        }
+        _current = user
+    }
+    
     static func setCurrent(_ user: User) {
         _current = user
     }

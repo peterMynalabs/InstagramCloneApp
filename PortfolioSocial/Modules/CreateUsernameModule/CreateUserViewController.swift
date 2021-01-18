@@ -13,11 +13,11 @@ import FirebaseAuth
 import FirebaseDatabase
 
 final class CreateUserViewController: UIViewController, UITextFieldDelegate {
-
+    
     // MARK: - Public properties -
-
+    
     var presenter: CreateUserPresenterInterface!
-
+    
     // MARK: - Lifecycle -
     
     var topLabel: UILabel = {
@@ -74,7 +74,7 @@ final class CreateUserViewController: UIViewController, UITextFieldDelegate {
         usernameTextField.frame = CGRect(x: 0, y: 150, width: 300, height: 50)
         nextButton.frame = CGRect(x: 0, y: 225, width: 300, height: 50)
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -92,19 +92,19 @@ final class CreateUserViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-            switch textField {
-            case usernameTextField:
-                usernameTextField.resignFirstResponder()
-            default:
-                break
-            }
-            return true
+        switch textField {
+        case usernameTextField:
+            usernameTextField.resignFirstResponder()
+        default:
+            break
         }
-
-        func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-            return true
-        }
-
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        return true
+    }
+    
 }
 
 // MARK: - Extensions -

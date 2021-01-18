@@ -10,25 +10,32 @@
 
 import UIKit
 
-final class ProfileScreenViewController: ViewController {
-
+final class ProfileScreenViewController: UIViewController {
+    
     // MARK: - Public properties -
-
+    
     var presenter: ProfileScreenPresenterInterface!
-
+    var profileImage: UIImage?
     // MARK: - Lifecycle -
-   lazy var user = User.current
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .green
-        navigationController?.navigationBar.prefersLargeTitles = true
+        self.title = "Profile"
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationController?.navigationBar.backgroundColor = .red
+        self.navigationController?.navigationBar.prefersLargeTitles = true
     }
+    
     override func viewDidAppear(_ animated: Bool) {
-        print(user?.username)
-
+        print(User.current?.username)
     }
-
+    
+    let profilePhoto: UIImageView = {
+        let imageView = UIImageView()
+        imageView.layer.cornerRadius = imageView.frame.size.width / 2;
+        imageView.layer.masksToBounds = true
+        return imageView
+    }()
 }
 
 // MARK: - Extensions -
