@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		43DF921DD5222DE180B56430 /* Pods_PortfolioSocialTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACC156C4B833619674E1EC58 /* Pods_PortfolioSocialTests.framework */; };
-		74E9F5B11A05B784375FF70F /* Pods_PortfolioSocial_PortfolioSocialUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EFFC4E1D9213D474C20E825 /* Pods_PortfolioSocial_PortfolioSocialUITests.framework */; };
+		2ACF06DE48DA9E3CBDF4E57C /* Pods_PortfolioSocial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 708BBC48D890D1C6A07B12A9 /* Pods_PortfolioSocial.framework */; };
+		519BAFC38FDA37B500FC97A5 /* Pods_PortfolioSocialTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D354FA6A8371D9E0D37EE4 /* Pods_PortfolioSocialTests.framework */; };
+		9F01AB9D6E8A37BAD476C944 /* Pods_PortfolioSocial_PortfolioSocialUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEBAB21880640EA259D30BE2 /* Pods_PortfolioSocial_PortfolioSocialUITests.framework */; };
 		A425842925A614E0005EB7BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A425842825A614E0005EB7BE /* AppDelegate.swift */; };
 		A425843025A614E0005EB7BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A425842E25A614E0005EB7BE /* Main.storyboard */; };
 		A425843225A614E3005EB7BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A425843125A614E3005EB7BE /* Assets.xcassets */; };
@@ -53,6 +54,9 @@
 		A425897A25A77005005EB7BE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A425897925A77005005EB7BE /* GoogleService-Info.plist */; };
 		A42589D625AB8313005EB7BE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A42589D525AB8313005EB7BE /* UIKit.framework */; };
 		A42589D825AB8320005EB7BE /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A42589D725AB8320005EB7BE /* CoreServices.framework */; };
+		A435D49325B971370097BD5A /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A435D49225B971370097BD5A /* UIImage+Extension.swift */; };
+		A435D49725B97C800097BD5A /* UserStatisticsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A435D49625B97C800097BD5A /* UserStatisticsContainer.swift */; };
+		A435D49D25B9B16B0097BD5A /* UserInformationStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A435D49C25B9B16B0097BD5A /* UserInformationStack.swift */; };
 		A479AB7925ACA340009DF940 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A479AB7825ACA340009DF940 /* UserService.swift */; };
 		A479AB8225ACA9F4009DF940 /* TabBarInterfaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = A479AB7D25ACA9F4009DF940 /* TabBarInterfaces.swift */; };
 		A479AB8325ACA9F4009DF940 /* TabBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A479AB7E25ACA9F4009DF940 /* TabBarPresenter.swift */; };
@@ -68,7 +72,8 @@
 		A479AD9125ADE719009DF940 /* UIViewController+Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A479AD9025ADE719009DF940 /* UIViewController+Spinner.swift */; };
 		A479ADCF25B07B34009DF940 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A479ADCE25B07B34009DF940 /* Constants.swift */; };
 		A479AE1725B0854B009DF940 /* RootNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A479AE1625B0854B009DF940 /* RootNavigationController.swift */; };
-		C03F9EB0C441493373AE3415 /* Pods_PortfolioSocial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D93A27AF52CD0F4D7552DC9 /* Pods_PortfolioSocial.framework */; };
+		A4BB58FC25BAB08D0032777D /* EditProfileButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BB58FB25BAB08D0032777D /* EditProfileButton.swift */; };
+		A4BB590025BACE920032777D /* PostsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BB58FF25BACE920032777D /* PostsCollectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,13 +107,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		322EDF42549348662424229C /* Pods-PortfolioSocial-PortfolioSocialUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PortfolioSocial-PortfolioSocialUITests.release.xcconfig"; path = "Target Support Files/Pods-PortfolioSocial-PortfolioSocialUITests/Pods-PortfolioSocial-PortfolioSocialUITests.release.xcconfig"; sourceTree = "<group>"; };
-		34F13CA4C526F57EC57DC828 /* Pods-PortfolioSocialTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PortfolioSocialTests.debug.xcconfig"; path = "Target Support Files/Pods-PortfolioSocialTests/Pods-PortfolioSocialTests.debug.xcconfig"; sourceTree = "<group>"; };
-		4B14D4CE92E9963B7A223B5A /* Pods-PortfolioSocialTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PortfolioSocialTests.release.xcconfig"; path = "Target Support Files/Pods-PortfolioSocialTests/Pods-PortfolioSocialTests.release.xcconfig"; sourceTree = "<group>"; };
-		4E53F655C16C1DC869FF714C /* Pods-PortfolioSocial.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PortfolioSocial.debug.xcconfig"; path = "Target Support Files/Pods-PortfolioSocial/Pods-PortfolioSocial.debug.xcconfig"; sourceTree = "<group>"; };
-		6757F8EC4433481866DFB842 /* Pods-PortfolioSocial.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PortfolioSocial.release.xcconfig"; path = "Target Support Files/Pods-PortfolioSocial/Pods-PortfolioSocial.release.xcconfig"; sourceTree = "<group>"; };
-		6D93A27AF52CD0F4D7552DC9 /* Pods_PortfolioSocial.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PortfolioSocial.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9EFFC4E1D9213D474C20E825 /* Pods_PortfolioSocial_PortfolioSocialUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PortfolioSocial_PortfolioSocialUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		01F1F0AAF90FE5EE1DEB9DE7 /* Pods-PortfolioSocial-PortfolioSocialUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PortfolioSocial-PortfolioSocialUITests.debug.xcconfig"; path = "Target Support Files/Pods-PortfolioSocial-PortfolioSocialUITests/Pods-PortfolioSocial-PortfolioSocialUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		45693B7149E84B207CED9D88 /* Pods-PortfolioSocialTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PortfolioSocialTests.debug.xcconfig"; path = "Target Support Files/Pods-PortfolioSocialTests/Pods-PortfolioSocialTests.debug.xcconfig"; sourceTree = "<group>"; };
+		55D354FA6A8371D9E0D37EE4 /* Pods_PortfolioSocialTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PortfolioSocialTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5740282DCB2A813C77430BCE /* Pods-PortfolioSocial-PortfolioSocialUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PortfolioSocial-PortfolioSocialUITests.release.xcconfig"; path = "Target Support Files/Pods-PortfolioSocial-PortfolioSocialUITests/Pods-PortfolioSocial-PortfolioSocialUITests.release.xcconfig"; sourceTree = "<group>"; };
+		5FA909B210E95ED14C5D3618 /* Pods-PortfolioSocial.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PortfolioSocial.release.xcconfig"; path = "Target Support Files/Pods-PortfolioSocial/Pods-PortfolioSocial.release.xcconfig"; sourceTree = "<group>"; };
+		6F06100292F630C3A3D8F533 /* Pods-PortfolioSocialTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PortfolioSocialTests.release.xcconfig"; path = "Target Support Files/Pods-PortfolioSocialTests/Pods-PortfolioSocialTests.release.xcconfig"; sourceTree = "<group>"; };
+		708BBC48D890D1C6A07B12A9 /* Pods_PortfolioSocial.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PortfolioSocial.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A425842525A614E0005EB7BE /* PortfolioSocial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PortfolioSocial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A425842825A614E0005EB7BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A425842F25A614E0005EB7BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -159,6 +164,9 @@
 		A425897925A77005005EB7BE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A42589D525AB8313005EB7BE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A42589D725AB8320005EB7BE /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+		A435D49225B971370097BD5A /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		A435D49625B97C800097BD5A /* UserStatisticsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatisticsContainer.swift; sourceTree = "<group>"; };
+		A435D49C25B9B16B0097BD5A /* UserInformationStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformationStack.swift; sourceTree = "<group>"; };
 		A479AB7825ACA340009DF940 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		A479AB7D25ACA9F4009DF940 /* TabBarInterfaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarInterfaces.swift; sourceTree = "<group>"; };
 		A479AB7E25ACA9F4009DF940 /* TabBarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPresenter.swift; sourceTree = "<group>"; };
@@ -174,8 +182,10 @@
 		A479AD9025ADE719009DF940 /* UIViewController+Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Spinner.swift"; sourceTree = "<group>"; };
 		A479ADCE25B07B34009DF940 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A479AE1625B0854B009DF940 /* RootNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootNavigationController.swift; sourceTree = "<group>"; };
-		ACC156C4B833619674E1EC58 /* Pods_PortfolioSocialTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PortfolioSocialTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D3D7521788B22CB3B5A38698 /* Pods-PortfolioSocial-PortfolioSocialUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PortfolioSocial-PortfolioSocialUITests.debug.xcconfig"; path = "Target Support Files/Pods-PortfolioSocial-PortfolioSocialUITests/Pods-PortfolioSocial-PortfolioSocialUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		A4BB58FB25BAB08D0032777D /* EditProfileButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileButton.swift; sourceTree = "<group>"; };
+		A4BB58FF25BACE920032777D /* PostsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsCollectionView.swift; sourceTree = "<group>"; };
+		B866A8299721F5EC156C6B35 /* Pods-PortfolioSocial.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PortfolioSocial.debug.xcconfig"; path = "Target Support Files/Pods-PortfolioSocial/Pods-PortfolioSocial.debug.xcconfig"; sourceTree = "<group>"; };
+		DEBAB21880640EA259D30BE2 /* Pods_PortfolioSocial_PortfolioSocialUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PortfolioSocial_PortfolioSocialUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,7 +195,7 @@
 			files = (
 				A42589D825AB8320005EB7BE /* CoreServices.framework in Frameworks */,
 				A42589D625AB8313005EB7BE /* UIKit.framework in Frameworks */,
-				C03F9EB0C441493373AE3415 /* Pods_PortfolioSocial.framework in Frameworks */,
+				2ACF06DE48DA9E3CBDF4E57C /* Pods_PortfolioSocial.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,7 +203,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43DF921DD5222DE180B56430 /* Pods_PortfolioSocialTests.framework in Frameworks */,
+				519BAFC38FDA37B500FC97A5 /* Pods_PortfolioSocialTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,7 +211,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74E9F5B11A05B784375FF70F /* Pods_PortfolioSocial_PortfolioSocialUITests.framework in Frameworks */,
+				9F01AB9D6E8A37BAD476C944 /* Pods_PortfolioSocial_PortfolioSocialUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,12 +221,12 @@
 		A31555E72D7AF4DB70424042 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				4E53F655C16C1DC869FF714C /* Pods-PortfolioSocial.debug.xcconfig */,
-				6757F8EC4433481866DFB842 /* Pods-PortfolioSocial.release.xcconfig */,
-				D3D7521788B22CB3B5A38698 /* Pods-PortfolioSocial-PortfolioSocialUITests.debug.xcconfig */,
-				322EDF42549348662424229C /* Pods-PortfolioSocial-PortfolioSocialUITests.release.xcconfig */,
-				34F13CA4C526F57EC57DC828 /* Pods-PortfolioSocialTests.debug.xcconfig */,
-				4B14D4CE92E9963B7A223B5A /* Pods-PortfolioSocialTests.release.xcconfig */,
+				B866A8299721F5EC156C6B35 /* Pods-PortfolioSocial.debug.xcconfig */,
+				5FA909B210E95ED14C5D3618 /* Pods-PortfolioSocial.release.xcconfig */,
+				01F1F0AAF90FE5EE1DEB9DE7 /* Pods-PortfolioSocial-PortfolioSocialUITests.debug.xcconfig */,
+				5740282DCB2A813C77430BCE /* Pods-PortfolioSocial-PortfolioSocialUITests.release.xcconfig */,
+				45693B7149E84B207CED9D88 /* Pods-PortfolioSocialTests.debug.xcconfig */,
+				6F06100292F630C3A3D8F533 /* Pods-PortfolioSocialTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -279,7 +289,7 @@
 			path = PortfolioSocialUITests;
 			sourceTree = "<group>";
 		};
-		A425846125A636A2005EB7BE /* HomeFeed */ = {
+		A425846125A636A2005EB7BE /* HomeFeedModule */ = {
 			isa = PBXGroup;
 			children = (
 				A425856D25A739EA005EB7BE /* HomeFeedInterfaces.swift */,
@@ -288,10 +298,10 @@
 				A425857025A739EA005EB7BE /* HomeFeedInteractor.swift */,
 				A425857125A739EA005EB7BE /* HomeFeedWireframe.swift */,
 			);
-			path = HomeFeed;
+			path = HomeFeedModule;
 			sourceTree = "<group>";
 		};
-		A425846325A636BD005EB7BE /* AddPost */ = {
+		A425846325A636BD005EB7BE /* AddPostModule */ = {
 			isa = PBXGroup;
 			children = (
 				A425855D25A739D8005EB7BE /* AddPostInterfaces.swift */,
@@ -300,7 +310,7 @@
 				A425856025A739D8005EB7BE /* AddPostInteractor.swift */,
 				A425856125A739D8005EB7BE /* AddPostWireframe.swift */,
 			);
-			path = AddPost;
+			path = AddPostModule;
 			sourceTree = "<group>";
 		};
 		A425846425A636CA005EB7BE /* ActivityModule */ = {
@@ -323,6 +333,10 @@
 				A425850D25A73088005EB7BE /* ProfileScreenViewController.swift */,
 				A425850E25A73088005EB7BE /* ProfileScreenInteractor.swift */,
 				A425850F25A73088005EB7BE /* ProfileScreenWireframe.swift */,
+				A435D49625B97C800097BD5A /* UserStatisticsContainer.swift */,
+				A435D49C25B9B16B0097BD5A /* UserInformationStack.swift */,
+				A4BB58FB25BAB08D0032777D /* EditProfileButton.swift */,
+				A4BB58FF25BACE920032777D /* PostsCollectionView.swift */,
 			);
 			path = ProfileModule;
 			sourceTree = "<group>";
@@ -333,8 +347,8 @@
 				A42584DD25A72D9C005EB7BE /* SearchModule */,
 				A425846525A636D5005EB7BE /* ProfileModule */,
 				A425846425A636CA005EB7BE /* ActivityModule */,
-				A425846325A636BD005EB7BE /* AddPost */,
-				A425846125A636A2005EB7BE /* HomeFeed */,
+				A425846325A636BD005EB7BE /* AddPostModule */,
+				A425846125A636A2005EB7BE /* HomeFeedModule */,
 			);
 			path = TabBarItems;
 			sourceTree = "<group>";
@@ -350,6 +364,7 @@
 				A479AD9025ADE719009DF940 /* UIViewController+Spinner.swift */,
 				A479ADCE25B07B34009DF940 /* Constants.swift */,
 				A479AE1625B0854B009DF940 /* RootNavigationController.swift */,
+				A435D49225B971370097BD5A /* UIImage+Extension.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -425,9 +440,9 @@
 			children = (
 				A42589D725AB8320005EB7BE /* CoreServices.framework */,
 				A42589D525AB8313005EB7BE /* UIKit.framework */,
-				6D93A27AF52CD0F4D7552DC9 /* Pods_PortfolioSocial.framework */,
-				9EFFC4E1D9213D474C20E825 /* Pods_PortfolioSocial_PortfolioSocialUITests.framework */,
-				ACC156C4B833619674E1EC58 /* Pods_PortfolioSocialTests.framework */,
+				708BBC48D890D1C6A07B12A9 /* Pods_PortfolioSocial.framework */,
+				DEBAB21880640EA259D30BE2 /* Pods_PortfolioSocial_PortfolioSocialUITests.framework */,
+				55D354FA6A8371D9E0D37EE4 /* Pods_PortfolioSocialTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -439,13 +454,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A425844F25A614E4005EB7BE /* Build configuration list for PBXNativeTarget "PortfolioSocial" */;
 			buildPhases = (
-				6C193EA719D9894FD17DEADB /* [CP] Check Pods Manifest.lock */,
+				17C062AAD455E5D5AE91B732 /* [CP] Check Pods Manifest.lock */,
 				A425842125A614E0005EB7BE /* Sources */,
 				A425842225A614E0005EB7BE /* Frameworks */,
 				A425842325A614E0005EB7BE /* Resources */,
 				A42588B125A75958005EB7BE /* Embed Frameworks */,
-				E5737267E907447EF3462438 /* [CP] Embed Pods Frameworks */,
-				6AE40F9CA3C5536999EF079A /* [CP] Copy Pods Resources */,
+				B2DAFC1FD9F04579F50D8545 /* [CP] Embed Pods Frameworks */,
+				6C885F42B8A0A3DB7A541BB9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -460,7 +475,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A425845225A614E4005EB7BE /* Build configuration list for PBXNativeTarget "PortfolioSocialTests" */;
 			buildPhases = (
-				639907C013FEEAB16258D5BD /* [CP] Check Pods Manifest.lock */,
+				44645D3CF75929AD45D5B6E8 /* [CP] Check Pods Manifest.lock */,
 				A425843725A614E4005EB7BE /* Sources */,
 				A425843825A614E4005EB7BE /* Frameworks */,
 				A425843925A614E4005EB7BE /* Resources */,
@@ -479,12 +494,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A425845525A614E4005EB7BE /* Build configuration list for PBXNativeTarget "PortfolioSocialUITests" */;
 			buildPhases = (
-				D8637DD19E91A32177899936 /* [CP] Check Pods Manifest.lock */,
+				B364D396C5A73DA36A34DD21 /* [CP] Check Pods Manifest.lock */,
 				A425844225A614E4005EB7BE /* Sources */,
 				A425844325A614E4005EB7BE /* Frameworks */,
 				A425844425A614E4005EB7BE /* Resources */,
-				3207AE193E92027AC5B6A6A5 /* [CP] Embed Pods Frameworks */,
-				CAC0879A49EDDF579294E3AA /* [CP] Copy Pods Resources */,
+				45267E969FA1BB42C00593C1 /* [CP] Embed Pods Frameworks */,
+				D0D5B781785A61F3F2CD197C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -567,63 +582,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3207AE193E92027AC5B6A6A5 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PortfolioSocial-PortfolioSocialUITests/Pods-PortfolioSocial-PortfolioSocialUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PortfolioSocial-PortfolioSocialUITests/Pods-PortfolioSocial-PortfolioSocialUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PortfolioSocial-PortfolioSocialUITests/Pods-PortfolioSocial-PortfolioSocialUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		639907C013FEEAB16258D5BD /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-PortfolioSocialTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6AE40F9CA3C5536999EF079A /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PortfolioSocial/Pods-PortfolioSocial-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PortfolioSocial/Pods-PortfolioSocial-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PortfolioSocial/Pods-PortfolioSocial-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6C193EA719D9894FD17DEADB /* [CP] Check Pods Manifest.lock */ = {
+		17C062AAD455E5D5AE91B732 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -645,24 +604,80 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CAC0879A49EDDF579294E3AA /* [CP] Copy Pods Resources */ = {
+		44645D3CF75929AD45D5B6E8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PortfolioSocial-PortfolioSocialUITests/Pods-PortfolioSocial-PortfolioSocialUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Copy Pods Resources";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PortfolioSocial-PortfolioSocialUITests/Pods-PortfolioSocial-PortfolioSocialUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PortfolioSocialTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PortfolioSocial-PortfolioSocialUITests/Pods-PortfolioSocial-PortfolioSocialUITests-resources.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D8637DD19E91A32177899936 /* [CP] Check Pods Manifest.lock */ = {
+		45267E969FA1BB42C00593C1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PortfolioSocial-PortfolioSocialUITests/Pods-PortfolioSocial-PortfolioSocialUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PortfolioSocial-PortfolioSocialUITests/Pods-PortfolioSocial-PortfolioSocialUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PortfolioSocial-PortfolioSocialUITests/Pods-PortfolioSocial-PortfolioSocialUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6C885F42B8A0A3DB7A541BB9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PortfolioSocial/Pods-PortfolioSocial-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PortfolioSocial/Pods-PortfolioSocial-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PortfolioSocial/Pods-PortfolioSocial-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B2DAFC1FD9F04579F50D8545 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PortfolioSocial/Pods-PortfolioSocial-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PortfolioSocial/Pods-PortfolioSocial-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PortfolioSocial/Pods-PortfolioSocial-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B364D396C5A73DA36A34DD21 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -684,21 +699,21 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E5737267E907447EF3462438 /* [CP] Embed Pods Frameworks */ = {
+		D0D5B781785A61F3F2CD197C /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PortfolioSocial/Pods-PortfolioSocial-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-PortfolioSocial-PortfolioSocialUITests/Pods-PortfolioSocial-PortfolioSocialUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PortfolioSocial/Pods-PortfolioSocial-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-PortfolioSocial-PortfolioSocialUITests/Pods-PortfolioSocial-PortfolioSocialUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PortfolioSocial/Pods-PortfolioSocial-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PortfolioSocial-PortfolioSocialUITests/Pods-PortfolioSocial-PortfolioSocialUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -725,13 +740,16 @@
 				A425851225A73088005EB7BE /* ProfileScreenViewController.swift in Sources */,
 				A425852125A73564005EB7BE /* LoginInterfaces.swift in Sources */,
 				A425855225A739C7005EB7BE /* ActivityInteractor.swift in Sources */,
+				A435D49725B97C800097BD5A /* UserStatisticsContainer.swift in Sources */,
 				A42584E325A72DC7005EB7BE /* SearchViewInterfaces.swift in Sources */,
 				A479AD4725ADD1D9009DF940 /* CreateUserViewController.swift in Sources */,
+				A4BB590025BACE920032777D /* PostsCollectionView.swift in Sources */,
 				A42585B525A7454A005EB7BE /* UIColor+Extension.swift in Sources */,
 				A479AD4825ADD1DA009DF940 /* CreateUserInteractor.swift in Sources */,
 				A479AB8325ACA9F4009DF940 /* TabBarPresenter.swift in Sources */,
 				A479AD4625ADD1D9009DF940 /* CreateUserPresenter.swift in Sources */,
 				A425857325A739EA005EB7BE /* HomeFeedPresenter.swift in Sources */,
+				A4BB58FC25BAB08D0032777D /* EditProfileButton.swift in Sources */,
 				A479AC2B25ACD7EC009DF940 /* UserDefaults+isFirstLaunch..swift in Sources */,
 				A479ADCF25B07B34009DF940 /* Constants.swift in Sources */,
 				A479AB7925ACA340009DF940 /* UserService.swift in Sources */,
@@ -741,12 +759,14 @@
 				A425851325A73088005EB7BE /* ProfileScreenInteractor.swift in Sources */,
 				A425852425A73564005EB7BE /* LoginInteractor.swift in Sources */,
 				A425856325A739D8005EB7BE /* AddPostPresenter.swift in Sources */,
+				A435D49D25B9B16B0097BD5A /* UserInformationStack.swift in Sources */,
 				A425856525A739D8005EB7BE /* AddPostInteractor.swift in Sources */,
 				A425857425A739EA005EB7BE /* HomeFeedViewController.swift in Sources */,
 				A425857225A739EA005EB7BE /* HomeFeedInterfaces.swift in Sources */,
 				A425849225A63E75005EB7BE /* ViewController.swift in Sources */,
 				A425855025A739C7005EB7BE /* ActivityPresenter.swift in Sources */,
 				A479AB8425ACA9F4009DF940 /* TabBarViewController.swift in Sources */,
+				A435D49325B971370097BD5A /* UIImage+Extension.swift in Sources */,
 				A42584E525A72DC7005EB7BE /* SearchViewViewController.swift in Sources */,
 				A479AE1725B0854B009DF940 /* RootNavigationController.swift in Sources */,
 				A425856425A739D8005EB7BE /* AddPostViewController.swift in Sources */,
@@ -931,7 +951,7 @@
 		};
 		A425845025A614E4005EB7BE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4E53F655C16C1DC869FF714C /* Pods-PortfolioSocial.debug.xcconfig */;
+			baseConfigurationReference = B866A8299721F5EC156C6B35 /* Pods-PortfolioSocial.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1003,7 +1023,7 @@
 		};
 		A425845125A614E4005EB7BE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6757F8EC4433481866DFB842 /* Pods-PortfolioSocial.release.xcconfig */;
+			baseConfigurationReference = 5FA909B210E95ED14C5D3618 /* Pods-PortfolioSocial.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1075,7 +1095,7 @@
 		};
 		A425845325A614E4005EB7BE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 34F13CA4C526F57EC57DC828 /* Pods-PortfolioSocialTests.debug.xcconfig */;
+			baseConfigurationReference = 45693B7149E84B207CED9D88 /* Pods-PortfolioSocialTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1098,7 +1118,7 @@
 		};
 		A425845425A614E4005EB7BE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4B14D4CE92E9963B7A223B5A /* Pods-PortfolioSocialTests.release.xcconfig */;
+			baseConfigurationReference = 6F06100292F630C3A3D8F533 /* Pods-PortfolioSocialTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1121,7 +1141,7 @@
 		};
 		A425845625A614E4005EB7BE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D3D7521788B22CB3B5A38698 /* Pods-PortfolioSocial-PortfolioSocialUITests.debug.xcconfig */;
+			baseConfigurationReference = 01F1F0AAF90FE5EE1DEB9DE7 /* Pods-PortfolioSocial-PortfolioSocialUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1142,7 +1162,7 @@
 		};
 		A425845725A614E4005EB7BE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 322EDF42549348662424229C /* Pods-PortfolioSocial-PortfolioSocialUITests.release.xcconfig */;
+			baseConfigurationReference = 5740282DCB2A813C77430BCE /* Pods-PortfolioSocial-PortfolioSocialUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

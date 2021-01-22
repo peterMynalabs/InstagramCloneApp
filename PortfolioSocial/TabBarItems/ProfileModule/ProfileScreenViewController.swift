@@ -16,26 +16,73 @@ final class ProfileScreenViewController: UIViewController {
     
     var presenter: ProfileScreenPresenterInterface!
     var profileImage: UIImage?
-    // MARK: - Lifecycle -
+    var userStatisticsStack: UserStatisticContainerView?
+    var userInformationView: UserInformationStack?
+    var editProfileButton: EditProfileButton?
+    var postCollectionView: PostCollectionView?
+   // MARK: - Lifecycle -
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Profile"
+        view.addSubview(profilePhoto)
+        
+        userStatisticsStack = UserStatisticContainerView(frame: .zero, stats: UserStatistics(postCount: 38, followerCount: 1902, followingCount: 13))
+        userInformationView = UserInformationStack(frame: .zero, withInformation: UserInformation(bio: "Digital goodies designer @pixsellz Everything is designed.", name: User.current!.username, occupation: "moron"))
+        editProfileButton = EditProfileButton(frame: .zero)
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
+        layout.itemSize = CGSize(width: view.frame.width / 3, height: view.frame.width / 3)
+        
+        postCollectionView = PostCollectionView(frame: .zero, collectionViewLayout: layout)
+        view.addSubview(userStatisticsStack!)
+        view.addSubview(userInformationView!)
+        view.addSubview(editProfileButton!)
+        view.addSubview(postCollectionView!)
+        view.backgroundColor = UIColor(rgb: 0xFAFAFA)
         self.navigationController?.isNavigationBarHidden = false
-        self.navigationController?.navigationBar.backgroundColor = .red
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+        setupFrames()
+        setupProfilePhoto()
     }
-    
+    //375 x 812
     override func viewDidAppear(_ animated: Bool) {
         print(User.current?.username)
+        
+    }
+    func setupFrames() {
+        //107 + 112 = 219
+        profilePhoto.frame = CGRect(x: 12, y: 80, width: 95, height: 95)
+        userStatisticsStack?.frame =  CGRect(x: profilePhoto.frame.maxX + 41, y:  95 / 2 + 57, width: 225.5, height: 32)
+        userInformationView?.frame = CGRect(x: 0, y: profilePhoto.frame.maxY + 12, width: view.frame.width, height: 49)
+        editProfileButton?.frame = CGRect(x: 16, y: (userInformationView?.frame.maxY)! + 15, width: view.frame.width - 32, height: 29)
+        postCollectionView?.frame = CGRect(x: 0, y: (editProfileButton?.frame.maxY)! + 10, width: self.view.frame.width, height: self.view.frame.height - (editProfileButton?.frame.maxY)!)
+    }
+    
+    func setupProfilePhoto() {
+        profilePhoto.layer.cornerRadius = profilePhoto.frame.width / 2
+        profilePhoto.addSubview(createButton(withframe: profilePhoto.bounds, calling: #selector(onPressProfile)))
+        profilePhoto.isUserInteractionEnabled = true
+    }
+    
+    func createButton(withframe: CGRect, calling: Selector) -> UIButton {
+        let button = UIButton(frame: withframe)
+        button.backgroundColor = .clear
+        button.addTarget(self, action: calling, for: .touchDown)
+        return button
     }
     
     let profilePhoto: UIImageView = {
         let imageView = UIImageView()
-        imageView.layer.cornerRadius = imageView.frame.size.width / 2;
+        imageView.image = UIImage(named: "back")
         imageView.layer.masksToBounds = true
         return imageView
     }()
+    
+    @objc func onPressProfile() {
+        self.view.backgroundColor = .red
+        print("HeY")
+    }
 }
 
 // MARK: - Extensions -
