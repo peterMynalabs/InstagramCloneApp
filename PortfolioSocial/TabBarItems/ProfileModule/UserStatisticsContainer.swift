@@ -42,7 +42,7 @@ class UserStatisticContainerView: UIStackView {
         let statArray = [stats?.postCount, stats?.followerCount, stats?.followingCount]
 
         for i in 0...titles.count - 1 {
-        addArrangedSubview(addItemsToContainer(title: titles[i], stat: statArray[i]!))
+            addArrangedSubview(addItemsToContainer(title: titles[i], stat: statArray[i]!))
         }
     }
     

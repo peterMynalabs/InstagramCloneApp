@@ -12,6 +12,7 @@ struct UserInformation {
     var bio: String
     var name: String
     var occupation: String
+    var username = User.current?.username ?? "Catastophic error"
 }
 
 class UserInformationStack: UIView {
@@ -55,6 +56,12 @@ class UserInformationStack: UIView {
         nameLabel.topAnchor.constraint(equalTo: topAnchor).isActive = true
         nameLabel.widthAnchor.constraint(equalTo: widthAnchor, constant: -36).isActive = true
         nameLabel.heightAnchor.constraint(equalToConstant: heightOfName!).isActive = true
+    }
+    
+    func updateInformationStack(info: UserInformation) {
+        nameLabel.text = info.name
+        occupationLabel.text = info.occupation
+        bioLabel.text = info.bio
     }
     
     func addOccupationLabel() {

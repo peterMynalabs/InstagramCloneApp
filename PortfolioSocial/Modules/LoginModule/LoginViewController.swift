@@ -115,8 +115,6 @@ extension LoginViewController: FUIAuthDelegate {
         else { return }
         presenter.checkUser(user: currentUser)
      
-        
-
     }
 }
 
