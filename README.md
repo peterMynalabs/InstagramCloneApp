@@ -2,6 +2,7 @@ This is a clone of Instagrams core functionality. Some features found in the rea
 
 
 Tech Stack:
+
 SDWebImage for async loading of images
 
 FirebaseAuth and FirebaseDatabase for backend and authorization
