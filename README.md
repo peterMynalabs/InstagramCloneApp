@@ -11,4 +11,4 @@ Architecture: VIPER
 
 Framework Manager: CocoaPods
 
-Some extensions in the App are taken from the interent and projects I worked on before.
+Some extensions in the code are taken from the interent and projects I worked on before.
