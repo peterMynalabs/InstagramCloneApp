@@ -9,4 +9,6 @@ FirebaseAuth and FirebaseDatabase for backend and authorization
 
 Architecture: VIPER
 
+Framework Manager: CocoaPods
+
 Some extensions in the App are taken from the interent and projects I worked on before.
