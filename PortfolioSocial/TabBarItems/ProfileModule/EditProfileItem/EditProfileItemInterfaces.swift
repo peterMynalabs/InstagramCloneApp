@@ -15,14 +15,17 @@ protocol EditProfileItemWireframeInterface: WireframeInterface {
 }
 
 protocol EditProfileItemViewInterface: ViewInterface {
-    func setCurrentInformation(labelText: String, information: String)
+    func setCurrentInformation(labelText: String, information: String, count: Int)
+    func setChangeUserName(username: String, count: Int) 
 }
 
 protocol EditProfileItemPresenterInterface: PresenterInterface {
-    func determineLayout()
+    func viewLoaded()
     func pressedDone(with text: String)
     func pressedCancel()
+    func pressedDoneForUsername(username: String)
 }
 
 protocol EditProfileItemInteractorInterface: InteractorInterface {
+    func checkUsername(username: String)
 }

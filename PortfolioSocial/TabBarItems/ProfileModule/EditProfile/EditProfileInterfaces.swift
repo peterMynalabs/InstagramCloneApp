@@ -17,14 +17,22 @@ protocol EditProfileWireframeInterface: WireframeInterface {
 
 protocol EditProfileViewInterface: ViewInterface {
     func updateProfileForm(info: UserInformation)
+    func removeAllViews()
+    func addProfileInformationForm(userInformation: UserInformation)
 }
 
 protocol EditProfilePresenterInterface: PresenterInterface {
-    func pressedOn(label item: FormItems, userInformation: UserInformation)
-    func pressedDone(info: UserInformation)
+    func pressedOn(label item: FormItems)
+    func pressedDone()
     func pressedCancel()
+    func viewDisappeared()
+    func recievedInformation(info: UserInformation)
+    func viewLoaded()
+    func updateProfilePhoto(image: NSObject)
 }
 
 protocol EditProfileInteractorInterface: InteractorInterface {
+    func getUserInformation()
     func updateUsersInformation(info: UserInformation)
+    func updateProfilePhoto(image: NSObject)
 }

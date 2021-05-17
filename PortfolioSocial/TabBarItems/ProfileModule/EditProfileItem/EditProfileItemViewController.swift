@@ -12,21 +12,23 @@ import UIKit
 
 
 
-final class EditProfileItemViewController: UIViewController, UITextFieldDelegate {
+class EditProfileItemViewController: UIViewController {
     
     // MARK: - Public properties -
     weak var delegate: EditProfileItemDelegate?
     var presenter: EditProfileItemPresenterInterface!
-    // MARK: - Lifecycle -
     
+    private let maxHeight: CGFloat = 100
+    private let minHeight: CGFloat = 50
+    // MARK: - Lifecycle -
+    var textView = TextView()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        setupTextView()
+        presenter.viewLoaded()
         setupNavigationBar()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        presenter.determineLayout()
     }
     
     func setupNavigationBar() {
@@ -34,51 +36,32 @@ final class EditProfileItemViewController: UIViewController, UITextFieldDelegate
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done", comment: "Done"), style: .plain, target: self, action: #selector(EditProfileItemViewController.pressDone))
     }
     
-    
-    var mainLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
-        label.textAlignment = .left
-        label.font = UIFont.boldSystemFont(ofSize: 13)
-        return label
-    }()
-    
-    var informationTextField: UITextField = {
-        let textField = UITextField()
-        textField.backgroundColor = .clear
-        textField.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
-        textField.font = UIFont.systemFont(ofSize: 15)
-        textField.textAlignment = .left
-        return textField
-    }()
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-           textField.resignFirstResponder();
-           return true;
-       }
+    func setupTextView() {
+        textView.frame = view.frame
+        if UIDevice.current.hasNotch {
+            textView.frame.origin = CGPoint(x: 0, y: (navigationController?.navigationBar.frame.height)!)
+        }
+        view.addSubview(textView)
+    }
     
     @objc func pressCancel() {
         presenter.pressedCancel()
     }
     
     @objc func pressDone() {
-        presenter.pressedDone(with: informationTextField.text!)
+        presenter.pressedDone(with: textView.textView.text!)
     }
 }
-
 // MARK: - Extensions -
 
 extension EditProfileItemViewController: EditProfileItemViewInterface {
     
-    func setCurrentInformation(labelText: String, information: String) {
-        mainLabel.text = labelText
-        mainLabel.frame = CGRect(x: 15, y: 65, width: view.frame.width - 15, height: 30)
-        view.addSubview(mainLabel)
-        informationTextField.text = information
-        informationTextField.frame = CGRect(x: 15, y: 85, width: view.frame.width - 15, height: 30)
-        view.addSubview(informationTextField)
-        informationTextField.delegate = self
-        view.addSubview(SeperatorLineView(frame: CGRect(x: 0, y: 115, width: view.frame.width - 15, height: 1)))
+    func setCurrentInformation(labelText: String, information: String, count: Int) {
+        let navHeight = (navigationController?.navigationBar.frame.height)!
+        textView.setInformation(labelText: labelText, information: information, count: count, navigationBarHeight: Int(navHeight))
     }
     
+    func setChangeUserName(username: String, count: Int) {
+        setCurrentInformation(labelText: "Username", information: username, count: count)
+    }
 }

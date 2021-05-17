@@ -15,7 +15,7 @@ import FirebaseUI
 
 typealias FIRUser = FirebaseAuth.User
 
-final class LoginViewController: UIViewController {
+class LoginViewController: UIViewController {
 
     // MARK: - Public properties -
 
@@ -31,8 +31,9 @@ final class LoginViewController: UIViewController {
         topBar.addSubview(bottomLabel)
         view.addSubview(signUpOrRegister)
         view.backgroundColor = .white
+        navigationController?.navigationBar.isHidden = true
+        tabBarController?.tabBar.isHidden = true
         addFrames()
-        navigationController?.isNavigationBarHidden = true
     }
     
     deinit {
@@ -84,25 +85,10 @@ final class LoginViewController: UIViewController {
     
     @objc func onPress() {
         presenter.pressedButton()
-        setupFirebaseAuth()
-    }
-    
-    func setupFirebaseAuth() {
-        guard let authUI = FUIAuth.defaultAuthUI()
-        else { return }
-                
-        authUI.delegate = self
-        let providers = [FUIEmailAuth()]
-        authUI.providers = providers
-        //Will add more providers later on
-  
-        let authViewController = authUI.authViewController()
-        authViewController.modalPresentationStyle = .fullScreen
-        present(authViewController, animated: true)
-
     }
 
 }
+
 extension LoginViewController: FUIAuthDelegate {
     func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
         if let error = error {
@@ -127,5 +113,20 @@ extension LoginViewController: LoginViewInterface {
             view.removeFromSuperview()
         }
         self.showSpinner(onView: view)
+    }
+    
+    func setupFirebaseAuth() {
+        guard let authUI = FUIAuth.defaultAuthUI()
+        else { return }
+                
+        authUI.delegate = self
+        let providers = [FUIEmailAuth()]
+        authUI.providers = providers
+        //Will add more providers later on
+  
+        let authViewController = authUI.authViewController()
+        authViewController.modalPresentationStyle = .fullScreen
+        present(authViewController, animated: true)
+
     }
 }

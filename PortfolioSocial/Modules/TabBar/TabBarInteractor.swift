@@ -10,7 +10,7 @@
 
 import Foundation
 
-final class TabBarInteractor {
+class TabBarInteractor {
 }
 
 // MARK: - Extensions -

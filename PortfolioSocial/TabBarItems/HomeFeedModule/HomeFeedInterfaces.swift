@@ -11,13 +11,28 @@
 import UIKit
 
 protocol HomeFeedWireframeInterface: WireframeInterface {
+    func routeToProfile(with uuid: String, isFollowed: Bool)
+    func routeToLogIn()
 }
 
 protocol HomeFeedViewInterface: ViewInterface {
+    func updateTimeline(with posts: [Post])
 }
 
 protocol HomeFeedPresenterInterface: PresenterInterface {
+    func viewLoaded()
+    func recievedTimeline(posts: [Post])
+    func viewReloaded()
+    func pressedUsernameButton(with username: String)
+    func recieved(uuid: String, isFollowed: Bool)
+    var posts: [Post] { get }
+    func likedPost(isLiked: Bool, post: Post, completion: @escaping (Bool) -> Void)
+    
 }
 
 protocol HomeFeedInteractorInterface: InteractorInterface {
+    func getTimeline()
+    func getUUID(from username: String)
+    func likedPost(isLiked: Bool, post: Post, completion: @escaping (Bool) -> Void)
+
 }

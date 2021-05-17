@@ -10,10 +10,35 @@
 
 import Foundation
 
-final class SearchViewInteractor {
+class SearchViewInteractor {
+    var presenter: SearchViewPresenterInterface!
+    var followService: FollowService?
+    var userService: UserService?
+    var profileService: ProfileService?
 }
 
 // MARK: - Extensions -
 
 extension SearchViewInteractor: SearchViewInteractorInterface {
+    func getAllUsers()  {
+        userService?.usersExcludingCurrentUser(completion: { [weak self] (users) in
+            self?.presenter.recievedUsers(users: users)
+        })
+    }
+    
+    func followUser(isFollowing: Bool, fromCurrentUserTo uuid: String) {
+        followService?.setIsFollowing(!isFollowing, fromCurrentUserTo: uuid, success: { (sucess) in
+            if sucess {
+                print("yay")
+            } 
+        })
+    }
+    
+    func getUserInfo(with uuid: String, completion: @escaping (String, Bool) -> Void) {
+        profileService?.profileImage(for: uuid, completion: { [weak self] (image) in
+            self?.followService?.isUserFollowed(uuid, byCurrentUserWithCompletion: { (isFollowed) in
+                completion(image, isFollowed)
+            })
+        })
+    }
 }

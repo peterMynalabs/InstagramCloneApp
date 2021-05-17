@@ -10,7 +10,7 @@
 
 import UIKit
 
-final class CreateUserWireframe: BaseWireframe {
+class CreateUserWireframe: BaseWireframe {
 
     // MARK: - Private properties -
 
@@ -23,6 +23,7 @@ final class CreateUserWireframe: BaseWireframe {
         let interactor = CreateUserInteractor()
         let presenter = CreateUserPresenter(view: moduleViewController, interactor: interactor, wireframe: self)
         interactor.presenter = presenter
+        interactor.userService = UserService()
         moduleViewController.presenter = presenter
     }
 
@@ -32,7 +33,6 @@ final class CreateUserWireframe: BaseWireframe {
 
 extension CreateUserWireframe: CreateUserWireframeInterface {
     func transitionToProfile() {
-        let tabBarWireframe = TabBarWireframe.init()
-        navigationController?.setRootWireframeWithoutAnimation(tabBarWireframe)
+        navigationController?.popToRootViewController(animated: true)
     }
 }

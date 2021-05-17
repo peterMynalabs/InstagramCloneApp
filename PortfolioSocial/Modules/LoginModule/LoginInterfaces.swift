@@ -17,6 +17,7 @@ protocol LoginWireframeInterface: WireframeInterface {
 
 protocol LoginViewInterface: ViewInterface {
     func removeAllViews()
+    func setupFirebaseAuth()
 }
 
 protocol LoginPresenterInterface: PresenterInterface {

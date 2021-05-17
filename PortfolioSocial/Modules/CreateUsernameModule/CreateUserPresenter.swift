@@ -10,7 +10,7 @@
 
 import Foundation
 
-final class CreateUserPresenter {
+class CreateUserPresenter {
 
     // MARK: - Private properties -
 

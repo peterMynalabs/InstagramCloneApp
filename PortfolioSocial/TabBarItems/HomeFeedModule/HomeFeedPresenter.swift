@@ -10,24 +10,66 @@
 
 import Foundation
 
-final class HomeFeedPresenter {
+class HomeFeedPresenter {
 
     // MARK: - Private properties -
 
     private unowned let view: HomeFeedViewInterface
     private let interactor: HomeFeedInteractorInterface
     private let wireframe: HomeFeedWireframeInterface
-
+    var postList = [Post]()
+    var likeService: LikeService?
     // MARK: - Lifecycle -
 
     init(view: HomeFeedViewInterface, interactor: HomeFeedInteractorInterface, wireframe: HomeFeedWireframeInterface) {
         self.view = view
         self.interactor = interactor
         self.wireframe = wireframe
+        self.likeService = LikeService()
     }
 }
 
 // MARK: - Extensions -
 
 extension HomeFeedPresenter: HomeFeedPresenterInterface {
+    var posts: [Post] {
+        get {
+            return postList
+        }
+    }
+     
+    func viewLoaded() {
+        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+        if launchedBefore {
+            interactor.getTimeline()
+        } else {
+            UserDefaults.standard.set(true, forKey: "launchedBefore")
+            wireframe.routeToLogIn()
+        }
+    }
+    
+    func recievedTimeline(posts: [Post]) {
+        postList = posts
+        view.updateTimeline(with: posts)
+    }
+    
+    func viewReloaded() {
+        interactor.getTimeline()
+    }
+    
+    func pressedUsernameButton(with username: String) {
+        interactor.getUUID(from: username)
+    }
+    
+    func recieved(uuid: String, isFollowed: Bool) {
+        wireframe.routeToProfile(with: uuid, isFollowed: isFollowed)
+    }
+    
+    func likedPost(isLiked: Bool, post: Post, completion: @escaping (Bool) -> Void) {
+        likeService?.setIsLiked(!post.isLiked, for: post) { (success) in
+            completion(success)
+        }
+    }
 }
+
+

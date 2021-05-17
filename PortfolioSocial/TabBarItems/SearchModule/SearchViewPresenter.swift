@@ -10,13 +10,13 @@
 
 import Foundation
 
-final class SearchViewPresenter {
+class SearchViewPresenter {
 
     // MARK: - Private properties -
-
     private unowned let view: SearchViewViewInterface
     private let interactor: SearchViewInteractorInterface
     private let wireframe: SearchViewWireframeInterface
+    private var infoList: [User]?
 
     // MARK: - Lifecycle -
 
@@ -30,4 +30,32 @@ final class SearchViewPresenter {
 // MARK: - Extensions -
 
 extension SearchViewPresenter: SearchViewPresenterInterface {
+    var info: [User]? {
+        get { return infoList }
+    }
+    
+    func viewReloaded() {
+        interactor.getAllUsers()
+    }
+    
+    func recievedUsers(users: [User]) {
+        infoList = users
+        view.updateUsers(users: users)
+    }
+    
+    func clickedUser(with uuid: String, isFollowing: Bool) {
+        interactor.followUser(isFollowing: isFollowing, fromCurrentUserTo: uuid)
+    }
+    
+    func clickedUserName(with uuid: String) {
+        wireframe.transitionToProfile(with: uuid)
+    }
+    
+    func cellLoaded(with uuid: String, completion: @escaping (String, Bool) -> Void) {
+        interactor.getUserInfo(with: uuid, completion: { (image, isFollowed) in
+            completion(image, isFollowed)
+        })
+        
+    }
 }
+

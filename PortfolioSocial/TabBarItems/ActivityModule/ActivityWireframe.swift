@@ -10,7 +10,7 @@
 
 import UIKit
 
-final class ActivityWireframe: BaseWireframe {
+class ActivityWireframe: BaseWireframe {
 
     // MARK: - Private properties -
 
@@ -22,12 +22,26 @@ final class ActivityWireframe: BaseWireframe {
 
         let interactor = ActivityInteractor()
         let presenter = ActivityPresenter(view: moduleViewController, interactor: interactor, wireframe: self)
+        interactor.presenter = presenter
+        interactor.activityService = ActivityService()
+        interactor.followService = FollowService()
+        interactor.postService = PostService()
+        interactor.userService = UserService()
+        interactor.profileService = ProfileService()
         moduleViewController.presenter = presenter
     }
-
 }
 
 // MARK: - Extensions -
 
 extension ActivityWireframe: ActivityWireframeInterface {
+    func transitionToProfile(with uuid: String) {
+        navigationController?.pushWireframe(ProfileScreenWireframe(uuid: uuid))
+    }
+    
+    func transitioToPost(with post: [Post]) {
+        let vc = ProfilePostViewController()
+        vc.postList = post
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }

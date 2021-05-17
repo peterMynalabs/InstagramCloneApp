@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "8F83EB3D-4160-426E-836D-5CCF2BE5CBAF"
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "00A040E4-D209-4545-B73A-EFB5E3C24013"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PortfolioSocial/TabBarItems/ProfileModule/MainProfile/PostsCollectionView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
+            landmarkName = "scrollViewDidScrollToTop(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "51B3E592-8E97-47AD-B07A-1A68A7BBD56E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PortfolioSocial/TabBarItems/ActivityModule/ActivityInteractor.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "getProfilePhoto(from:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AB816A82-3821-44B1-BFD8-1465F9C2CE91"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PortfolioSocial/TabBarItems/ActivityModule/ActivityPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "loadProfilePhoto(from:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "AB816A82-3821-44B1-BFD8-1465F9C2CE91 - 7c9eb92a997deda0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PortfolioSocial.ActivityPresenter.loadProfilePhoto(from: Swift.String, completion: (Swift.String) -&gt; ()) -&gt; ()"
+                  moduleName = "PortfolioSocial"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/petershaburov/Desktop/profolioProject1/PortfolioSocial/TabBarItems/ActivityModule/ActivityPresenter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  uuid = "AB816A82-3821-44B1-BFD8-1465F9C2CE91 - 7383777a18e13d7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.String) -&gt; () in PortfolioSocial.ActivityPresenter.loadProfilePhoto(from: Swift.String, completion: (Swift.String) -&gt; ()) -&gt; ()"
+                  moduleName = "PortfolioSocial"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/petershaburov/Desktop/profolioProject1/PortfolioSocial/TabBarItems/ActivityModule/ActivityPresenter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40"
+                  offsetFromSymbolStart = "41">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

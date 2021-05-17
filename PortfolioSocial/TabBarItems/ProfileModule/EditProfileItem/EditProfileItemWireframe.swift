@@ -10,7 +10,7 @@
 
 import UIKit
 
-final class EditProfileItemWireframe: BaseWireframe {
+class EditProfileItemWireframe: BaseWireframe {
 
     // MARK: - Private properties -
 
@@ -24,6 +24,8 @@ final class EditProfileItemWireframe: BaseWireframe {
         presenter.userInformation = userInformation
         presenter.delegate = delegate
         presenter.currentCase = item
+        interactor.presenter = presenter
+        interactor.userService = UserService()
         moduleViewController.presenter = presenter
     }
     

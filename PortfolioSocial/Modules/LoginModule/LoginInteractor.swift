@@ -13,15 +13,16 @@ import FirebaseAuth
 import FirebaseUI
 import FirebaseDatabase
 
-final class LoginInteractor {
+class LoginInteractor {
     weak var presenter: LoginPresenter?
+    var userService: UserService?
 }
 
 // MARK: - Extensions -
 
 extension LoginInteractor: LoginInteractorInterface {
     func getUserState(user: FIRUser) {
-        UserService.show(forUID: user.uid) { [weak self] (user) in
+        userService?.show(forUID: user.uid) { [weak self] (user) in
             if let user = user {
                 User.setCurrent(user, saveToDefaults: true)
                 self?.presenter?.userExists()

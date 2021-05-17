@@ -11,13 +11,25 @@
 import UIKit
 
 protocol SearchViewWireframeInterface: WireframeInterface {
+    func transitionToProfile(with uuid: String)
 }
 
 protocol SearchViewViewInterface: ViewInterface {
+    func updateUsers(users: [User])
 }
 
 protocol SearchViewPresenterInterface: PresenterInterface {
+    var info: [User]? { get }
+    func viewReloaded()
+    func recievedUsers(users: [User])
+    func clickedUser(with uuid: String, isFollowing: Bool)
+    func clickedUserName(with uuid: String)
+    func cellLoaded(with uuid: String, completion: @escaping (String, Bool) -> Void)
 }
 
 protocol SearchViewInteractorInterface: InteractorInterface {
+    func getAllUsers()
+    func followUser(isFollowing: Bool, fromCurrentUserTo uuid: String)
+    func getUserInfo(with uuid: String, completion: @escaping (String, Bool) -> Void)
+
 }

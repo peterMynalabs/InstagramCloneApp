@@ -9,11 +9,24 @@
 //
 
 import Foundation
+import Firebase
 
-final class EditProfileItemInteractor {
+class EditProfileItemInteractor {
+    weak var presenter: EditProfileItemPresenter!
+    var userService: UserService?
 }
 
 // MARK: - Extensions -
 
 extension EditProfileItemInteractor: EditProfileItemInteractorInterface {
+    func checkUsername(username: String) {
+        userService?.checkUsername(username: username){ [weak self] (bool) in
+            if !bool {
+                self?.presenter.pressedDone(with: username)
+            } else {
+                self?.presenter.pressedCancel()
+
+            }
+        }
+    }
 }

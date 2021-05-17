@@ -10,21 +10,123 @@
 
 import UIKit
 
-final class ActivityViewController: ViewController {
-
+class ActivityViewController: UIViewController {
+    
     // MARK: - Public properties -
-
     var presenter: ActivityPresenterInterface!
-
+    var tableView = UITableView()
+    var refreshControl = UIRefreshControl()
+    
     // MARK: - Lifecycle -
-
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTableView()
+        navigationItem.title = "Activity"
+        setupRefreshControl()
+        presenter.viewLoaded()
     }
-
+    
+    func setupTableView() {
+        tableView.frame = view.frame
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.allowsSelection = false
+        tableView.separatorColor = .clear
+        tableView.backgroundColor = UIColor(rgb: 0xFAFAFA)
+        tableView.register(ActivityCell.self, forCellReuseIdentifier: "ActivityCell")
+        view.addSubview(tableView)
+        tableView.isUserInteractionEnabled = true
+    }
+    
+    func setupRefreshControl() {
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        tableView.addSubview(refreshControl)
+    }
+    
+    @objc func refresh(_ sender: AnyObject) {
+        presenter.viewLoaded()
+    }
+    
+    @objc func pressedFollowButton(sender: FollowUnfollowButton) {
+        if sender.titleLabel!.text == "Follow" {
+            sender.unfollow()
+            presenter.pressedFollowButton(isFollowing: true, with: sender.uuid)
+        } else {
+            sender.follow()
+            presenter.pressedFollowButton(isFollowing: false, with: sender.uuid)
+        }
+    }
+    
+    @objc func singleTapping(recognizer: ImageTapGesture) {
+        if let post = recognizer.post {
+            presenter.pressedImageView(posts: [post])
+        }
+    }
+    
+    @objc func pressedUsername(_ sender: AnyObject) {
+        if let button = sender as? UsernameButton {
+            presenter.pressedUsername(with: button.username!)
+        }
+    }
 }
 
 // MARK: - Extensions -
 
+extension ActivityViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return presenter.resultArray?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let myCell = tableView.dequeueReusableCell(withIdentifier: "ActivityCell", for: indexPath) as! ActivityCell
+        if let result = presenter.resultArray {
+            myCell.backgroundColor = UIColor(rgb: 0xFAFAFA)
+            
+            presenter.loadProfilePhoto(from: result[indexPath.row][1], completion: { (url) in
+                myCell.setupProfileImage(with: url)
+            })
+            
+            if result[indexPath.row][0] != "" {
+                presenter.loadPost(from: result[indexPath.row][0], completion: { [weak self] (post) in
+                    if let post = post {
+                        myCell.setupImageView(with: URL(string: post.imageURL)!)
+                        myCell.post = post
+                        let singleTap: ImageTapGesture = ImageTapGesture(target: self, action: #selector(self?.singleTapping(recognizer:)))
+                        singleTap.post = post
+                        myCell.imagePreview.isUserInteractionEnabled = true
+                        myCell.imagePreview.addGestureRecognizer(singleTap)
+                    }
+                })
+                
+                myCell.isFollowNotification = false
+                myCell.followButton.frame = .zero
+                
+            } else {
+                myCell.isFollowNotification = true
+                myCell.imagePreview.frame = .zero
+                presenter.loadFollowButton(from: result[indexPath.row][1], completion: { (uuid, isFollowed) in
+                    myCell.setupFollowButton(with: uuid, isFollowed: isFollowed)
+                })
+                myCell.followButton.addTarget(self, action: #selector(self.pressedFollowButton), for: .touchDown)
+            }
+            
+            myCell.setupInformationLabel(with: result[indexPath.row][1])
+            myCell.isUserInteractionEnabled = true
+            myCell.informationLabel.isUserInteractionEnabled = true
+            myCell.informationLabel.addTarget(self, action: #selector(self.pressedUsername(_:)), for: .touchDown)
+        }
+        return myCell
+    }
+}
+
 extension ActivityViewController: ActivityViewInterface {
+    func updateEvents(events: [[String]]) {
+        self.tableView.reloadData()
+        refreshControl.endRefreshing()
+    }
 }

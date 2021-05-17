@@ -10,7 +10,7 @@
 
 import Foundation
 
-final class TabBarPresenter {
+class TabBarPresenter {
 
     // MARK: - Private properties -
 

@@ -10,7 +10,7 @@
 
 import Foundation
 
-final class LoginPresenter {
+class LoginPresenter {
 
     // MARK: - Private properties -
 
@@ -31,7 +31,9 @@ final class LoginPresenter {
 
 extension LoginPresenter: LoginPresenterInterface {
     func pressedButton() {
+        view.setupFirebaseAuth()
         view.removeAllViews()
+        
     }
 
     func checkUser(user: FIRUser) {
@@ -40,6 +42,9 @@ extension LoginPresenter: LoginPresenterInterface {
     
     func userExists() {
         wireframe.transitionToProfile()
+    }
+    func setupFirebaseAuth() {
+        
     }
     
     func transitionToNewUser() {

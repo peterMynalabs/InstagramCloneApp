@@ -10,19 +10,23 @@
 
 import UIKit
 
-final class EditProfileWireframe: BaseWireframe {
+class EditProfileWireframe: BaseWireframe {
 
     // MARK: - Private properties -
     // MARK: - Module setup -
 
-    init(userInformation: UserInformation, delegate: EditProfileDelegate?)  {
+    init(delegate: EditProfileDelegate?, image: String)  {
         let moduleViewController = EditProfileViewController()
-        moduleViewController.userInformation = userInformation
+        moduleViewController.imageUrl = image
         super.init(viewController: moduleViewController)
-
+        
         let interactor = EditProfileInteractor()
         let presenter = EditProfilePresenter(view: moduleViewController, interactor: interactor, wireframe: self)
         presenter.delegate = delegate
+        interactor.presenter = presenter
+        interactor.profilePhotoService = ProfilePhotoService()
+        interactor.userService = UserService()
+        interactor.profileService = ProfileService()
         moduleViewController.presenter = presenter
     }
 

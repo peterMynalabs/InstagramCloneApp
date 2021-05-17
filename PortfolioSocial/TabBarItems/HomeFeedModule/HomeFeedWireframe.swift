@@ -10,7 +10,7 @@
 
 import UIKit
 
-final class HomeFeedWireframe: BaseWireframe {
+class HomeFeedWireframe: BaseWireframe {
 
     // MARK: - Private properties -
 
@@ -19,15 +19,26 @@ final class HomeFeedWireframe: BaseWireframe {
     init() {
         let moduleViewController = HomeFeedViewController()
         super.init(viewController: moduleViewController)
-
         let interactor = HomeFeedInteractor()
         let presenter = HomeFeedPresenter(view: moduleViewController, interactor: interactor, wireframe: self)
+        interactor.presenter = presenter
+        interactor.followService = FollowService()
+        interactor.userService = UserService()
+        interactor.likeService = LikeService()
         moduleViewController.presenter = presenter
     }
-
 }
 
 // MARK: - Extensions -
 
 extension HomeFeedWireframe: HomeFeedWireframeInterface {
+    func routeToProfile(with uuid: String, isFollowed: Bool){
+        let wireframe = ProfileScreenWireframe(uuid: uuid)
+        self.navigationController?.pushWireframe(wireframe)
+    }
+    
+    func routeToLogIn() {
+        let module = LoginWireframe()
+        navigationController?.pushWireframeWithoutAnimation(module)
+    }
 }

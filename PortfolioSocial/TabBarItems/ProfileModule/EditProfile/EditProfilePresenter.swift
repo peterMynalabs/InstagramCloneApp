@@ -15,7 +15,7 @@ protocol EditProfileDelegate: AnyObject {
 }
 
 
-final class EditProfilePresenter {
+class EditProfilePresenter {
     
     // MARK: - Private properties -
     
@@ -23,6 +23,7 @@ final class EditProfilePresenter {
     private let interactor: EditProfileInteractorInterface
     private let wireframe: EditProfileWireframeInterface
     var delegate: EditProfileDelegate?
+    var userInformation: UserInformation?
     
     // MARK: - Lifecycle -
     
@@ -36,26 +37,41 @@ final class EditProfilePresenter {
 // MARK: - Extensions -
 
 extension EditProfilePresenter: EditProfilePresenterInterface {
-    func pressedDone(info: UserInformation) {
-        interactor.updateUsersInformation(info: info)
-        delegate?.recieveNewData(updatedUserInformation: info)
-        wireframe.viewDisappeared()
+    func pressedDone() {
+        interactor.updateUsersInformation(info: userInformation!)
+        view.removeAllViews()
+        delegate?.recieveNewData(updatedUserInformation: userInformation!)
+    }
+    
+    func viewLoaded() {
+        interactor.getUserInformation()
     }
     
     func pressedCancel() {
         wireframe.viewDisappeared()
     }
+   
+    func recievedInformation(info: UserInformation){
+        view.addProfileInformationForm(userInformation: info)
+        view.updateProfileForm(info: info)
+        userInformation = info
+    }
     
-    func pressedOn(label item: FormItems, userInformation: UserInformation) {
-        wireframe.routeToEditProfileItem(with: item, userInformation: userInformation, delegate: self)
+    func viewDisappeared() {
+        wireframe.viewDisappeared()
+    }
+    
+    func pressedOn(label item: FormItems) {
+        wireframe.routeToEditProfileItem(with: item, userInformation: userInformation!, delegate: self)
+    }
+    func updateProfilePhoto(image: NSObject) {
+        interactor.updateProfilePhoto(image: image)
     }
 }
 
 extension EditProfilePresenter: EditProfileItemDelegate {
     func recieveNewData(updatedUserInformation: UserInformation) {
+        userInformation = updatedUserInformation
         view.updateProfileForm(info: updatedUserInformation)
-        
     }
-    
-    
 }

@@ -17,68 +17,81 @@ import UIKit
 enum RootTabBarsItem : Int {
     
     case home = 0
-       case search
-       case addPost
-       case activity
-       case profile
+    case search
+    case addPost
+    case activity
+    case profile
     
-    static var homeController: UIViewController?
-    static var userSearchController: UIViewController?
-    static var addPostController: UIViewController?
-    static var activityController: UIViewController?
-    static var profileController: UIViewController?
+    static var homeController: BaseWireframe?
+    static var userSearchController: BaseWireframe?
+    static var addPostController: BaseWireframe?
+    static var activityController: BaseWireframe?
+    static var profileController: BaseWireframe?
+    
     
     static func initialize() {
-        homeController = try! HomeFeedWireframe.init().viewController
-        userSearchController = try! SearchViewWireframe.init().viewController
-        addPostController = try! AddPostWireframe.init().viewController
-        activityController = try! ActivityWireframe.init().viewController
-        profileController = try! ProfileScreenWireframe.init().viewController
+        homeController =  HomeFeedWireframe.init()
+        userSearchController = SearchViewWireframe.init()
+        addPostController =  AddPostWireframe.init()
+        activityController =  ActivityWireframe.init()
+        profileController = ProfileScreenWireframe.init(uuid: "")
+        
     }
     
     static func controllers() -> [UIViewController] {
-            return [homeController!,
-                    userSearchController!,
-                    addPostController!,
-                    activityController!,
-                    profileController!]
-        }
+        return [homeController!.viewController,
+                userSearchController!.viewController,
+                addPostController!.viewController,
+                activityController!.viewController,
+                profileController!.viewController]
+    }
     
 }
-final class TabBarWireframe: BaseWireframe {
-
+class TabBarWireframe: BaseWireframe {
+    
     // MARK: - Private properties -
     var titles = ["Home","Search", "Post", "Liked", "Profile"]
-
-
+    var tabBarViewControllers = [UINavigationController]()
+    
     fileprivate weak var view: (UITabBarController)?
-   
+    
     // MARK: - Module setup -
-
-    init() {
+    
+    init(isFirstTime: Bool) {
         RootTabBarsItem.initialize()
-
         let moduleViewController = TabBarViewController()
+        moduleViewController.isFirstTime = isFirstTime
         super.init(viewController: moduleViewController)
-        moduleViewController.viewControllers = RootTabBarsItem.controllers()
-        moduleViewController.selectedIndex = 4
-        for i in 0...titles.count - 1 {
-            moduleViewController.viewControllers?[i].title = titles[i]
+                
+        var controllers = RootTabBarsItem.controllers()
+        for i in 0...controllers.count - 1 {
+            let navController = RootNavigationController()
+            navController.setViewControllers([controllers[i]], animated: false)
+            tabBarViewControllers.append(navController)
         }
+        moduleViewController.selectedIndex = 4
+        moduleViewController.viewControllers = tabBarViewControllers
+        
+//        for i in 0...titles.count - 1 {
+//            moduleViewController.viewControllers?[i].title = titles[i]
+//        }
+        
         let interactor = TabBarInteractor()
         let presenter = TabBarPresenter(view: moduleViewController, interactor: interactor, wireframe: self)
         moduleViewController.presenter = presenter
+
     }
     
-
+    
 }
 
 // MARK: - Extensions -
 
 extension TabBarWireframe: TabBarWireframeInterface {
     func transitionToLogIn() {
-        let module = LoginWireframe()
+       // let module = LoginWireframe()//
         //module.viewController.modalPresentationStyle = .fullScreen
-        navigationController?.pushWireframeWithoutAnimation(module)
+      //  viewController.presentWireframe(module)
+  //      navigationController?.pushWireframeWithoutAnimation(module)
     }
 }

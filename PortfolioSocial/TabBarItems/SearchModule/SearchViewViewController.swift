@@ -10,23 +10,135 @@
 
 import UIKit
 
-final class SearchViewViewController: ViewController {
+class SearchViewViewController: UITableViewController {
 
     // MARK: - Public properties -
-
     var presenter: SearchViewPresenterInterface!
 
     // MARK: - Lifecycle -
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Search"
-        view.backgroundColor = .red
+        setupView()
+        setupRefreshControl()
+        setupTableView()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        presenter.viewReloaded()
+    }
+    
+    func setupRefreshControl() {
+        refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+        tableView.addSubview(refreshControl!)
+    }
+    
+    func setupView() {
+        view.backgroundColor = UIColor(rgb: 0xFAFAFA)
+        navigationItem.title = "Users"
+    }
+    
+    func setupTableView() {
+        tableView.frame = view.frame
+        tableView.backgroundColor = UIColor(rgb: 0xFAFAFA)
+        tableView.register(UsersTableViewCell.self, forCellReuseIdentifier: "UserTableViewCell")
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+    
+    @objc func refresh(_ sender: AnyObject) {
+        presenter.viewReloaded()
+    }
+    
+    @objc func pressedFollowButton(sender: Any) {
+        let button: FollowUnfollowButton = sender as! FollowUnfollowButton
+        if button.titleLabel?.text == "Following" {
+            button.follow()
+            presenter.clickedUser(with: button.uuid, isFollowing: true)
+        } else {
+            button.unfollow()
+            presenter.clickedUser(with: button.uuid, isFollowing: false)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return view.frame.width / 5
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return presenter.info?.count ?? 9
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let info = presenter.info {
+            presenter.clickedUserName(with: info[indexPath.row].uid)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let myCell = tableView.dequeueReusableCell(withIdentifier: UsersTableViewCell.identifier, for: indexPath) as! UsersTableViewCell
+        myCell.backgroundColor = UIColor(rgb: 0xFAFAFA)
+        let shimmerView = UIView(frame: CGRect(x: 20, y: view.frame.width / 10 - 25, width: 50, height: 50))
+        shimmerView.backgroundColor = UIColor(rgb: 0xEDEDED)
+        shimmerView.layer.cornerRadius = 25
+        
+        if let info = presenter.info {
+                presenter.cellLoaded(with: info[indexPath.row].uid, completion: { (image, isFollowed) in
+                    myCell.addSubview(myCell.newImageView)
+                    myCell.newImageView.backgroundColor = .clear
+                    myCell.newImageView.translatesAutoresizingMaskIntoConstraints = false
+                    myCell.newImageView.centerYAnchor.constraint(equalTo: myCell.centerYAnchor).isActive = true
+                    myCell.newImageView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 20).isActive = true
+                    myCell.newImageView.widthAnchor.constraint(equalToConstant: 50).isActive = true
+                    myCell.newImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+                    
+                    DispatchQueue.main.async {
+                        myCell.newImageView.sd_setImage(with: URL(string: image), placeholderImage: UIImage(named: "defaultProfilePhoto"), options: .highPriority, completed: nil)
+                    }
+                    
+                    myCell.newImageView.layer.cornerRadius = 25
+                    myCell.newImageView.layer.masksToBounds = true
+                    
+                    if isFollowed {
+                        myCell.followUnfollowButton.unfollow()
+                    } else {
+                        myCell.followUnfollowButton.follow()
+                    }
+                })
+                
+                myCell.addSubview(myCell.usernameLabel)
+                myCell.usernameLabel.text = info[indexPath.row].username
+                myCell.usernameLabel.font = UIFont.boldSystemFont(ofSize: 13)
+                myCell.usernameLabel.translatesAutoresizingMaskIntoConstraints = false
+                myCell.usernameLabel.centerYAnchor.constraint(equalTo: myCell.centerYAnchor).isActive = true
+                myCell.usernameLabel.leftAnchor.constraint(equalTo: myCell.leftAnchor, constant: 90).isActive = true
+                myCell.usernameLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
+                myCell.usernameLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
+                
+                myCell.addSubview(myCell.followUnfollowButton)
+                
+                myCell.followUnfollowButton.uuid = info[indexPath.row].uid
+                myCell.followUnfollowButton.addTarget(self, action: #selector(pressedFollowButton(sender:)), for: .touchDown)
+                myCell.followUnfollowButton.translatesAutoresizingMaskIntoConstraints = false
+                myCell.followUnfollowButton.centerYAnchor.constraint(equalTo: myCell.centerYAnchor).isActive = true
+                myCell.followUnfollowButton.leftAnchor.constraint(equalTo: myCell.rightAnchor, constant: -120).isActive = true
+                myCell.followUnfollowButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
+                myCell.followUnfollowButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
+                myCell.followUnfollowButton.tag = indexPath.row
+        }
+        myCell.backgroundViewForImage = shimmerView
+        
+        shimmerView.startShimmeringEffect()
+        return myCell
+    }
 }
 
 // MARK: - Extensions -
 
 extension SearchViewViewController: SearchViewViewInterface {
+    func updateUsers(users: [User]) {
+        tableView.reloadData()
+        refreshControl!.endRefreshing()
+    }
 }

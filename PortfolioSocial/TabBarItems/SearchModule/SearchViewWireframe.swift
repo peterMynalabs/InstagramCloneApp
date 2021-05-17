@@ -10,7 +10,7 @@
 
 import UIKit
 
-final class SearchViewWireframe: BaseWireframe {
+class SearchViewWireframe: BaseWireframe {
 
     // MARK: - Private properties -
 
@@ -22,6 +22,10 @@ final class SearchViewWireframe: BaseWireframe {
 
         let interactor = SearchViewInteractor()
         let presenter = SearchViewPresenter(view: moduleViewController, interactor: interactor, wireframe: self)
+        interactor.presenter = presenter
+        interactor.followService = FollowService()
+        interactor.userService = UserService()
+        interactor.profileService = ProfileService()
         moduleViewController.presenter = presenter
     }
 
@@ -30,4 +34,8 @@ final class SearchViewWireframe: BaseWireframe {
 // MARK: - Extensions -
 
 extension SearchViewWireframe: SearchViewWireframeInterface {
+    func transitionToProfile(with uuid: String) {
+        let module = ProfileScreenWireframe(uuid: uuid)
+        navigationController?.pushWireframe(module)
+    }
 }

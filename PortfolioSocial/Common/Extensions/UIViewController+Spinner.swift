@@ -46,3 +46,11 @@ extension UITextView {
    }
 
 }
+
+extension UITableView {
+    func registerCells(_ types: [(AnyObject.Type, String)]) {
+            for (type, identifier) in types {
+                self.register(type, forCellReuseIdentifier: identifier)
+            }
+        }
+}

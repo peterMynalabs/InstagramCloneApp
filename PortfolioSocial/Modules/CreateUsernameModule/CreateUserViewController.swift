@@ -12,7 +12,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 
-final class CreateUserViewController: UIViewController, UITextFieldDelegate {
+class CreateUserViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Public properties -
     

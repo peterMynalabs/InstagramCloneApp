@@ -11,21 +11,20 @@ import UIKit
 class InteractableProfilePhoto: UIView {
     
     var button: UIButton?
+    var PImage = UIImage(named: "back")
     override init(frame: CGRect) {
         super.init(frame: frame)
         profilePhoto.frame = bounds
         setupProfilePhoto()
         addSubview(profilePhoto)
-        
     }
     
-  
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     func setupProfilePhoto() {
+        profilePhoto.image = PImage
         profilePhoto.layer.cornerRadius = profilePhoto.frame.width / 2
         //refactor
         button = UIButton(frame: frame)
@@ -37,11 +36,8 @@ class InteractableProfilePhoto: UIView {
         profilePhoto.isUserInteractionEnabled = true
     }
     
-
-    
     let profilePhoto: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "back")
         imageView.layer.masksToBounds = true
         return imageView
     }()

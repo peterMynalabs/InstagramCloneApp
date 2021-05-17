@@ -22,7 +22,7 @@ class RootNavigationController: UINavigationController {
         let navigationBar: UINavigationBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: width, height: 90 ))
         self.view.addSubview(navigationBar)
         
-        let navigationItem = UINavigationItem(title: self.title ?? "Something is Wrong")
+        let navigationItem = UINavigationItem(title: self.topViewController?.title ?? "Something is Wrong")
         navigationItem.largeTitleDisplayMode = .always
         navigationBar.prefersLargeTitles = true
         navigationBar.backgroundColor = .clear

@@ -11,13 +11,30 @@
 import UIKit
 
 protocol ActivityWireframeInterface: WireframeInterface {
+    func transitionToProfile(with uuid: String)
+    func transitioToPost(with post: [Post])
 }
 
 protocol ActivityViewInterface: ViewInterface {
+    func updateEvents(events: [[String]])
 }
 
 protocol ActivityPresenterInterface: PresenterInterface {
+    var resultArray: [[String]]? { get }
+    func viewLoaded()
+    func recievedEvents(events: [String: [String]])
+    func loadProfilePhoto(from username: String, completion: @escaping (String) -> Void)
+    func loadFollowButton(from username: String, completion: @escaping (String, Bool) -> Void)
+    func loadPost(from key: String, completion: @escaping (Post?) -> Void)
+    func pressedFollowButton(isFollowing: Bool, with uuid: String)
+    func pressedUsername(with username: String)
+    func pressedImageView(posts: [Post])
 }
 
 protocol ActivityInteractorInterface: InteractorInterface {
+    func getEvents()
+    func getPost(from key: String, completion: @escaping (Post?) -> Void)
+    func getProfilePhoto(from username: String, completion: @escaping (String) -> Void)
+    func getUserUUID(from username: String, completion: @escaping (String, Bool) -> Void)
+    func setFollowStatus(with isFollowing: Bool, uuid: String)
 }

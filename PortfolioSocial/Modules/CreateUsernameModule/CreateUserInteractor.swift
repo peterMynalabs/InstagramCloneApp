@@ -11,9 +11,9 @@
 import Foundation
 import FirebaseAuth
 
-final class CreateUserInteractor {
+class CreateUserInteractor {
     weak var presenter: CreateUserPresenter?
-    
+    var userService: UserService?
 }
 
 // MARK: - Extensions -
@@ -23,8 +23,8 @@ extension CreateUserInteractor: CreateUserInteractorInterface {
         guard let firUser = Auth.auth().currentUser,
               let username = username,
               !username.isEmpty else { return }
-        UserService.create(firUser, username: username) { [weak self] (user) in
-            User.setCurrent(user!, saveToDefaults: true)//yooo
+        userService?.create(firUser, username: username) { [weak self] (user) in
+            User.setCurrent(user!, saveToDefaults: true)
               self?.presenter?.transitionToProfile()
         }
     }

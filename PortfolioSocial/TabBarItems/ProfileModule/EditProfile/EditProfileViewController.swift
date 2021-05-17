@@ -9,33 +9,30 @@
 //
 
 import UIKit
+import SDWebImage
 
-
-final class EditProfileViewController: UIViewController {
+class EditProfileViewController: UIViewController {
     // MARK: - Public properties -
     var presenter: EditProfilePresenterInterface!
     var profileView: InteractableProfilePhoto?
     var profileInformationForm: ProfileInformationForm?
     var scalingForKeyboard: CGFloat = 0.0
-    var userInformation: UserInformation?
-    var updatedInformation: UserInformation?
-
+    var imagePicker: ImagePicker!
+    var imageUrl: String = ""
     // MARK: - Lifecycle -
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        definesPresentationContext = true
         setupFrames()
-        addGestureRecognizers()
+        presenter.viewLoaded()
         view.addSubview(profileView!)
+        profileView?.profilePhoto.sd_setImage(with: URL(string: imageUrl), placeholderImage: UIImage(named: "defaultProfilePhoto"), options: .highPriority, completed: nil)
         view.addSubview(changeProfilePhotoButton)
-        view.addSubview(profileInformationForm!)
         view.addSubview(SeperatorLineView(frame: CGRect(x: 0, y: changeProfilePhotoButton.frame.maxY + 20, width: view.frame.width, height: 1)))
         setupNavigationBar()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-       
+        imagePicker = ImagePicker(presentationController: self, delegate: self)
     }
     
     func setupNavigationBar() {
@@ -49,14 +46,13 @@ final class EditProfileViewController: UIViewController {
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
         button.setTitleColor(UIColor(rgb: 0x0498FC), for: .normal)
-        button.addTarget(self, action: #selector(onPressProfile), for: .touchDown)
+        button.addTarget(self, action: #selector(pressChangeProfilePhoto), for: .touchDown)
         return button
     }()
     
     func setupFrames() {
         profileView = InteractableProfilePhoto(frame: CGRect(x: (view.frame.width - 75) / 2, y: 90, width: 75, height: 75))
-        changeProfilePhotoButton.frame = CGRect(x: 0, y: (profileView?.frame.maxY)! + 20, width: self.view.frame.width, height: 10)
-        profileInformationForm = ProfileInformationForm(frame: CGRect(x: 0, y: changeProfilePhotoButton.frame.maxY + 22, width: view.frame.width, height: 190), userInformation: userInformation!)
+        changeProfilePhotoButton.frame = CGRect(x: 0, y: (profileView?.frame.maxY)! + 10, width: self.view.frame.width, height: 30)
     }
     
     func addGestureRecognizers() {
@@ -68,40 +64,72 @@ final class EditProfileViewController: UIViewController {
     }
     
     @objc func onPressProfile() {
-        view.backgroundColor = .red
+        let popupController = UpdateProfilePhotoViewController()
+        popupController.modalPresentationStyle = .overFullScreen
+        self.present(popupController, animated: true, completion: nil)
     }
     
     @objc func handleTap(sender: UITapGestureRecognizer) {
         if sender.state == .ended {
             if let label = sender.view as? UILabel {
                 let formItem = FormItems(rawValue: (label.text ?? ""))
-                presenter.pressedOn(label: formItem ?? FormItems.nothing, userInformation: userInformation!)
+                presenter.pressedOn(label: formItem ?? FormItems.nothing)
             }
         }
     }
  
-    
     @objc func pressCancel() {
         presenter.pressedCancel()
     }
     
     @objc func pressDone() {
-        presenter.pressedDone(info: userInformation!)
+        presenter.pressedDone()
     }
-
-
+    
+    @objc func pressChangeProfilePhoto(_ sender: UIButton) {
+        self.imagePicker.present(from: sender)
+    }
 }
 
 // MARK: - Extensions -
 
 extension EditProfileViewController: EditProfileViewInterface {
     func updateProfileForm(info: UserInformation) {
-        profileInformationForm!.updateTitles(info: info)
-        updatedInformation = info
-        userInformation = info
+        profileInformationForm?.removeFromSuperview()
+        profileInformationForm = ProfileInformationForm(frame: CGRect(x: 0, y: changeProfilePhotoButton.frame.maxY + 22, width: view.frame.width, height: 300), userInformation: info)
+        self.view.addSubview(profileInformationForm!)
+        addGestureRecognizers()
+    }
+    
+    func addProfileInformationForm(userInformation: UserInformation) {
+        profileInformationForm = ProfileInformationForm(frame: CGRect(x: 0, y: changeProfilePhotoButton.frame.maxY + 22, width: view.frame.width, height: 300), userInformation: userInformation)
+        addGestureRecognizers()
+        view.addSubview(profileInformationForm!)
+    }
+    
+    
+    func removeAllViews() {
+        for view in self.view.subviews{
+            view.removeFromSuperview()
+        }
+        self.showSpinner(onView: view)
     }
 }
-
+extension EditProfileViewController: ImagePickerDelegate {
+    func didSelect(image: UIImage?) {
+        if let image = image {
+            profileView?.PImage = image
+            profileView?.profilePhoto.image = image
+            presenter.updateProfilePhoto(image: image.withRoundedCorners(radius: image.size.height / 2)!)
+        } else {
+            print("YO")
+        }
+        
+        
+    }
+    
+    
+}
 
 
 

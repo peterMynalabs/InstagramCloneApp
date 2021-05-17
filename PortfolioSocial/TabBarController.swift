@@ -13,7 +13,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     let userSearchController = SearchViewWireframe.init()
     let addPostController = AddPostWireframe.init()
     let activityController = ActivityWireframe.init()
-    let profileController = ProfileScreenWireframe.init()
+    let profileController = ProfileScreenWireframe.init(uuid: "")
     
     override func viewDidLoad() {
         delegate = self
