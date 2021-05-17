@@ -9,10 +9,7 @@ import Foundation
 import UIKit
 
 class RootNavigationController: UINavigationController {
-    override func viewWillLayoutSubviews() {
-        //setupNavigationBar()
-    }
-    
+  
     override var prefersStatusBarHidden: Bool {
         return false
     }

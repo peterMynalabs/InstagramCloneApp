@@ -9,7 +9,7 @@ import Foundation
 import FirebaseDatabase
 
 class FollowService {
-    func followUser(_ user: String, forCurrentUserWithSuccess success: @escaping (Bool) -> Void) {
+    func followUser(_ user: String) {
         let currentUID = User.current!.uid
         let followData = ["followers/\(user)/\(currentUID)" : true,
                           "following/\(currentUID)/\(user)" : true]
@@ -18,37 +18,32 @@ class FollowService {
         ref.updateChildValues(followData) { (error, _) in
             if let error = error {
                 assertionFailure(error.localizedDescription)
-                success(false)
+               
             }
 
-            // 1
             ProfileService().posts(for: user) { (posts) in
-                // 2
                 let postKeys = posts.compactMap { $0.key }
 
-                // 3
                 var followData = [String : Any]()
                 let timelinePostDict = ["poster_uid" : user]
                 postKeys.forEach { followData["timeline/\(currentUID)/\($0)"] = timelinePostDict }
 
-                // 4
                 ref.updateChildValues(followData, withCompletionBlock: { (error, ref) in
                     if let error = error {
                         assertionFailure(error.localizedDescription)
                     }
 
                     ActivityService().createEvent(forURLString: "", from: user, completion: { (bool) in
-                        success(error == nil)
+                        assertionFailure("activityEvent failed")
                     })
                 })
             }
         }
     }
     
-     func unfollowUser(_ user: String, forCurrentUserWithSuccess success: @escaping (Bool) -> Void) {
+     func unfollowUser(_ user: String) {
         let currentUID = User.current!.uid
-        // Use NSNull() object instead of nil because updateChildValues expects type [Hashable : Any]
-        // http://stackoverflow.com/questions/38462074/using-updatechildvalues-to-delete-from-firebase
+        
         let followData = ["followers/\(user)/\(currentUID)" : NSNull(),
                           "following/\(currentUID)/\(user)" : NSNull()]
 
@@ -56,14 +51,12 @@ class FollowService {
         ref.updateChildValues(followData) { (error, ref) in
             if let error = error {
                 assertionFailure(error.localizedDescription)
-                return success(false)
             }
 
             ProfileService().posts(for: user, completion: { (posts) in
                 var unfollowData = [String : Any]()
                 let postsKeys = posts.compactMap { $0.key }
                 postsKeys.forEach {
-                    // Use NSNull() object instead of nil because updateChildValues expects type [Hashable : Any]
                     unfollowData["timeline/\(currentUID)/\($0)"] = NSNull()
                 }
 
@@ -73,7 +66,7 @@ class FollowService {
                     }
 
                     ActivityService().deleteEvent(forURLString: "", from: user, completion: { (bool) in
-                        success(error == nil)
+                        assertionFailure("activityEvent failed")
                     })
                 })
             })
@@ -93,11 +86,11 @@ class FollowService {
         })
     }
     
-     func setIsFollowing(_ isFollowing: Bool, fromCurrentUserTo followeeUUID: String, success: @escaping (Bool) -> Void) {
+     func setIsFollowing(_ isFollowing: Bool, fromCurrentUserTo followeeUUID: String) {
         if isFollowing {
-            followUser(followeeUUID, forCurrentUserWithSuccess: success)
+            followUser(followeeUUID)
         } else {
-            unfollowUser(followeeUUID, forCurrentUserWithSuccess: success)
+            unfollowUser(followeeUUID)
         }
     }
     
@@ -118,6 +111,5 @@ class FollowService {
                 completion(0,0)
             }
         })
-        
     }
 }

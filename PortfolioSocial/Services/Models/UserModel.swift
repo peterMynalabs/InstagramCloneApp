@@ -47,7 +47,6 @@ class User: Codable {
     
     private static var _current: User?
 
-    // 2
     static var current: User? {
         
         return _current
@@ -55,7 +54,6 @@ class User: Codable {
 
     // MARK: - Class Methods
 
-    // 5
     
     static func setCurrent(_ user: User, saveToDefaults: Bool = false) {
         if saveToDefaults {

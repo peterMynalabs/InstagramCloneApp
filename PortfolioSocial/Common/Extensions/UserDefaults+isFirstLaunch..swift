@@ -7,9 +7,6 @@
 
 import Foundation
 
-
-// Bad, Bad Bad this need to be redone, but not right now....
-
 extension UserDefaults {
     static func isFirstLaunch() -> Bool {
         let hasBeenLaunchedBeforeFlag = "hasBeenLaunchedBeforeFlag"

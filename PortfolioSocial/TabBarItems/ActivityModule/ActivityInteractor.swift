@@ -45,11 +45,7 @@ extension ActivityInteractor: ActivityInteractorInterface {
     }
     
     func setFollowStatus(with isFollowing: Bool, uuid: String) {
-        followService?.setIsFollowing(isFollowing, fromCurrentUserTo: uuid, success: { (sucess) in
-            if !sucess {
-                fatalError()
-            }
-        })
+        followService?.setIsFollowing(isFollowing, fromCurrentUserTo: uuid)
     }
     
     func getPost(from key: String, completion: @escaping (Post?) -> Void) {

@@ -27,11 +27,7 @@ extension SearchViewInteractor: SearchViewInteractorInterface {
     }
     
     func followUser(isFollowing: Bool, fromCurrentUserTo uuid: String) {
-        followService?.setIsFollowing(!isFollowing, fromCurrentUserTo: uuid, success: { (sucess) in
-            if sucess {
-                print("yay")
-            } 
-        })
+        followService?.setIsFollowing(!isFollowing, fromCurrentUserTo: uuid)
     }
     
     func getUserInfo(with uuid: String, completion: @escaping (String, Bool) -> Void) {

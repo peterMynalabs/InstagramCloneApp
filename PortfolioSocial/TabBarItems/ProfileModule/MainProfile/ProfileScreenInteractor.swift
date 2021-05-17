@@ -56,8 +56,6 @@ extension ProfileScreenInteractor: ProfileScreenInteractorInterface {
     }
     
     func setFollowing(isFollowing: Bool, username: String) {
-        followService?.setIsFollowing(!isFollowing, fromCurrentUserTo: username, success: { (sucess) in
-            print(sucess)
-        })
+        followService?.setIsFollowing(!isFollowing, fromCurrentUserTo: username)
     }
 }

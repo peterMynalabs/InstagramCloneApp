@@ -2,7 +2,7 @@
 //  Constants.swift
 //  PortfolioSocial
 //
-//  Created by Peter Shaburov on 14.01.2021.
+//  Created by Peter Shaburov on 5/17/21.
 //
 
 import Foundation
