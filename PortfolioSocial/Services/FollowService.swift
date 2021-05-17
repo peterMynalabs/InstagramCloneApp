@@ -32,8 +32,10 @@ class FollowService {
                         assertionFailure(error.localizedDescription)
                     }
 
-                    ActivityService().createEvent(forURLString: "", from: user, completion: { (_) in
-                        assertionFailure("activityEvent failed")
+                    ActivityService().createEvent(forURLString: "", from: user, completion: { (bool) in
+                        if !bool {
+                            assertionFailure()
+                        }
                     })
                 })
             }
@@ -63,8 +65,10 @@ class FollowService {
                         assertionFailure(error.localizedDescription)
                     }
 
-                    ActivityService().deleteEvent(forURLString: "", from: user, completion: { (_) in
-                        assertionFailure("activityEvent failed")
+                    ActivityService().deleteEvent(forURLString: "", from: user, completion: { (bool) in
+                        if !bool {
+                            assertionFailure()
+                        }
                     })
                 })
             })

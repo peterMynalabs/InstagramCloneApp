@@ -25,7 +25,6 @@ class ProfileSettingsWireframe: BaseWireframe {
         interactor.presenter = presenter
         moduleViewController.presenter = presenter
     }
-
 }
 
 // MARK: - Extensions -
@@ -34,6 +33,5 @@ extension ProfileSettingsWireframe: ProfileSettingsWireframeInterface {
     func transitionToLogOut() {
         UserDefaults.standard.set(false, forKey: "launchedBefore")
         UIApplication.shared.keyWindow?.rootViewController = TabBarWireframe.init(isFirstTime: true).viewController
-
     }
 }

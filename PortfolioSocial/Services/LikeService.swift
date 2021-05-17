@@ -9,7 +9,6 @@ import Foundation
 import FirebaseDatabase
 
 class LikeService {
-
     func create(for post: Post, success: @escaping (Bool) -> Void) {
         guard let key = post.key else {
             return success(false)
