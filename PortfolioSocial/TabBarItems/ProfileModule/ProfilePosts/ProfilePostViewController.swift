@@ -16,7 +16,7 @@ class ProfilePostViewController: UIViewController {
     var imageView = UIImageView()
     var tableView = PostTableView()
     var index = 0
-    
+
     var postList = [Post]() {
         didSet {
             tableView = PostTableView(frame: view.frame, style: .plain, posts: postList)
@@ -25,10 +25,10 @@ class ProfilePostViewController: UIViewController {
             tableView.reloadData()
         }
     }
-    var onDoneBlock : ((Int) -> Void)?
+    var onDoneBlock: ((Int) -> Void)?
     let dismissButton = UIButton(type: .system)
     var uuid = ""
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -41,69 +41,63 @@ class ProfilePostViewController: UIViewController {
         tableView.isHidden = true
 
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         if !tableView.isDescendant(of: view) {
             view.addSubview(tableView)
         }
         tableView.scrollToRow(at: IndexPath(row: index, section: 0), at: .middle, animated: false)
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         dismissButton.sizeToFit()
         dismissButton.center = CGPoint(x: 30, y: 30)
-        imageView.frame = CGRect(x: 0 , y: 117, width: view.frame.width, height: view.frame.width)
+        imageView.frame = CGRect(x: 0, y: 117, width: view.frame.width, height: view.frame.width)
     }
-    
+
     @objc func back() {
         tableView.isHidden = true
         navigationController?.popViewController(animated: true)
     }
-    
+
     @objc func onTap() {
-        back() 
+        back()
     }
-    
 }
 
 extension ProfilePostViewController: PostTableViewDelegate {
     func didTapLikeButton(_ likeButton: UIButton, on cell: PostTableCell) {
         guard let indexPath = self.tableView.indexPath(for: cell)
         else { return }
-        
+
         likeButton.isUserInteractionEnabled = false
         let post = postList[indexPath.row]
-        
+
         LikeService().setIsLiked(!post.isLiked, for: post) { (success) in
             defer {
                 likeButton.isUserInteractionEnabled = true
             }
-            
+
             guard success else { return }
-            
+
             post.likeCount += !post.isLiked ? 1 : -1
             post.isLiked = !post.isLiked
-            
+
             guard let cell = self.tableView.cellForRow(at: indexPath) as? PostTableCell
             else { return }
-            
+
             DispatchQueue.main.async {
-                
                 cell.liked = post.isLiked
                 cell.likeCount = post.likeCount
-                
             }
         }
     }
-    
+
     func clickedUsername(with username: String) {
         UserService().getUUID(from: username.capitalized, completion: { [weak self] (uuid) in
             let wireframe = ProfileScreenWireframe(uuid: uuid)
             self?.navigationController?.pushWireframe(wireframe)
-            
         })
     }
-    
 }
-

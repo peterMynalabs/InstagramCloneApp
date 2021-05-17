@@ -13,13 +13,13 @@ import FirebaseAuth
 import FirebaseDatabase
 
 class CreateUserViewController: UIViewController, UITextFieldDelegate {
-    
+
     // MARK: - Public properties -
-    
+
     var presenter: CreateUserPresenterInterface!
-    
+
     // MARK: - Lifecycle -
-    
+
     var topLabel: UILabel = {
         var label = UILabel()
         label.text = "Create Username"
@@ -28,13 +28,13 @@ class CreateUserViewController: UIViewController, UITextFieldDelegate {
         label.textAlignment = .center
         return label
     }()
-    
+
     var containter: UIView = {
         let container = UIView()
         container.backgroundColor = .clear
         return container
     }()
-    
+
     var bottomLabel: UILabel = {
         var label = UILabel()
         label.text = "Add a username so your friends can find you"
@@ -44,7 +44,7 @@ class CreateUserViewController: UIViewController, UITextFieldDelegate {
         label.numberOfLines = 2
         return label
     }()
-    
+
     var usernameTextField: UITextField = {
         var textField = UITextField()
         textField.placeholder = "Username"
@@ -55,7 +55,7 @@ class CreateUserViewController: UIViewController, UITextFieldDelegate {
         textField.backgroundColor = UIColor(rgb: 0xFAFAFA)
         return textField
     }()
-    
+
     var nextButton: UIButton = {
         var button = UIButton(type: .custom)
         button.setTitle("Register or Login", for: .normal)
@@ -66,15 +66,18 @@ class CreateUserViewController: UIViewController, UITextFieldDelegate {
         button.backgroundColor = UIColor(rgb: 0x3897F0)
         return button
     }()
-    
+
     func setupFrames() {
-        containter.frame =  CGRect(x: (view.frame.width - 300) / 2, y: (view.frame.height - 275) / 2 , width: 300, height: 275)
+        containter.frame =  CGRect(x: (view.frame.width - 300) / 2,
+                                   y: (view.frame.height - 275) / 2 ,
+                                   width: 300,
+                                   height: 275)
         topLabel.frame = CGRect(x: 50, y: 0, width: 200, height: 50)
         bottomLabel.frame = CGRect(x: 0, y: 50, width: 300, height: 50)
         usernameTextField.frame = CGRect(x: 0, y: 150, width: 300, height: 50)
         nextButton.frame = CGRect(x: 0, y: 225, width: 300, height: 50)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -86,11 +89,11 @@ class CreateUserViewController: UIViewController, UITextFieldDelegate {
         containter.addSubview(nextButton)
         setupFrames()
     }
-    
+
     @objc func onPress() {
         presenter.buttonPressed(username: usernameTextField.text)
     }
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
         case usernameTextField:
@@ -100,11 +103,10 @@ class CreateUserViewController: UIViewController, UITextFieldDelegate {
         }
         return true
     }
-    
+
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         return true
     }
-    
 }
 
 // MARK: - Extensions -

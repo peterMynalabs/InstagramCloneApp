@@ -9,10 +9,7 @@ import Foundation
 import UIKit
 import FirebaseDatabase.FIRDataSnapshot
 
-
-
 class User: Codable {
-
     let uid: String
     var username: String
     var name: String
@@ -29,9 +26,9 @@ class User: Codable {
         self.bio = ""
         self.numberOfPosts = "0"
     }
-    
+
     init?(snapshot: DataSnapshot) {
-        guard let dict = snapshot.value as? [String : Any],
+        guard let dict = snapshot.value as? [String: Any],
             let username = dict["username"] as? String,
             let numberOfPosts = dict["numberOfPosts"] as? String,
             let information = dict["information"] as? [String: String]
@@ -44,17 +41,15 @@ class User: Codable {
         self.bio = information["bio"] ?? ""
         self.numberOfPosts = numberOfPosts
     }
-    
+
     private static var _current: User?
 
     static var current: User? {
-        
         return _current
     }
 
     // MARK: - Class Methods
 
-    
     static func setCurrent(_ user: User, saveToDefaults: Bool = false) {
         if saveToDefaults {
             if let data = try? JSONEncoder().encode(user) {
@@ -63,9 +58,8 @@ class User: Codable {
         }
         _current = user
     }
-    
+
     static func setCurrent(_ user: User) {
         _current = user
     }
 }
-

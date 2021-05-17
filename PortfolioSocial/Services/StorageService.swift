@@ -2,13 +2,12 @@ import UIKit
 import FirebaseStorage
 
 class StorageService {
-    
      func uploadImage(_ image: UIImage, at reference: StorageReference, completion: @escaping (URL?) -> Void) {
         guard let imageData = image.jpegData(compressionQuality: 1.0) else {
             return completion(nil)
         }
 
-        reference.putData(imageData, metadata: nil, completion: { (metadata, error) in
+        reference.putData(imageData, metadata: nil, completion: { (_, error) in
             if let error = error {
                 assertionFailure(error.localizedDescription)
                 return completion(nil)
@@ -30,7 +29,6 @@ extension StorageReference {
     static func newPostImageReference() -> StorageReference {
         let uid = User.current!.uid
         let timestamp = dateFormatter.string(from: Date())
-
         return Storage.storage().reference().child("images/posts/\(uid)/\(timestamp).jpg")
     }
     static func updateProfilePhoto() -> StorageReference {
@@ -38,4 +36,3 @@ extension StorageReference {
         return Storage.storage().reference().child("images/profilePhotos/\(uid).jpg")
     }
 }
-

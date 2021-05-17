@@ -28,13 +28,13 @@ class EditProfileItemWireframe: BaseWireframe {
         interactor.userService = UserService()
         moduleViewController.presenter = presenter
     }
-    
+
 }
 
 // MARK: - Extensions -
 
 extension EditProfileItemWireframe: EditProfileItemWireframeInterface {
-    func viewDisappeared(){
+    func viewDisappeared() {
         navigationController?.popViewController(animated: false)
     }
 }

@@ -20,7 +20,9 @@ class CreateUserPresenter {
 
     // MARK: - Lifecycle -
 
-    init(view: CreateUserViewInterface, interactor: CreateUserInteractorInterface, wireframe: CreateUserWireframeInterface) {
+    init(view: CreateUserViewInterface,
+         interactor: CreateUserInteractorInterface,
+         wireframe: CreateUserWireframeInterface) {
         self.view = view
         self.interactor = interactor
         self.wireframe = wireframe

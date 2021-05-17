@@ -8,15 +8,14 @@
 import Foundation
 import UIKit
 
-
 class EditProfileButton: UIButton {
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         addDesign()
         self.clipsToBounds = true
     }
-    
+
     func addDesign() {
         layer.borderWidth = 1
         backgroundColor = .white
@@ -27,9 +26,8 @@ class EditProfileButton: UIButton {
         titleLabel?.textAlignment = .center
         titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }

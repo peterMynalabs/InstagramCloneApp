@@ -20,7 +20,9 @@ class ProfileSettingsPresenter {
 
     // MARK: - Lifecycle -
 
-    init(view: ProfileSettingsViewInterface, interactor: ProfileSettingsInteractorInterface, wireframe: ProfileSettingsWireframeInterface) {
+    init(view: ProfileSettingsViewInterface,
+         interactor: ProfileSettingsInteractorInterface,
+         wireframe: ProfileSettingsWireframeInterface) {
         self.view = view
         self.interactor = interactor
         self.wireframe = wireframe

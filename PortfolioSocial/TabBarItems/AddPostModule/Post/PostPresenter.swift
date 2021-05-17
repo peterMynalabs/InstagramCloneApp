@@ -30,7 +30,7 @@ class PostPresenter {
 // MARK: - Extensions -
 
 extension PostPresenter: PostPresenterInterface {
-    
+
     func viewLoaded() {
         view.setImage(with: image!)
     }

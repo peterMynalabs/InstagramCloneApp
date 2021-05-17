@@ -37,10 +37,9 @@ extension BaseWireframe {
 
 extension UIViewController {
 
-    func presentWireframe(_ wireframe: BaseWireframe, animated: Bool = true, completion: (()->())? = nil) {
+    func presentWireframe(_ wireframe: BaseWireframe, animated: Bool = true, completion: (() -> ())? = nil) {
         present(wireframe.viewController, animated: animated, completion: completion)
     }
-
 }
 
 extension UINavigationController {
@@ -59,7 +58,6 @@ extension UINavigationController {
         self.setViewControllers([wireframe.viewController], animated: animated)
     }
 }
-
 
 protocol PresenterInterface: class {
     func viewDidLoad()

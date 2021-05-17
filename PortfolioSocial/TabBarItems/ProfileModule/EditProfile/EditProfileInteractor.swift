@@ -36,11 +36,14 @@ extension EditProfileInteractor: EditProfileInteractorInterface {
             }
         }
     }
-    
+
     func updateProfilePhoto(image: NSObject) {
-        profilePhotoService?.updateProfilePhoto(for: image as! UIImage)
+        guard let uiImage = image as? UIImage else {
+            return
+        }
+        profilePhotoService?.updateProfilePhoto(for: uiImage)
     }
-    
+
     func getUserInformation() {
         profileService?.userInformation(for: User.current!.uid, completion: { [weak self]  (info) in
             self?.presenter?.recievedInformation(info: info)

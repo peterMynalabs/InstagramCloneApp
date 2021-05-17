@@ -10,14 +10,12 @@
 
 import UIKit
 
-
-
 class EditProfileItemViewController: UIViewController {
-    
+
     // MARK: - Public properties -
     weak var delegate: EditProfileItemDelegate?
     var presenter: EditProfileItemPresenterInterface!
-    
+
     private let maxHeight: CGFloat = 100
     private let minHeight: CGFloat = 50
     // MARK: - Lifecycle -
@@ -30,12 +28,18 @@ class EditProfileItemViewController: UIViewController {
         presenter.viewLoaded()
         setupNavigationBar()
     }
-    
+
     func setupNavigationBar() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .plain, target: self, action: #selector(EditProfileItemViewController.pressCancel))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done", comment: "Done"), style: .plain, target: self, action: #selector(EditProfileItemViewController.pressDone))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Cancel", comment: "Cancel"),
+                                                           style: .plain,
+                                                           target: self,
+                                                           action: #selector(pressCancel))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done", comment: "Done"),
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(pressDone))
     }
-    
+
     func setupTextView() {
         textView.frame = view.frame
         if UIDevice.current.hasNotch {
@@ -43,11 +47,11 @@ class EditProfileItemViewController: UIViewController {
         }
         view.addSubview(textView)
     }
-    
+
     @objc func pressCancel() {
         presenter.pressedCancel()
     }
-    
+
     @objc func pressDone() {
         presenter.pressedDone(with: textView.textView.text!)
     }
@@ -55,12 +59,15 @@ class EditProfileItemViewController: UIViewController {
 // MARK: - Extensions -
 
 extension EditProfileItemViewController: EditProfileItemViewInterface {
-    
+
     func setCurrentInformation(labelText: String, information: String, count: Int) {
         let navHeight = (navigationController?.navigationBar.frame.height)!
-        textView.setInformation(labelText: labelText, information: information, count: count, navigationBarHeight: Int(navHeight))
+        textView.setInformation(labelText: labelText,
+                                information: information,
+                                count: count,
+                                navigationBarHeight: Int(navHeight))
     }
-    
+
     func setChangeUserName(username: String, count: Int) {
         setCurrentInformation(labelText: "Username", information: username, count: count)
     }

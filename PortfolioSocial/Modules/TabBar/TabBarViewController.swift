@@ -12,70 +12,57 @@ import UIKit
 import Firebase
 
 class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
-    
-    
     // MARK: - Public properties -
-    
+
     var presenter: TabBarPresenterInterface!
     var isFirstTime = false
-    
+
     // MARK: - Lifecycle -
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self
         tabBar.backgroundColor = .white
-        
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         setTabBarItems()
         tabBar.backgroundColor = .white
         tabBar.frame.size.height = 75
         tabBar.frame.origin.y = view.frame.height - 75
     }
-    
-    func setTabBarItems(){
-        
+
+    func setTabBarItems() {
         let myTabBarItem1 = (self.tabBar.items?[0])! as UITabBarItem
         myTabBarItem1.image = UIImage(named: "home")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
         myTabBarItem1.selectedImage = UIImage(named: "selectedHome")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
         myTabBarItem1.title = ""
         myTabBarItem1.imageInsets = UIEdgeInsets(top: 26, left: 25, bottom: 25, right: 26)
-        
+
         let myTabBarItem2 = (self.tabBar.items?[1])! as UITabBarItem
         myTabBarItem2.image = UIImage(named: "search")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
         myTabBarItem2.selectedImage = UIImage(named: "selectedSearch")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
         myTabBarItem2.title = ""
         myTabBarItem2.imageInsets = UIEdgeInsets(top: 26, left: 25, bottom: 25, right: 26)
-        
-        
+
         let myTabBarItem3 = (self.tabBar.items?[2])! as UITabBarItem
         myTabBarItem3.image = UIImage(named: "AddPost")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
         myTabBarItem3.selectedImage = UIImage(named: "AddPost")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
         myTabBarItem3.title = ""
         myTabBarItem3.imageInsets = UIEdgeInsets(top: 26, left: 25, bottom: 25, right: 26)
-        
+
         let myTabBarItem4 = (self.tabBar.items?[3])! as UITabBarItem
         myTabBarItem4.image = UIImage(named: "Like")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
         myTabBarItem4.selectedImage = UIImage(named: "selectedLike")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
         myTabBarItem4.title = ""
         myTabBarItem4.imageInsets = UIEdgeInsets(top: 26, left: 25, bottom: 25, right: 26)
-        
+
         let myTabBarItem5 = (self.tabBar.items?[4])! as UITabBarItem
         myTabBarItem5.image = UIImage(named: "profile")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
         myTabBarItem5.selectedImage = UIImage(named: "selectedProfile")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
         myTabBarItem5.title = ""
         myTabBarItem5.imageInsets = UIEdgeInsets(top: 26, left: 25, bottom: 25, right: 26)
-        
-        
     }
-    
-    
-//    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-//        print("Should select viewController: \(viewController.title ?? "") ?")
-//        return true;
-//    }
 }
 
 // MARK: - Extensions -

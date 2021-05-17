@@ -15,14 +15,14 @@ class ProfileSettingsViewController: UIViewController {
     // MARK: - Public properties -
 
     var presenter: ProfileSettingsPresenterInterface!
-    let cellReuseIdentifier = "cell"
+    let cellID = "cell"
     let tableView = UITableView()
     var scrollView = UIScrollView()
 
     // MARK: - Lifecycle -
 
     func setupTableView() {
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
         tableView.delegate = self
                 tableView.dataSource = self
         self.tableView.tableFooterView = UIView(frame: .zero)
@@ -35,6 +35,7 @@ class ProfileSettingsViewController: UIViewController {
         tableView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
         tableView.heightAnchor.constraint(equalToConstant: 11 * 48).isActive = true
     }
+
     func addLogoutView() {
         let seperatorLine = SeperatorLineView()
         scrollView.addSubview(seperatorLine)
@@ -49,7 +50,7 @@ class ProfileSettingsViewController: UIViewController {
         logOutTitle.translatesAutoresizingMaskIntoConstraints = false
         logOutTitle.sizeToFit()
         scrollView.addSubview(logOutTitle)
-        logOutTitle.topAnchor.constraint(equalTo: seperatorLine.bottomAnchor,constant: 15).isActive = true
+        logOutTitle.topAnchor.constraint(equalTo: seperatorLine.bottomAnchor, constant: 15).isActive = true
         logOutTitle.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 15).isActive = true
         let addAccountButton = UIButton()
         addAccountButton.setTitle("Add Account", for: .normal)
@@ -84,7 +85,7 @@ class ProfileSettingsViewController: UIViewController {
         seperatorLine2.heightAnchor.constraint(equalToConstant: 1).isActive = true
 
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(scrollView)
@@ -110,20 +111,20 @@ extension ProfileSettingsViewController: ProfileSettingsViewInterface {
 }
 
 extension ProfileSettingsViewController: UITableViewDelegate, UITableViewDataSource {
-  
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 11
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = (self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as UITableViewCell?)!
-        // set the text from the data model
+        guard let cell = (tableView.dequeueReusableCell(withIdentifier: cellID) as UITableViewCell?) else {
+            return UITableViewCell()
+        }
         cell.textLabel?.text = "Hey"
         return cell
     }
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 48
     }
-    
-    
 }

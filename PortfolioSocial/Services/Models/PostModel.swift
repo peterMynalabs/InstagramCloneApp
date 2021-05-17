@@ -10,7 +10,7 @@ class Post {
     let poster: String
     var likeCount: Int
     var isLiked = false
-    
+
     init(imageURL: String, imageHeight: CGFloat, caption: String, poster: String, likeCount: Int) {
         self.imageURL = imageURL
         self.imageHeight = imageHeight
@@ -19,9 +19,9 @@ class Post {
         self.poster = poster
         self.likeCount = likeCount
     }
-    
+
     init?(snapshot: DataSnapshot) {
-        guard let dict = snapshot.value as? [String : Any],
+        guard let dict = snapshot.value as? [String: Any],
             let imageURL = dict["image_url"] as? String,
             let imageHeight = dict["image_height"] as? CGFloat,
             let createdAgo = dict["created_at"] as? TimeInterval,
@@ -38,18 +38,26 @@ class Post {
         self.poster = poster
         self.likeCount = likeCount
     }
-    
-    static func create(forURLString urlString: String, aspectHeight: CGFloat, caption: String, poster: String, likedCount: Int, completion:  @escaping (Bool) -> Void) {
+
+    static func create(forURLString urlString: String,
+                       aspectHeight: CGFloat,
+                       caption: String,
+                       poster: String,
+                       likedCount: Int,
+                       completion:  @escaping (Bool) -> Void) {
         let currentUser = User.current
-        let post = Post(imageURL: urlString, imageHeight: aspectHeight, caption: caption, poster: poster, likeCount: likedCount)
-        let dict = post.dictValue
+        let post = Post(imageURL: urlString,
+                        imageHeight: aspectHeight,
+                        caption: caption,
+                        poster: poster,
+                        likeCount: likedCount)
         let postRef = Database.database().reference().child("posts").child(currentUser!.uid).childByAutoId()
         let newPostKey = postRef.key
-        
-        UserService().followers(for: currentUser!) { (followerUIDs) in
-              let timelinePostDict = ["poster_uid" : currentUser!.uid]
 
-              var updatedData: [String : Any] = ["timeline/\(currentUser!.uid)/\(newPostKey!)" : timelinePostDict]
+        UserService().followers(for: currentUser!) { (followerUIDs) in
+              let timelinePostDict = ["poster_uid": currentUser!.uid]
+
+              var updatedData: [String: Any] = ["timeline/\(currentUser!.uid)/\(newPostKey!)": timelinePostDict]
 
               for uid in followerUIDs {
                   updatedData["timeline/\(uid)/\(newPostKey!)"] = timelinePostDict
@@ -57,28 +65,23 @@ class Post {
               let postDict = post.dictValue
               updatedData["posts/\(currentUser!.uid)/\(newPostKey!)"] = postDict
 
-            Database.database().reference().updateChildValues(updatedData) {  (error, ref) in
+            Database.database().reference().updateChildValues(updatedData) {  (error, _) in
                 if error != nil {
                     completion(false)
                 } else {
                     completion(true)
                 }
             }
-          }
+        }
     }
-    
-    
-    var dictValue: [String : Any] {
-        let createdAgo = creationDate.timeIntervalSince1970
 
-        return ["image_url" : imageURL,
-                "image_height" : imageHeight,
-                "created_at" : createdAgo,
+    var dictValue: [String: Any] {
+        let createdAgo = creationDate.timeIntervalSince1970
+        return ["image_url": imageURL,
+                "image_height": imageHeight,
+                "created_at": createdAgo,
                 "caption": caption,
                 "poster": poster,
                 "like_count": likeCount]
     }
 }
-
-
-

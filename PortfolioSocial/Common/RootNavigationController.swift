@@ -9,23 +9,23 @@ import Foundation
 import UIKit
 
 class RootNavigationController: UINavigationController {
-  
+
     override var prefersStatusBarHidden: Bool {
         return false
     }
-    
-    func setupNavigationBar()  {
+
+    func setupNavigationBar() {
         let width = self.view.frame.width
         let navigationBar: UINavigationBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: width, height: 90 ))
         self.view.addSubview(navigationBar)
-        
+
         let navigationItem = UINavigationItem(title: self.topViewController?.title ?? "Something is Wrong")
         navigationItem.largeTitleDisplayMode = .always
         navigationBar.prefersLargeTitles = true
         navigationBar.backgroundColor = .clear
         navigationBar.setItems([navigationItem], animated: false)
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
     }
 }

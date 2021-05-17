@@ -27,18 +27,18 @@ class SearchViewViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         presenter.viewReloaded()
     }
-    
+
     func setupRefreshControl() {
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         tableView.addSubview(refreshControl!)
     }
-    
+
     func setupView() {
         view.backgroundColor = UIColor(rgb: 0xFAFAFA)
         navigationItem.title = "Users"
     }
-    
+
     func setupTableView() {
         tableView.frame = view.frame
         tableView.backgroundColor = UIColor(rgb: 0xFAFAFA)
@@ -46,13 +46,15 @@ class SearchViewViewController: UITableViewController {
         tableView.delegate = self
         tableView.dataSource = self
     }
-    
+
     @objc func refresh(_ sender: AnyObject) {
         presenter.viewReloaded()
     }
-    
+
     @objc func pressedFollowButton(sender: Any) {
-        let button: FollowUnfollowButton = sender as! FollowUnfollowButton
+        guard let button = sender as? FollowUnfollowButton else {
+            return
+        }
         if button.titleLabel?.text == "Following" {
             button.follow()
             presenter.clickedUser(with: button.uuid, isFollowing: true)
@@ -61,76 +63,84 @@ class SearchViewViewController: UITableViewController {
             presenter.clickedUser(with: button.uuid, isFollowing: false)
         }
     }
-    
+
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return view.frame.width / 5
     }
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.info?.count ?? 9
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let info = presenter.info {
             presenter.clickedUserName(with: info[indexPath.row].uid)
         }
     }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let myCell = tableView.dequeueReusableCell(withIdentifier: UsersTableViewCell.identifier, for: indexPath) as! UsersTableViewCell
-        myCell.backgroundColor = UIColor(rgb: 0xFAFAFA)
+
+    override func tableView(_ tableView: UITableView,
+                            cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let myCell = tableView.dequeueReusableCell(withIdentifier: UsersTableViewCell.identifier,
+                                                   for: indexPath) as? UsersTableViewCell
+        guard let cell = myCell else {
+            return UITableViewCell()
+        }
+        cell.backgroundColor = UIColor(rgb: 0xFAFAFA)
         let shimmerView = UIView(frame: CGRect(x: 20, y: view.frame.width / 10 - 25, width: 50, height: 50))
         shimmerView.backgroundColor = UIColor(rgb: 0xEDEDED)
         shimmerView.layer.cornerRadius = 25
-        
+
         if let info = presenter.info {
-                presenter.cellLoaded(with: info[indexPath.row].uid, completion: { (image, isFollowed) in
-                    myCell.addSubview(myCell.newImageView)
-                    myCell.newImageView.backgroundColor = .clear
-                    myCell.newImageView.translatesAutoresizingMaskIntoConstraints = false
-                    myCell.newImageView.centerYAnchor.constraint(equalTo: myCell.centerYAnchor).isActive = true
-                    myCell.newImageView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 20).isActive = true
-                    myCell.newImageView.widthAnchor.constraint(equalToConstant: 50).isActive = true
-                    myCell.newImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-                    
+                presenter.cellLoaded(with: info[indexPath.row].uid, completion: { [weak self] (image, isFollowed) in
+                    cell.addSubview(cell.newImageView)
+                    cell.newImageView.backgroundColor = .clear
+                    cell.newImageView.translatesAutoresizingMaskIntoConstraints = false
+                    cell.newImageView.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
+                    cell.newImageView.leftAnchor.constraint(equalTo: (self?.view.leftAnchor)!,
+                                                            constant: 20).isActive = true
+                    cell.newImageView.widthAnchor.constraint(equalToConstant: 50).isActive = true
+                    cell.newImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+
                     DispatchQueue.main.async {
-                        myCell.newImageView.sd_setImage(with: URL(string: image), placeholderImage: UIImage(named: "defaultProfilePhoto"), options: .highPriority, completed: nil)
+                        cell.newImageView.sd_setImage(with: URL(string: image),
+                                                      placeholderImage: UIImage(named: "defaultProfilePhoto"),
+                                                      options: .highPriority,
+                                                      completed: nil)
                     }
-                    
-                    myCell.newImageView.layer.cornerRadius = 25
-                    myCell.newImageView.layer.masksToBounds = true
-                    
+
+                    cell.newImageView.layer.cornerRadius = 25
+                    cell.newImageView.layer.masksToBounds = true
+
                     if isFollowed {
-                        myCell.followUnfollowButton.unfollow()
+                        cell.followUnfollowButton.unfollow()
                     } else {
-                        myCell.followUnfollowButton.follow()
+                        cell.followUnfollowButton.follow()
                     }
                 })
-                
-                myCell.addSubview(myCell.usernameLabel)
-                myCell.usernameLabel.text = info[indexPath.row].username
-                myCell.usernameLabel.font = UIFont.boldSystemFont(ofSize: 13)
-                myCell.usernameLabel.translatesAutoresizingMaskIntoConstraints = false
-                myCell.usernameLabel.centerYAnchor.constraint(equalTo: myCell.centerYAnchor).isActive = true
-                myCell.usernameLabel.leftAnchor.constraint(equalTo: myCell.leftAnchor, constant: 90).isActive = true
-                myCell.usernameLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
-                myCell.usernameLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
-                
-                myCell.addSubview(myCell.followUnfollowButton)
-                
-                myCell.followUnfollowButton.uuid = info[indexPath.row].uid
-                myCell.followUnfollowButton.addTarget(self, action: #selector(pressedFollowButton(sender:)), for: .touchDown)
-                myCell.followUnfollowButton.translatesAutoresizingMaskIntoConstraints = false
-                myCell.followUnfollowButton.centerYAnchor.constraint(equalTo: myCell.centerYAnchor).isActive = true
-                myCell.followUnfollowButton.leftAnchor.constraint(equalTo: myCell.rightAnchor, constant: -120).isActive = true
-                myCell.followUnfollowButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
-                myCell.followUnfollowButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
-                myCell.followUnfollowButton.tag = indexPath.row
+
+            cell.addSubview(cell.usernameLabel)
+            cell.usernameLabel.text = info[indexPath.row].username
+            cell.usernameLabel.font = UIFont.boldSystemFont(ofSize: 13)
+            cell.usernameLabel.translatesAutoresizingMaskIntoConstraints = false
+            cell.usernameLabel.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
+            cell.usernameLabel.leftAnchor.constraint(equalTo: cell.leftAnchor, constant: 90).isActive = true
+            cell.usernameLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
+            cell.usernameLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
+
+            cell.addSubview(cell.followUnfollowButton)
+
+            cell.followUnfollowButton.uuid = info[indexPath.row].uid
+            cell.followUnfollowButton.addTarget(self, action: #selector(pressedFollowButton(sender:)), for: .touchDown)
+            cell.followUnfollowButton.translatesAutoresizingMaskIntoConstraints = false
+            cell.followUnfollowButton.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
+            cell.followUnfollowButton.leftAnchor.constraint(equalTo: cell.rightAnchor, constant: -120).isActive = true
+            cell.followUnfollowButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
+            cell.followUnfollowButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
+            cell.followUnfollowButton.tag = indexPath.row
         }
-        myCell.backgroundViewForImage = shimmerView
-        
+        cell.backgroundViewForImage = shimmerView
         shimmerView.startShimmeringEffect()
-        return myCell
+        return cell
     }
 }
 

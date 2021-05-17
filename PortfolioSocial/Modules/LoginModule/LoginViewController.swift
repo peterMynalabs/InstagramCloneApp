@@ -35,17 +35,17 @@ class LoginViewController: UIViewController {
         tabBarController?.tabBar.isHidden = true
         addFrames()
     }
-    
+
     deinit {
         self.removeSpinner()
     }
-    
+
     var topBar: UIView = {
         let views = UIView(frame: .zero)
         views.backgroundColor = .red
         return views
     }()
-    
+
     var topLabel: UILabel = {
         var label = UILabel()
         label.text = "InstaClone"
@@ -54,7 +54,7 @@ class LoginViewController: UIViewController {
         label.textAlignment = .center
         return label
     }()
-    
+
     var bottomLabel: UILabel = {
         var label = UILabel()
         label.text = "Sign up to see photos and videos from your friends."
@@ -64,7 +64,7 @@ class LoginViewController: UIViewController {
         label.numberOfLines = 2
         return label
     }()
-    
+
     var signUpOrRegister: UIButton = {
         var button = UIButton(type: .custom)
         button.setTitle("Register or Login", for: .normal)
@@ -75,18 +75,26 @@ class LoginViewController: UIViewController {
         button.backgroundColor = UIColor(rgb: 0x3897F0)
         return button
     }()
-    
+
     func addFrames() {
         topBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 265)
-        topLabel.frame = CGRect(x: topBar.bounds.maxX / 2 - 100, y: topBar.bounds.maxY / 2 - 25, width: 200, height: 50)
-        bottomLabel.frame = CGRect(x: topBar.bounds.maxX / 2 - 100, y: topBar.bounds.maxY / 2 + 15 , width: 200, height: 75)
-        signUpOrRegister.frame = CGRect(x: view.frame.width / 2 - 152.5, y: topBar.frame.height + 25, width: 305, height: 44)
+        topLabel.frame = CGRect(x: topBar.bounds.maxX / 2 - 100,
+                                y: topBar.bounds.maxY / 2 - 25,
+                                width: 200,
+                                height: 50)
+        bottomLabel.frame = CGRect(x: topBar.bounds.maxX / 2 - 100,
+                                   y: topBar.bounds.maxY / 2 + 15 ,
+                                   width: 200,
+                                   height: 75)
+        signUpOrRegister.frame = CGRect(x: view.frame.width / 2 - 152.5,
+                                        y: topBar.frame.height + 25,
+                                        width: 305,
+                                        height: 44)
     }
-    
+
     @objc func onPress() {
         presenter.pressedButton()
     }
-
 }
 
 extension LoginViewController: FUIAuthDelegate {
@@ -95,12 +103,9 @@ extension LoginViewController: FUIAuthDelegate {
             assertionFailure("Error signing in: \(error.localizedDescription)")
             return
         }
-        
-        print("handle user signup / login")
         guard let currentUser = authDataResult?.user
         else { return }
         presenter.checkUser(user: currentUser)
-     
     }
 }
 
@@ -108,25 +113,20 @@ extension LoginViewController: FUIAuthDelegate {
 
 extension LoginViewController: LoginViewInterface {
     func removeAllViews() {
-        //aihfaoiehfoaheoifhsioehf ugh
-        for view in self.view.subviews{
+        for view in self.view.subviews {
             view.removeFromSuperview()
         }
         self.showSpinner(onView: view)
     }
-    
+
     func setupFirebaseAuth() {
         guard let authUI = FUIAuth.defaultAuthUI()
         else { return }
-                
         authUI.delegate = self
         let providers = [FUIEmailAuth()]
         authUI.providers = providers
-        //Will add more providers later on
-  
         let authViewController = authUI.authViewController()
         authViewController.modalPresentationStyle = .fullScreen
         present(authViewController, animated: true)
-
     }
 }

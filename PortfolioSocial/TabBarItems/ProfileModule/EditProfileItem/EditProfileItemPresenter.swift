@@ -15,20 +15,20 @@ protocol EditProfileItemDelegate: AnyObject {
 }
 
 class EditProfileItemPresenter {
-    
     // MARK: - Private properties -
-    
     private unowned let view: EditProfileItemViewInterface
     private let interactor: EditProfileItemInteractorInterface
     private let wireframe: EditProfileItemWireframeInterface
-    var delegate: EditProfileItemDelegate?
+    weak var delegate: EditProfileItemDelegate?
     var isChangingUsername = false
     var userInformation: UserInformation?
     var currentCase: FormItems?
-    
+
     // MARK: - Lifecycle -
-    
-    init(view: EditProfileItemViewInterface, interactor: EditProfileItemInteractorInterface, wireframe: EditProfileItemWireframeInterface) {
+
+    init(view: EditProfileItemViewInterface,
+         interactor: EditProfileItemInteractorInterface,
+         wireframe: EditProfileItemWireframeInterface) {
         self.view = view
         self.interactor = interactor
         self.wireframe = wireframe
@@ -41,22 +41,29 @@ extension EditProfileItemPresenter: EditProfileItemPresenterInterface {
     func viewLoaded() {
         switch currentCase {
         case .name:
-            view.setCurrentInformation(labelText: currentCase!.rawValue, information: userInformation?.name ?? "none", count: 25)
+            view.setCurrentInformation(labelText: currentCase!.rawValue,
+                                       information: userInformation?.name ?? "none",
+                                       count: 25)
         case .username:
             isChangingUsername = true
-            view.setChangeUserName(username: userInformation?.username ?? "none", count: 25)
+            view.setChangeUserName(username: userInformation?.username ?? "none",
+                                   count: 25)
         case .occupation:
-            view.setCurrentInformation(labelText: currentCase!.rawValue, information: userInformation?.occupation ?? "none", count: 50)
+            view.setCurrentInformation(labelText: currentCase!.rawValue,
+                                       information: userInformation?.occupation ?? "none",
+                                       count: 50)
         case .bio:
-            view.setCurrentInformation(labelText: currentCase!.rawValue, information: userInformation?.bio ?? "none", count: 150)
+            view.setCurrentInformation(labelText: currentCase!.rawValue,
+                                       information: userInformation?.bio ?? "none",
+                                       count: 150)
         case .nothing:
             fatalError()
         case .none:
             fatalError()
         }
-        
+
     }
-    func pressedDone(with text: String){
+    func pressedDone(with text: String) {
         if isChangingUsername {
             interactor.checkUsername(username: text)
             isChangingUsername = false
@@ -75,18 +82,18 @@ extension EditProfileItemPresenter: EditProfileItemPresenterInterface {
             case .none:
                 fatalError()
             }
-            
+
             delegate?.recieveNewData(updatedUserInformation: userInformation!)
             wireframe.viewDisappeared()
         }
     }
-    
+
     func pressedCancel() {
         wireframe.viewDisappeared()
     }
-    
+
     func pressedDoneForUsername(username: String) {
         interactor.checkUsername(username: username)
     }
-    
+
 }

@@ -11,14 +11,12 @@
 import UIKit
 
 protocol TabBarWireframeInterface: WireframeInterface {
-    func transitionToLogIn() 
 }
 
 protocol TabBarViewInterface: ViewInterface {
 }
 
 protocol TabBarPresenterInterface: PresenterInterface {
-    func showLogin()
 }
 
 protocol TabBarInteractorInterface: InteractorInterface {

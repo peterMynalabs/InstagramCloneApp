@@ -10,14 +10,14 @@
 
 import UIKit
 
-class AddPostViewController: UICollectionViewController  {
-    
+class AddPostViewController: UICollectionViewController {
+
     // MARK: - Public properties -
     var presenter: AddPostPresenterInterface!
     var scrollView = CropScrollView()
-    
+
     // MARK: - Lifecycle -
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.viewLoaded()
@@ -26,29 +26,36 @@ class AddPostViewController: UICollectionViewController  {
         setupCollectionView()
         setMainImage(item: 0)
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = true
     }
-    
+
     func setupScollView() {
         scrollView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.width)
         scrollView.backgroundColor = .black
     }
-    
+
     func setupNavigationBar() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .plain, target: self, action: #selector(pressedCancel))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Next", comment: "Next"), style: .plain, target: self, action: #selector(pressedNext))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Cancel", comment: "Cancel"),
+                                                           style: .plain,
+                                                           target: self,
+                                                           action: #selector(pressedCancel))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Next", comment: "Next"),
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(pressedNext))
     }
-    
+
     func setupCollectionView() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.pressedOnImage(_:)))
         collectionView.addGestureRecognizer(tap)
         collectionView.dataSource = self
         collectionView.isUserInteractionEnabled = true
         collectionView.backgroundColor = UIColor(rgb: 0xFAFAFA)
-        collectionView.register(CameraRollCollectionViewCell.self, forCellWithReuseIdentifier: CameraRollCollectionViewCell.identifier)
+        collectionView.register(CameraRollCollectionViewCell.self,
+                                forCellWithReuseIdentifier: CameraRollCollectionViewCell.identifier)
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.minimumInteritemSpacing = 1
@@ -58,55 +65,58 @@ class AddPostViewController: UICollectionViewController  {
         view.addSubview(scrollView)
         view.sendSubviewToBack(scrollView)
         view.sendSubviewToBack(scrollView.imageView)
-        
+
         let width: CGFloat = view.frame.width
         let offset: CGFloat = width
         collectionView?.frame = CGRect(x: 0, y: offset, width: width, height: view.frame.height )
     }
-    
+
      func captureVisibleRect() -> UIImage {
         var croprect = CGRect.zero
         let xOffset = (scrollView.imageToDisplay?.size.width)! / scrollView.contentSize.width
         let yOffset = (scrollView.imageToDisplay?.size.height)! / scrollView.contentSize.height
-        
+
         croprect.origin.x = scrollView.contentOffset.x * xOffset
         croprect.origin.y = scrollView.contentOffset.y * yOffset
-        
+
         let normalizedWidth = (scrollView.frame.width) / (scrollView.contentSize.width)
         let normalizedHeight = (scrollView.frame.height) / (scrollView.contentSize.height)
-        
+
         croprect.size.width = scrollView.imageToDisplay!.size.width * normalizedWidth
         croprect.size.height = scrollView.imageToDisplay!.size.height * normalizedHeight
-        
+
         let toCropImage = scrollView.imageView.image?.fixImageOrientation()
-        let cr: CGImage? = toCropImage?.cgImage?.cropping(to: croprect)
-        let cropped = UIImage(cgImage: cr!)
-        
+        let crop: CGImage? = toCropImage?.cgImage?.cropping(to: croprect)
+        let cropped = UIImage(cgImage: crop!)
+
         return cropped
     }
-    
+
     func setMainImage(item: Int) {
         if let posts = presenter.postList {
-            presenter.imageLoaded(with: posts[item], size: CGSize(width: view.frame.width, height: view.frame.width), completion: { (result) in
-                self.scrollView.imageToDisplay = (result as! UIImage)
+            presenter.imageLoaded(with: posts[item],
+                                  size: view.frame.size,
+                                  completion: { (result) in
+                guard let uiImage = result as? UIImage else { return }
+                self.scrollView.imageToDisplay = uiImage
             })
         }
     }
-   
+
     @objc func pressedOnImage(_ sender: UITapGestureRecognizer) {
         if let indexPath = collectionView.indexPathForItem(at: sender.location(in: collectionView)) {
             setMainImage(item: indexPath.row)
         }
     }
-    
+
     @objc func pressedNext() {
         presenter.pressedNext(with: captureVisibleRect())
     }
-    
+
     @objc func pressedCancel() {
         presenter.pressedCancel()
     }
-    
+
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let posts = presenter.postList {
             return posts.count
@@ -114,36 +124,50 @@ class AddPostViewController: UICollectionViewController  {
             return 9
         }
     }
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CameraRollCollectionViewCell.identifier, for: indexPath) as! CameraRollCollectionViewCell
+
+    override func collectionView(_ collectionView: UICollectionView,
+                                 cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CameraRollCollectionViewCell.identifier,
+                                                      for: indexPath) as? CameraRollCollectionViewCell
+        guard let unwrappedCell = cell else {
+            return UICollectionViewCell()
+        }
         if let posts = presenter.postList {
             let asset = posts[indexPath.row]
             presenter.imageLoaded(with: asset, size: CGSize(width: 120, height: 120), completion: { (result) in
-                cell.imageView.image = UIImage.cropToBounds(image: result as! UIImage, width: 120, height: 120, posY:0)
+                guard let uiImage = result as? UIImage else { return }
+                unwrappedCell.imageView.image = UIImage.cropToBounds(image: uiImage, width: 120, height: 120, posY: 0)
             })
-            return cell
+            return unwrappedCell
         } else {
-            cell.backgroundColor = UIColor(rgb: 0xEDEDED)
-            return cell
+            unwrappedCell.backgroundColor = UIColor(rgb: 0xEDEDED)
+            return unwrappedCell
         }
     }
-    
-    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+    override func collectionView(_ collectionView: UICollectionView,
+                                 layout collectionViewLayout: UICollectionViewLayout,
+                                 sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = view.frame.width * 0.32
         let height = view.frame.height * 0.179910045
         return CGSize(width: width, height: height)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 2.5
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
 }
@@ -151,4 +175,3 @@ class AddPostViewController: UICollectionViewController  {
 // MARK: - Extensions -
 extension AddPostViewController: AddPostViewInterface {
 }
-

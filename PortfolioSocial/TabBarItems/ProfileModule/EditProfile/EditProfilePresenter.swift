@@ -14,20 +14,21 @@ protocol EditProfileDelegate: AnyObject {
     func recieveNewData(updatedUserInformation: UserInformation)
 }
 
-
 class EditProfilePresenter {
-    
+
     // MARK: - Private properties -
-    
+
     private unowned let view: EditProfileViewInterface
     private let interactor: EditProfileInteractorInterface
     private let wireframe: EditProfileWireframeInterface
-    var delegate: EditProfileDelegate?
+    weak var delegate: EditProfileDelegate?
     var userInformation: UserInformation?
-    
+
     // MARK: - Lifecycle -
-    
-    init(view: EditProfileViewInterface, interactor: EditProfileInteractorInterface, wireframe: EditProfileWireframeInterface) {
+
+    init(view: EditProfileViewInterface,
+         interactor: EditProfileInteractorInterface,
+         wireframe: EditProfileWireframeInterface) {
         self.view = view
         self.interactor = interactor
         self.wireframe = wireframe
@@ -42,27 +43,27 @@ extension EditProfilePresenter: EditProfilePresenterInterface {
         view.removeAllViews()
         delegate?.recieveNewData(updatedUserInformation: userInformation!)
     }
-    
+
     func viewLoaded() {
         interactor.getUserInformation()
     }
-    
+
     func pressedCancel() {
         wireframe.viewDisappeared()
     }
-   
-    func recievedInformation(info: UserInformation){
+
+    func recievedInformation(info: UserInformation) {
         view.addProfileInformationForm(userInformation: info)
         view.updateProfileForm(info: info)
         userInformation = info
     }
-    
+
     func viewDisappeared() {
         wireframe.viewDisappeared()
     }
-    
+
     func pressedOn(label item: FormItems) {
-        wireframe.routeToEditProfileItem(with: item, userInformation: userInformation!, delegate: self)
+        wireframe.routeToEditItem(with: item, userInformation: userInformation!, delegate: self)
     }
     func updateProfilePhoto(image: NSObject) {
         interactor.updateProfilePhoto(image: image)

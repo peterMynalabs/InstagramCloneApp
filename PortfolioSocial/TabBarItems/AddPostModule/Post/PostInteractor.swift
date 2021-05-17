@@ -15,7 +15,7 @@ class PostInteractor {
     var postService: PostService?
     var presenter: PostPresenter?
     var profileService: ProfileService?
-    
+
     func updateNumberOfPosts() {
         profileService?.updateNumberOfPosts(forUID: User.current!.uid)
     }
@@ -28,12 +28,19 @@ extension PostInteractor: PostInteractorInterface {
         guard let user = User.current else {
             return
         }
-        postService?.create(for: image as! UIImage, with: caption, by: user.username, likeCount: 0, completion: { [weak self] (bool) in
+        guard let uiImage = image as? UIImage else {
+            return
+        }
+        postService?.create(for: uiImage,
+                            with: caption,
+                            by: user.username,
+                            likeCount: 0,
+                            completion: { [weak self] (bool) in
             if bool {
                 self?.updateNumberOfPosts()
                 self?.presenter?.createdPost()
             } else {
-                fatalError()
+                assertionFailure()
             }
         })
     }

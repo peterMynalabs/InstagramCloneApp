@@ -11,15 +11,14 @@
 import Foundation
 
 class ActivityPresenter {
-    
     // MARK: - Private properties -
-    
+
     private unowned let view: ActivityViewInterface
     private let interactor: ActivityInteractorInterface
     private let wireframe: ActivityWireframeInterface
     var resultArray: [[String]]?
     // MARK: - Lifecycle -
-    
+
     init(view: ActivityViewInterface, interactor: ActivityInteractorInterface, wireframe: ActivityWireframeInterface) {
         self.view = view
         self.interactor = interactor
@@ -30,32 +29,31 @@ class ActivityPresenter {
 // MARK: - Extensions -
 
 extension ActivityPresenter: ActivityPresenterInterface {
- 
-    
+
     func viewLoaded() {
         interactor.getEvents()
     }
-    
+
     func loadProfilePhoto(from username: String, completion: @escaping (String) -> Void) {
         interactor.getProfilePhoto(from: username, completion: { (result) in completion(result) })
     }
-    
+
     func loadFollowButton(from username: String, completion: @escaping (String, Bool) -> Void) {
         interactor.getUserUUID(from: username, completion: { (uuid, isFollowed) in completion(uuid, isFollowed) })
     }
-    
+
     func loadPost(from key: String, completion: @escaping (Post?) -> Void) {
         interactor.getPost(from: key, completion: { (post) in
             completion(post)
         })
     }
-    
-    func recievedEvents(events: [String : [String]]) {
+
+    func recievedEvents(events: [String: [String]]) {
         var formattedEvents = [[String]]()
         for (_, value) in events {
             formattedEvents.append(value)
         }
-        
+
         formattedEvents.sort {
             var first: Double = 0
             var second: Double = 0
@@ -70,17 +68,17 @@ extension ActivityPresenter: ActivityPresenterInterface {
         resultArray = formattedEvents
         view.updateEvents(events: formattedEvents)
     }
-    
+
     func pressedFollowButton(isFollowing: Bool, with uuid: String) {
         interactor.setFollowStatus(with: isFollowing, uuid: uuid)
     }
-    
+
     func pressedUsername(with username: String) {
-        interactor.getUserUUID(from: username, completion: { [weak self] (uuid, isFollowed) in
+        interactor.getUserUUID(from: username, completion: { [weak self] (uuid, _) in
             self?.wireframe.transitionToProfile(with: uuid)
         })
     }
-    
+
     func pressedImageView(posts: [Post]) {
         wireframe.transitioToPost(with: posts)
     }

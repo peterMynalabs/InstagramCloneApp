@@ -10,34 +10,28 @@
 
 import UIKit
 
-//There is some fishy things happening with NaviagtionControllers that I havent yet fixed. This being the main archtecture of the whole app, What do you think about it?
+enum RootTabBarsItem: Int {
 
-//I shamelessly stole this (the enum) from a previous project I worked on, not sure wether this is the best way to do it
-
-enum RootTabBarsItem : Int {
-    
     case home = 0
     case search
     case addPost
     case activity
     case profile
-    
+
     static var homeController: BaseWireframe?
     static var userSearchController: BaseWireframe?
     static var addPostController: BaseWireframe?
     static var activityController: BaseWireframe?
     static var profileController: BaseWireframe?
-    
-    
+
     static func initialize() {
         homeController =  HomeFeedWireframe.init()
         userSearchController = SearchViewWireframe.init()
         addPostController =  AddPostWireframe.init()
         activityController =  ActivityWireframe.init()
         profileController = ProfileScreenWireframe.init(uuid: "")
-        
     }
-    
+
     static func controllers() -> [UIViewController] {
         return [homeController!.viewController,
                 userSearchController!.viewController,
@@ -45,53 +39,39 @@ enum RootTabBarsItem : Int {
                 activityController!.viewController,
                 profileController!.viewController]
     }
-    
 }
+
 class TabBarWireframe: BaseWireframe {
-    
+
     // MARK: - Private properties -
-    var titles = ["Home","Search", "Post", "Liked", "Profile"]
+    var titles = ["Home", "Search", "Post", "Liked", "Profile"]
     var tabBarViewControllers = [UINavigationController]()
-    
+
     fileprivate weak var view: (UITabBarController)?
-    
+
     // MARK: - Module setup -
-    
+
     init(isFirstTime: Bool) {
         RootTabBarsItem.initialize()
         let moduleViewController = TabBarViewController()
         moduleViewController.isFirstTime = isFirstTime
         super.init(viewController: moduleViewController)
-                
-        var controllers = RootTabBarsItem.controllers()
-        for i in 0...controllers.count - 1 {
+
+        let controllers = RootTabBarsItem.controllers()
+        for controller in controllers {
             let navController = RootNavigationController()
-            navController.setViewControllers([controllers[i]], animated: false)
+            navController.setViewControllers([controller], animated: false)
             tabBarViewControllers.append(navController)
         }
         moduleViewController.selectedIndex = 4
         moduleViewController.viewControllers = tabBarViewControllers
-        
-//        for i in 0...titles.count - 1 {
-//            moduleViewController.viewControllers?[i].title = titles[i]
-//        }
-        
         let interactor = TabBarInteractor()
         let presenter = TabBarPresenter(view: moduleViewController, interactor: interactor, wireframe: self)
         moduleViewController.presenter = presenter
-
     }
-    
-    
 }
 
 // MARK: - Extensions -
 
 extension TabBarWireframe: TabBarWireframeInterface {
-    func transitionToLogIn() {
-       // let module = LoginWireframe()//
-        //module.viewController.modalPresentationStyle = .fullScreen
-      //  viewController.presentWireframe(module)
-  //      navigationController?.pushWireframeWithoutAnimation(module)
-    }
 }

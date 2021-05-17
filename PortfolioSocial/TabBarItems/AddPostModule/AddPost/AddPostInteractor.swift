@@ -22,15 +22,15 @@ extension AddPostInteractor: AddPostInteractorInterface {
         var postList = [PHAsset]()
 
         let assets = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: nil)
-        assets.enumerateObjects({ (object, count, stop) in
+        assets.enumerateObjects({ (object, _, _) in
             postList.append(object)
         })
-        
+
         postList.reverse()
         return postList
     }
-    
-    func getSpecificImage(with asset: PHAsset, size: CGSize, completion: @escaping (NSObject) -> Void)  {
+
+    func getSpecificImage(with asset: PHAsset, size: CGSize, completion: @escaping (NSObject) -> Void) {
         let manager = PHImageManager.default()
         manager.requestImage(for: asset,
                              targetSize: size,

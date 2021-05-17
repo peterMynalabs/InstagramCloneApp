@@ -21,40 +21,41 @@ class ProfileScreenInteractor {
 // MARK: - Extensions -
 
 extension ProfileScreenInteractor: ProfileScreenInteractorInterface {
-    
+
     func getUserInformation(with uuid: String) {
         profileService?.userInformation(for: uuid, completion: { [weak self]  (info) in
             self?.presenter?.recievedUserInformation(info: info)
         })
     }
-    
+
     func checkIfFollowing(with uuid: String, completion: @escaping (Bool) -> Void) {
         followService?.isUserFollowed(uuid, byCurrentUserWithCompletion: { (isFollowed) in
             completion(isFollowed)
         })
     }
-    
-    func getUserPosts(with uuid: String)  {
+
+    func getUserPosts(with uuid: String) {
         profileService?.posts(for: uuid) { [weak self] (posts) in
             self?.presenter?.recievedPosts(posts: posts)
         }
     }
-    
+
     func getUserStatistics(with uuid: String) {
-        followService?.getNumberOfFollowersAndFollowing(from: uuid, completion: {
-            [weak self] (follower, following) in
+        followService?.getNumberOfFollowersAndFollowing(from: uuid, completion: { [weak self] (follower, following) in
             self?.profileService?.getNumberOfPost(for: uuid, completion: { (postCount) in
-                self?.presenter?.recieveUserStatistics(statistics: UserStatistics(postCount: Int(postCount)!, followerCount: follower, followingCount: following))
+                self?.presenter?.recieveUserStatistics(statistics: UserStatistics(postCount: Int(postCount)!,
+                                                                                  followerCount: follower,
+                                                                                  followingCount: following))
             })
         })
     }
-    
+
     func getProfilePhoto(with uuid: String) {
-        profileService?.profileImage(for: uuid) { (image_url) in
-            self.presenter?.recievedProfileImage(with: image_url)
+        profileService?.profileImage(for: uuid) { (imageURL) in
+            self.presenter?.recievedProfileImage(with: imageURL)
         }
     }
-    
+
     func setFollowing(isFollowing: Bool, username: String) {
         followService?.setIsFollowing(!isFollowing, fromCurrentUserTo: username)
     }

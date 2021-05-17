@@ -15,11 +15,11 @@ class PostCollectionViewHeader: UICollectionReusableView {
         setupView()
         backgroundColor = UIColor(rgb: 0xFAFAFA)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     func setupView() {
         let seperatorViewDark = SeperatorLineView()
         seperatorViewDark.backgroundColor = .black
@@ -29,7 +29,7 @@ class PostCollectionViewHeader: UICollectionReusableView {
         seperatorViewDark.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         seperatorViewDark.rightAnchor.constraint(equalTo: centerXAnchor).isActive = true
         seperatorViewDark.heightAnchor.constraint(equalToConstant: 1).isActive = true
-        
+
         let seperatorViewHidden = SeperatorLineView()
         seperatorViewHidden.backgroundColor = .clear
         addSubview(seperatorViewHidden)
@@ -39,7 +39,6 @@ class PostCollectionViewHeader: UICollectionReusableView {
         seperatorViewHidden.widthAnchor.constraint(equalTo: seperatorViewDark.widthAnchor).isActive = true
         seperatorViewHidden.heightAnchor.constraint(equalToConstant: 1).isActive = true
 
-        
         let postIcon = UIImageView()
         postIcon.image = UIImage(named: "posts")
         postIcon.translatesAutoresizingMaskIntoConstraints = false
@@ -48,7 +47,7 @@ class PostCollectionViewHeader: UICollectionReusableView {
         postIcon.leftAnchor.constraint(equalTo: seperatorViewDark.centerXAnchor, constant: -11).isActive = true
         postIcon.widthAnchor.constraint(equalToConstant: 23).isActive = true
         postIcon.heightAnchor.constraint(equalToConstant: 23).isActive = true
-        
+
         let taggedIcon = UIImageView()
         taggedIcon.image = UIImage(named: "tagged")
         taggedIcon.translatesAutoresizingMaskIntoConstraints = false

@@ -11,9 +11,9 @@
 import Foundation
 
 class ProfileScreenPresenter: EditProfileDelegate {
-    
+
     // MARK: - Private properties -
-    
+
     private unowned let view: ProfileScreenViewInterface
     private let interactor: ProfileScreenInteractorInterface
     private let wireframe: ProfileScreenWireframeInterface
@@ -23,10 +23,11 @@ class ProfileScreenPresenter: EditProfileDelegate {
     var postList: [Post]?
     var currentUser: User?
     var numberOfPosts: Int?
-   
-    
+
     // MARK: - Lifecycle -
-    init(view: ProfileScreenViewInterface, interactor: ProfileScreenInteractorInterface, wireframe: ProfileScreenWireframeInterface) {
+    init(view: ProfileScreenViewInterface,
+         interactor: ProfileScreenInteractorInterface,
+         wireframe: ProfileScreenWireframeInterface) {
         self.view = view
         self.interactor = interactor
         self.wireframe = wireframe
@@ -36,27 +37,27 @@ class ProfileScreenPresenter: EditProfileDelegate {
 // MARK: - Extensions -
 
 extension ProfileScreenPresenter: ProfileScreenPresenterInterface {
-    
+
     func buttonLoaded(completion: @escaping (Bool) -> Void) {
         interactor.checkIfFollowing(with: uuid, completion: { (isFollowed) in
             completion(isFollowed)
         })
     }
-    
+
     func pressedEdit() {
         wireframe.routeToEdit(delegate: self, image: profileImageURL ?? "")
     }
-    
+
     func pressedFollow(isFollowing: Bool, username: String) {
         interactor.setFollowing(isFollowing: isFollowing, username: username)
     }
-    
+
     func headerViewExists() {
         interactor.getUserInformation(with: uuid)
         interactor.getProfilePhoto(with: uuid)
         interactor.getUserStatistics(with: uuid)
     }
-    
+
     func viewDidLoad() {
         guard let user = User.current  else {
             return
@@ -69,22 +70,22 @@ extension ProfileScreenPresenter: ProfileScreenPresenterInterface {
         }
         interactor.getUserPosts(with: uuid)
     }
-    
+
     func viewReloaded() {
         interactor.getUserPosts(with: uuid)
         interactor.getUserStatistics(with: uuid)
     }
-    
+
     func recievedPosts(posts: [Post]) {
         postList = posts
         view.updatePosts()
     }
-    
+
     func recievedUserInformation(info: UserInformation) {
         view.updateProfileForm(info: info)
         view.setupEditProfileButton()
     }
-    
+
     func recieveUserStatistics(statistics: UserStatistics) {
         self.view.setupUserStatisticView(with: statistics)
     }
@@ -95,7 +96,7 @@ extension ProfileScreenPresenter: ProfileScreenPresenterInterface {
             profileImageURL = imageURL
         }
     }
-    
+
     func selectedMenuItem(with selection: Menu) {
         switch selection {
         case .settings:

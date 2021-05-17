@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class CropScrollView: UIScrollView {
-    
+
     var imageView = UIImageView()
     var imageToDisplay: UIImage? = nil {
         didSet {
@@ -23,16 +23,16 @@ class CropScrollView: UIScrollView {
             updateLayout()
         }
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         viewConfigurations()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     func updateLayout() {
         imageView.center = center
         var frame = imageView.frame
@@ -44,7 +44,7 @@ class CropScrollView: UIScrollView {
         }
         imageView.frame = frame
     }
-    
+
     func zoom() {
         if zoomScale <= 1.0 {
             setZoomScale(zoomScaleWithNoWhiteSpaces(), animated: true)
@@ -53,7 +53,7 @@ class CropScrollView: UIScrollView {
         }
         updateLayout()
     }
-        
+
     private func viewConfigurations() {
         showsVerticalScrollIndicator = false
         showsHorizontalScrollIndicator = false
@@ -64,13 +64,12 @@ class CropScrollView: UIScrollView {
         maximumZoomScale = 5.0
         addSubview(imageView)
     }
-    
+
     private func sizeForImageToDisplay() -> CGSize {
         var actualWidth = imageToDisplay!.size.width
         var actualHeight = imageToDisplay!.size.height
         var imgRatio = actualWidth / actualHeight
         let maxRatio = frame.size.width / frame.size.height
-        
         if imgRatio != maxRatio {
             if imgRatio < maxRatio {
                 imgRatio = frame.size.height / actualHeight
@@ -89,7 +88,7 @@ class CropScrollView: UIScrollView {
 
         return CGSize(width: actualWidth, height: actualHeight)
     }
-    
+
     private func zoomScaleWithNoWhiteSpaces() -> CGFloat {
         let imageViewSize = imageView.bounds.size
         let scrollViewSize = bounds.size
@@ -99,11 +98,11 @@ class CropScrollView: UIScrollView {
     }
 }
 
-extension CropScrollView:UIScrollViewDelegate {
+extension CropScrollView: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return imageView
     }
-    
+
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
         updateLayout()
     }

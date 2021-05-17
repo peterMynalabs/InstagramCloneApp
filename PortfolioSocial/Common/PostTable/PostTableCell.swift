@@ -27,11 +27,13 @@ class PostTableCell: UITableViewCell {
     var dateLabel = UILabel()
     var liked: Bool?
     var likeCount = 0
-    let shimmerView = UIView(frame: CGRect(x: 0, y: 54, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width))
+    let shimmerView = UIView(frame: CGRect(x: 0,
+                                           y: 54,
+                                           width: UIScreen.main.bounds.width,
+                                           height: UIScreen.main.bounds.width))
 
     weak var delegate: PostActionCellDelegate?
 
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubview(shimmerView)
@@ -46,28 +48,29 @@ class PostTableCell: UITableViewCell {
         backgroundColor = UIColor(rgb: 0xFAFAFA)
 
     }
-    
+
     func setupTopNameButton(name: String) {
         topNameButton.username = name
         topNameButton.setupButton()
         topNameButton.sizeToFit()
         topNameButton.frame.origin = CGPoint(x: 52, y: (54 - topNameButton.frame.height) / 2)
     }
-    
+
     func setupProfileImage(info: Post) {
-        //this is a problem with my backend and I don't want to uncouple this from this cell because ideally I would iron it out
         UserService().getUUID(from: info.poster, completion: { (uuid) in
-            ProfileService().profileImage(for: uuid, completion: { [weak self] (image_url) in
-                self?.profileImage.sd_setImage(with:  URL(string: image_url), placeholderImage: UIImage(named: "defaultProfilePhoto"),  completed: nil)
+            ProfileService().profileImage(for: uuid, completion: { [weak self] (imageURL) in
+                self?.profileImage.sd_setImage(with: URL(string: imageURL),
+                                               placeholderImage: UIImage(named: "defaultProfilePhoto"),
+                                               completed: nil)
             })
         })
     }
-    
+
     func setupMainImageView(imageURL: String) {
         mainImageView.frame = CGRect(x: 0, y: 54, width: frame.width, height: frame.width)
         mainImageView.sd_setImage(with: URL(string: imageURL), completed: nil)
     }
-    
+
     func setupLikeButton(isLiked: Bool) {
         self.liked = isLiked
         likeButton.frame = CGRect(x: 7, y: frame.width + 54 + 9, width: 35, height: 31.5)
@@ -78,7 +81,7 @@ class PostTableCell: UITableViewCell {
         }
         likeButton.addTarget(self, action: #selector(pressedLiked), for: .touchDown)
     }
-    
+
     func setupBottonNameButton(name: String) {
         bottomNameButton.username = name
         bottomNameButton.setupButton()
@@ -86,21 +89,24 @@ class PostTableCell: UITableViewCell {
         let inset = 36 - bottomNameButton.frame.height
         bottomNameButton.titleLabel?.textAlignment = .left
         bottomNameButton.frame.origin = CGPoint(x: 14, y: 72 + frame.width + 54 - 3 - inset)
-        let sizeOfNameButton = bottomNameButton.titleLabel!.text!.sizeOfString(usingFont: UIFont.boldSystemFont(ofSize: 13))
-        bottomNameButton.frame.size = CGSize(width: (sizeOfNameButton.width > 44) ? sizeOfNameButton.width : 44, height: 36)
+        let font = UIFont.boldSystemFont(ofSize: 13)
+        let sizeOfNameButton = bottomNameButton.titleLabel!.text!.sizeOfString(usingFont: font)
+        bottomNameButton.frame.size = CGSize(width: (sizeOfNameButton.width > 44) ? sizeOfNameButton.width : 44,
+                                             height: 36)
 
     }
-    
+
     func setupLikeLabel(with liked: String) {
         likeCount = Int(liked)!
         likeLabel.frame = CGRect(x: 14, y: 48 + frame.width + 54, width: frame.width, height: 19)
         likeLabel.text = liked + " likes"
         likeLabel.font = UIFont.boldSystemFont(ofSize: 13)
     }
-    
+
     func setupCaptionLabel(caption: String) {
         let sizeOfSpace = " ".sizeOfString(usingFont: UIFont.systemFont(ofSize: 13))
-        let sizeOfNameButton = bottomNameButton.titleLabel!.text!.sizeOfString(usingFont: UIFont.boldSystemFont(ofSize: 13))
+        let font = UIFont.boldSystemFont(ofSize: 13)
+        let sizeOfNameButton = bottomNameButton.titleLabel!.text!.sizeOfString(usingFont: font)
         let numberOfSpacesNeeded = sizeOfNameButton.width / sizeOfSpace.width
         let insetString = String(repeating: " ", count: Int(numberOfSpacesNeeded) + 2)
 
@@ -113,18 +119,19 @@ class PostTableCell: UITableViewCell {
         captionLabel.sendSubviewToBack(bottomNameButton)
         captionLabel.frame.origin = CGPoint(x: 14, y: 72 + frame.width + 54)
     }
-    
+
     func setupDateLabel(date: Date, captionExists: Bool) {
         dateLabel.font = UIFont.systemFont(ofSize: 13)
         dateLabel.textColor = UIColor.black.withAlphaComponent(0.5)
-        let df = DateFormatter()
-        df.dateFormat = "dd MMMM yyyy"
-        let now = df.string(from: Date())
+        let datef = DateFormatter()
+        datef.dateFormat = "dd MMMM yyyy"
+        let now = datef.string(from: Date())
         dateLabel.text = now
         dateLabel.sizeToFit()
-        dateLabel.frame.origin = CGPoint(x: 14, y: 72 + frame.width + 60 + ((captionExists) ? captionLabel.frame.height : 0))
+        dateLabel.frame.origin = CGPoint(x: 14,
+                                         y: 72 + frame.width + 60 + ((captionExists) ? captionLabel.frame.height : 0))
     }
-    
+
     @objc func pressedLiked(_ sender: UIButton) {
         if liked! {
             likeButton.setImage(UIImage(named: "Like"), for: .normal)
@@ -140,16 +147,15 @@ class PostTableCell: UITableViewCell {
             } else {
                 likeLabel.text = String(likeCount + 1) + " likes"
             }
-
         }
-        
+
         delegate?.didTapLikeButton(sender, on: self)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
         profileImage.image = UIImage(named: "back")

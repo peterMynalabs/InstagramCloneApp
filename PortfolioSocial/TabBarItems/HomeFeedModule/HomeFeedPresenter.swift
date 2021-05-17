@@ -18,6 +18,7 @@ class HomeFeedPresenter {
     private let interactor: HomeFeedInteractorInterface
     private let wireframe: HomeFeedWireframeInterface
     var postList = [Post]()
+    var posts: [Post]?
     var likeService: LikeService?
     // MARK: - Lifecycle -
 
@@ -32,12 +33,7 @@ class HomeFeedPresenter {
 // MARK: - Extensions -
 
 extension HomeFeedPresenter: HomeFeedPresenterInterface {
-    var posts: [Post] {
-        get {
-            return postList
-        }
-    }
-     
+
     func viewLoaded() {
         let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
         if launchedBefore {
@@ -47,29 +43,27 @@ extension HomeFeedPresenter: HomeFeedPresenterInterface {
             wireframe.routeToLogIn()
         }
     }
-    
+
     func recievedTimeline(posts: [Post]) {
-        postList = posts
+        self.posts = posts
         view.updateTimeline(with: posts)
     }
-    
+
     func viewReloaded() {
         interactor.getTimeline()
     }
-    
+
     func pressedUsernameButton(with username: String) {
         interactor.getUUID(from: username)
     }
-    
+
     func recieved(uuid: String, isFollowed: Bool) {
         wireframe.routeToProfile(with: uuid, isFollowed: isFollowed)
     }
-    
+
     func likedPost(isLiked: Bool, post: Post, completion: @escaping (Bool) -> Void) {
         likeService?.setIsLiked(!post.isLiked, for: post) { (success) in
             completion(success)
         }
     }
 }
-
-

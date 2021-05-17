@@ -8,6 +8,6 @@
 import Foundation
 import UIKit
 
-class ImageTapGesture : UITapGestureRecognizer {
+class ImageTapGesture: UITapGestureRecognizer {
     var post: Post?
 }

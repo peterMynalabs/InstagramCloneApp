@@ -30,7 +30,4 @@ class TabBarPresenter {
 // MARK: - Extensions -
 
 extension TabBarPresenter: TabBarPresenterInterface {
-    func showLogin() {
-        wireframe.transitionToLogIn()
-    }
 }

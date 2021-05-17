@@ -20,7 +20,7 @@ class EditProfileItemInteractor {
 
 extension EditProfileItemInteractor: EditProfileItemInteractorInterface {
     func checkUsername(username: String) {
-        userService?.checkUsername(username: username){ [weak self] (bool) in
+        userService?.checkUsername(username: username) { [weak self] (bool) in
             if !bool {
                 self?.presenter.pressedDone(with: username)
             } else {

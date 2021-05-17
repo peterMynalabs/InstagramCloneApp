@@ -9,20 +9,20 @@ import Foundation
 import UIKit
 
 class UpdateProfilePhotoViewController: UIViewController {
-    
+
     let popupBox: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .green
         return view
     }()
-    
+
     override func viewDidLoad() {
         view.backgroundColor = UIColor.black.withAlphaComponent(0.3)
         self.definesPresentationContext = true
         setupViews()
     }
-    
+
     func setupViews() {
         view.addSubview(popupBox)
         popupBox.heightAnchor.constraint(equalToConstant: 200).isActive = true
@@ -31,4 +31,3 @@ class UpdateProfilePhotoViewController: UIViewController {
         popupBox.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
 }
-

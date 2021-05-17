@@ -19,7 +19,7 @@ class PostWireframe: BaseWireframe {
     init(with image: NSObject) {
         let moduleViewController = PostViewController()
         super.init(viewController: moduleViewController)
-        
+
         let interactor = PostInteractor()
         interactor.postService = PostService()
         interactor.profileService = ProfileService()
@@ -28,7 +28,6 @@ class PostWireframe: BaseWireframe {
         presenter.image = image
         moduleViewController.presenter = presenter
     }
-
 }
 
 // MARK: - Extensions -

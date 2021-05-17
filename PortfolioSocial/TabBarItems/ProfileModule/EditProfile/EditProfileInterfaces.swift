@@ -11,7 +11,7 @@
 import UIKit
 
 protocol EditProfileWireframeInterface: WireframeInterface {
-    func routeToEditProfileItem(with item: FormItems, userInformation: UserInformation, delegate: EditProfileItemDelegate)
+    func routeToEditItem(with item: FormItems, userInformation: UserInformation, delegate: EditProfileItemDelegate)
     func viewDisappeared()
 }
 

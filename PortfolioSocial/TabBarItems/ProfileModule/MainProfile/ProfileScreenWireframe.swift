@@ -39,12 +39,12 @@ extension ProfileScreenWireframe: ProfileScreenWireframeInterface {
         let module = EditProfileWireframe(delegate: delegate, image: image)
         navigationController?.pushWireframe(module)
     }
-    
+
     func routeToSettings() {
         let module = ProfileSettingsWireframe()
         navigationController?.pushWireframeWithoutAnimation(module)
     }
-    
+
     func routeToLogIn() {
         let module = LoginWireframe()
         navigationController?.pushWireframeWithoutAnimation(module)

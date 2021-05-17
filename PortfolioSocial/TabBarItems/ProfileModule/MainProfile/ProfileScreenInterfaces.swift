@@ -30,7 +30,7 @@ protocol ProfileScreenPresenterInterface: PresenterInterface {
     var postList: [Post]? { get set }
     func buttonLoaded(completion: @escaping (Bool) -> Void)
     func pressedEdit()
-    func pressedFollow(isFollowing: Bool, username: String) 
+    func pressedFollow(isFollowing: Bool, username: String)
     func viewReloaded()
     func selectedMenuItem(with selection: Menu)
     func headerViewExists()

@@ -16,11 +16,13 @@ class SearchViewPresenter {
     private unowned let view: SearchViewViewInterface
     private let interactor: SearchViewInteractorInterface
     private let wireframe: SearchViewWireframeInterface
-    private var infoList: [User]?
+    var info: [User]?
 
     // MARK: - Lifecycle -
 
-    init(view: SearchViewViewInterface, interactor: SearchViewInteractorInterface, wireframe: SearchViewWireframeInterface) {
+    init(view: SearchViewViewInterface,
+         interactor: SearchViewInteractorInterface,
+         wireframe: SearchViewWireframeInterface) {
         self.view = view
         self.interactor = interactor
         self.wireframe = wireframe
@@ -30,32 +32,26 @@ class SearchViewPresenter {
 // MARK: - Extensions -
 
 extension SearchViewPresenter: SearchViewPresenterInterface {
-    var info: [User]? {
-        get { return infoList }
-    }
-    
     func viewReloaded() {
         interactor.getAllUsers()
     }
-    
+
     func recievedUsers(users: [User]) {
-        infoList = users
+        info = users
         view.updateUsers(users: users)
     }
-    
+
     func clickedUser(with uuid: String, isFollowing: Bool) {
         interactor.followUser(isFollowing: isFollowing, fromCurrentUserTo: uuid)
     }
-    
+
     func clickedUserName(with uuid: String) {
         wireframe.transitionToProfile(with: uuid)
     }
-    
+
     func cellLoaded(with uuid: String, completion: @escaping (String, Bool) -> Void) {
         interactor.getUserInfo(with: uuid, completion: { (image, isFollowed) in
             completion(image, isFollowed)
         })
-        
     }
 }
-

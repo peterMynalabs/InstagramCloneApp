@@ -20,53 +20,5 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "AB816A82-3821-44B1-BFD8-1465F9C2CE91"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PortfolioSocial/TabBarItems/ActivityModule/ActivityPresenter.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
-            landmarkName = "loadProfilePhoto(from:completion:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "AB816A82-3821-44B1-BFD8-1465F9C2CE91 - 7c9eb92a997deda0"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "PortfolioSocial.ActivityPresenter.loadProfilePhoto(from: Swift.String, completion: (Swift.String) -&gt; ()) -&gt; ()"
-                  moduleName = "PortfolioSocial"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/petershaburov/Desktop/profolioProject1/PortfolioSocial/TabBarItems/ActivityModule/ActivityPresenter.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "40"
-                  endingLineNumber = "40"
-                  offsetFromSymbolStart = "52">
-               </Location>
-               <Location
-                  uuid = "AB816A82-3821-44B1-BFD8-1465F9C2CE91 - 7383777a18e13d7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.String) -&gt; () in PortfolioSocial.ActivityPresenter.loadProfilePhoto(from: Swift.String, completion: (Swift.String) -&gt; ()) -&gt; ()"
-                  moduleName = "PortfolioSocial"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/petershaburov/Desktop/profolioProject1/PortfolioSocial/TabBarItems/ActivityModule/ActivityPresenter.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "40"
-                  endingLineNumber = "40"
-                  offsetFromSymbolStart = "41">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

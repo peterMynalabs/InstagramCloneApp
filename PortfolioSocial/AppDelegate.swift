@@ -7,26 +7,25 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
 import AVKit
 import Photos
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
-    var window: UIWindow?
-    
 
-    
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    var window: UIWindow?
+
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         FirebaseApp.configure()
         setRootViewController()
         askForPermissions()
         setupAppearance()
-        
         return true
     }
-    
+
     func setRootViewController() {
         let defaults = UserDefaults.standard
 
@@ -39,16 +38,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             isFirstTime = true
         }
-        
+
         window?.rootViewController = TabBarWireframe.init(isFirstTime: isFirstTime).viewController
         window?.makeKeyAndVisible()
     }
-    
+
     func askForPermissions() {
         let photos = PHPhotoLibrary.authorizationStatus()
         if photos == .notDetermined {
             PHPhotoLibrary.requestAuthorization({status in
-                if status == .authorized{
+                if status == .authorized {
                     print("good")
                 } else {
                     print("bad")
@@ -56,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             })
         }
     }
-    
+
     func setupAppearance() {
         if #available(iOS 13.0, *) {
             UITabBar.appearance().barTintColor = UIColor.white

@@ -9,28 +9,26 @@ import Foundation
 import UIKit
 import SDWebImage
 
-protocol PostCollectionViewParrallaxHeaderDelegate {
+protocol PostCollectionViewParrallaxHeaderDelegate: class {
     func pressedEdit()
     func pressedFollow(with username: String, isFollowing: Bool)
 }
 
 class PostCollectionViewParrallaxHeader: UICollectionReusableView {
-    
+
     var editProfileButton = EditProfileButton()
     var userInformationView = UserInformationStack()
     var userStatisticsStack = UserStatisticContainerView()
     var profilePhoto = UIImageView()
     var followButton = FollowUnfollowButton()
     var pinnableSeperatorView = UIView()
-    var parrallaxDelegate: PostCollectionViewParrallaxHeaderDelegate?
+    weak var parrallaxDelegate: PostCollectionViewParrallaxHeaderDelegate?
     static let Kind = "StickyHeaderLayoutAttributesKind"
     static let reuseIdentifierHeader = "header"
 
     var onRefresh : (() -> Void)?
     var onCancel : (() -> Void)?
 
-
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.clipsToBounds = true
@@ -45,11 +43,11 @@ class PostCollectionViewParrallaxHeader: UICollectionReusableView {
         setupProfilePhoto()
 
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
+
     func setupProfilePhoto() {
         profilePhoto.image = UIImage(named: "back")?.withRoundedCorners(radius: profilePhoto.frame.width / 2)
         profilePhoto.layer.cornerRadius = profilePhoto.frame.width / 2
@@ -63,11 +61,14 @@ class PostCollectionViewParrallaxHeader: UICollectionReusableView {
         profilePhoto.widthAnchor.constraint(equalToConstant: 95).isActive = true
         profilePhoto.heightAnchor.constraint(equalToConstant: 95).isActive = true
     }
-    
+
     func updateProfileImage(with image: String) {
-        profilePhoto.sd_setImage(with: URL(string: image), placeholderImage: UIImage(named: "defaultProfilePhoto"), options: .highPriority, completed: nil)
+        profilePhoto.sd_setImage(with: URL(string: image),
+                                 placeholderImage: UIImage(named: "defaultProfilePhoto"),
+                                 options: .highPriority,
+                                 completed: nil)
     }
-    
+
     func setupUserStatisticView(with info: UserStatistics) {
         userStatisticsStack.removeFromSuperview()
         userStatisticsStack = UserStatisticContainerView(frame: .zero, stats: info)
@@ -78,7 +79,7 @@ class PostCollectionViewParrallaxHeader: UICollectionReusableView {
         userStatisticsStack.widthAnchor.constraint(equalToConstant: 225.5).isActive = true
         userStatisticsStack.heightAnchor.constraint(equalToConstant: 32).isActive = true
     }
-    
+
     func setupUserInformationView(with info: UserInformation) {
         if !userInformationView.isDescendant(of: self) {
             userInformationView = UserInformationStack(frame: .zero, withInformation: info)
@@ -99,7 +100,7 @@ class PostCollectionViewParrallaxHeader: UICollectionReusableView {
             userInformationView.layoutIfNeeded()
         }
     }
-    
+
     func setupEditProfileButton() {
         editProfileButton = EditProfileButton(frame: .zero)
         addSubview(editProfileButton)
@@ -110,7 +111,7 @@ class PostCollectionViewParrallaxHeader: UICollectionReusableView {
         editProfileButton.widthAnchor.constraint(equalTo: widthAnchor, constant: -32).isActive = true
         editProfileButton.heightAnchor.constraint(equalToConstant: 29).isActive = true
     }
-    
+
     func setupFollowButton(with uuid: String) {
         addSubview(followButton)
         followButton.uuid = uuid
@@ -121,44 +122,40 @@ class PostCollectionViewParrallaxHeader: UICollectionReusableView {
         followButton.rightAnchor.constraint(equalTo: centerXAnchor, constant: -32).isActive = true
         followButton.heightAnchor.constraint(equalToConstant: 29).isActive = true
     }
-    
+
     @objc func pressedFollowButton(sender: Any) {
-        let button: FollowUnfollowButton = sender as! FollowUnfollowButton
+        guard let button = sender as? FollowUnfollowButton else { return }
         if button.titleLabel?.text == "Following" {
             button.follow()
             parrallaxDelegate?.pressedFollow(with: button.uuid, isFollowing: true)
         } else {
             button.unfollow()
             parrallaxDelegate?.pressedFollow(with: button.uuid, isFollowing: false)
-
         }
-       
-        
     }
-    
+
     func startRefreshAnimation() {
-        
         onRefresh?()
     }
-    
+
     func cancelRefreshAnimation() {
         onCancel?()
     }
-    func finishRefreshAnimation(onCompletion : (()->Void)? = nil) {
+
+    func finishRefreshAnimation(onCompletion : (() -> Void)? = nil) {
         onCompletion?()
     }
-    
+
     override func prepareForReuse() {
         onRefresh = nil
         onCancel = nil
     }
-    
+
     @objc func onPressEditProfile() {
         parrallaxDelegate?.pressedEdit()
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
     }
-    
 }

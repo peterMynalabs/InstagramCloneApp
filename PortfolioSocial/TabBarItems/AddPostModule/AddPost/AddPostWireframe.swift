@@ -21,7 +21,6 @@ class AddPostWireframe: BaseWireframe {
         super.init(viewController: moduleViewController)
 
         let interactor = AddPostInteractor()
-        
         let presenter = AddPostPresenter(view: moduleViewController, interactor: interactor, wireframe: self)
         interactor.presenter = presenter
         moduleViewController.presenter = presenter
@@ -33,10 +32,10 @@ class AddPostWireframe: BaseWireframe {
 
 extension AddPostWireframe: AddPostWireframeInterface {
     func routeBack() {
-        viewController.tabBarController?.tabBar.isHidden = false 
+        viewController.tabBarController?.tabBar.isHidden = false
         viewController.tabBarController?.selectedIndex = 4
     }
-    
+
     func routeToPost(with image: NSObject) {
         let wireframe = PostWireframe(with: image)
         navigationController?.pushWireframe(wireframe)

@@ -11,24 +11,23 @@
 import UIKit
 
 class HomeFeedViewController: UIViewController {
-    
+
     // MARK: - Public properties -
-    
+
     var presenter: HomeFeedPresenterInterface!
     var tableView = PostTableView()
     var refreshControl = UIRefreshControl()
-    
+
     // MARK: - Lifecycle -
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Home"
-   
         setupTableView()
         setupRefreshControl()
         presenter.viewLoaded()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         presenter.viewReloaded()
         navigationController?.navigationBar.isHidden = false
@@ -39,14 +38,14 @@ class HomeFeedViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         tableView.addSubview(refreshControl)
     }
-    
+
     func setupTableView() {
         tableView = PostTableView(frame: view.frame, style: .plain)
         tableView.tableViewDelegate = self
         tableView.showsVerticalScrollIndicator = false
         view.addSubview(tableView)
     }
-    
+
     @objc func refresh(_ sender: AnyObject) {
         presenter.viewReloaded()
     }
@@ -68,23 +67,27 @@ extension HomeFeedViewController: PostTableViewDelegate {
     func didTapLikeButton(_ likeButton: UIButton, on cell: PostTableCell) {
         guard let indexPath = tableView.indexPath(for: cell)
         else { return }
-        
+
         likeButton.isUserInteractionEnabled = false
-        let post = presenter.posts[indexPath.row]
-        
+
+        guard let posts = presenter.posts else {
+            return
+        }
+        let post = posts[indexPath.row]
+
         presenter.likedPost(isLiked: !post.isLiked, post: post, completion: { (success) in
             defer {
                 likeButton.isUserInteractionEnabled = true
             }
-            
+
             guard success else { return }
-            
+
             post.likeCount += !post.isLiked ? 1 : -1
             post.isLiked = !post.isLiked
-            
+
             guard let cell = self.tableView.cellForRow(at: indexPath) as? PostTableCell
             else { return }
-            
+
             DispatchQueue.main.async {
                 cell.liked = post.isLiked
                 cell.likeCount = post.likeCount

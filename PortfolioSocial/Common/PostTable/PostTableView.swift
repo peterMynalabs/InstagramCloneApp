@@ -10,17 +10,17 @@
 
 import UIKit
 
-protocol PostTableViewDelegate {
+protocol PostTableViewDelegate: class {
     func clickedUsername(with username: String)
     func didTapLikeButton(_ likeButton: UIButton, on cell: PostTableCell)
 }
 
 class PostTableView: UITableView {
-    
+
     // MARK: - Public properties -
     var tableView = UITableView()
     var postList: [Post]?
-    var tableViewDelegate: PostTableViewDelegate?
+    weak var tableViewDelegate: PostTableViewDelegate?
     // MARK: - Lifecycle -
 
     override init(frame: CGRect, style: UITableView.Style) {
@@ -32,24 +32,26 @@ class PostTableView: UITableView {
         allowsSelection = false
         backgroundColor = UIColor(rgb: 0xFAFAFA)
     }
-    
+
     convenience init(frame: CGRect, style: UITableView.Style, posts: [Post]) {
         self.init(frame: frame, style: style)
         self.postList = posts
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     func updateWithPostsList(posts: [Post]) {
         postList = posts
         self.reloadData()
     }
-    
 
     @objc func pressedOnUsername(sender: Any) {
-        let name : String = ((sender as! UsernameButton).username)!
+        guard let button = sender as? UsernameButton else {
+            return
+        }
+        let name: String = button.username!
         tableViewDelegate?.clickedUsername(with: name)
     }
 }
@@ -59,46 +61,45 @@ extension PostTableView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return postList?.count ?? 9
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let myCell = tableView.dequeueReusableCell(withIdentifier: PostTableCell.identifier, for: indexPath) as! PostTableCell
-        
-        if let posts = postList {
-            myCell.shimmerView.removeFromSuperview()
-            myCell.shimmerView.stopShimmeringEffect()
-            myCell.contentView.isUserInteractionEnabled = false
-            myCell.frame.size = frame.size
-            
-            let slice = posts[indexPath.row]
-            
-            myCell.setupProfileImage(info: slice)
-            myCell.setupTopNameButton(name: slice.poster)
-            myCell.setupMainImageView(imageURL: slice.imageURL)
-            myCell.setupLikeButton(isLiked: slice.isLiked)
-            myCell.delegate = self
-            if !slice.caption.isEmpty {
-                myCell.setupBottonNameButton(name: slice.poster)
-                myCell.setupCaptionLabel(caption: slice.caption)
-                myCell.setupDateLabel(date: slice.creationDate, captionExists: true)
-            } else {
-                myCell.setupDateLabel(date: slice.creationDate, captionExists: false)
-            }
-            
-            myCell.backgroundColor = .white
-            myCell.setupLikeLabel(with: String(slice.likeCount))
-            myCell.topNameButton.tag = indexPath.row
-            myCell.bottomNameButton.tag = indexPath.row
-            myCell.topNameButton.addTarget(self, action: #selector(pressedOnUsername(sender:)), for: .touchDown)
-            myCell.bottomNameButton.addTarget(self, action: #selector(pressedOnUsername(sender:)), for: .touchDown)
-        } else {
-            myCell.shimmerView.backgroundColor = UIColor(rgb: 0xEDEDED)
-            myCell.shimmerView.startShimmeringEffect()
+        let myCell = tableView.dequeueReusableCell(withIdentifier: PostTableCell.identifier,
+                                                   for: indexPath) as? PostTableCell
+        guard let cell = myCell else {
+            return UITableViewCell()
         }
-        myCell.backgroundColor = UIColor(rgb: 0xFAFAFA)
-        
-        
-        return myCell
-        
+
+        if let posts = postList {
+            cell.shimmerView.removeFromSuperview()
+            cell.shimmerView.stopShimmeringEffect()
+            cell.contentView.isUserInteractionEnabled = false
+            cell.frame.size = frame.size
+
+            let slice = posts[indexPath.row]
+            cell.setupProfileImage(info: slice)
+            cell.setupTopNameButton(name: slice.poster)
+            cell.setupMainImageView(imageURL: slice.imageURL)
+            cell.setupLikeButton(isLiked: slice.isLiked)
+            cell.delegate = self
+            if !slice.caption.isEmpty {
+                cell.setupBottonNameButton(name: slice.poster)
+                cell.setupCaptionLabel(caption: slice.caption)
+                cell.setupDateLabel(date: slice.creationDate, captionExists: true)
+            } else {
+                cell.setupDateLabel(date: slice.creationDate, captionExists: false)
+            }
+            cell.backgroundColor = .white
+            cell.setupLikeLabel(with: String(slice.likeCount))
+            cell.topNameButton.tag = indexPath.row
+            cell.bottomNameButton.tag = indexPath.row
+            cell.topNameButton.addTarget(self, action: #selector(pressedOnUsername(sender:)), for: .touchDown)
+            cell.bottomNameButton.addTarget(self, action: #selector(pressedOnUsername(sender:)), for: .touchDown)
+        } else {
+            cell.shimmerView.backgroundColor = UIColor(rgb: 0xEDEDED)
+            cell.shimmerView.startShimmeringEffect()
+        }
+        cell.backgroundColor = UIColor(rgb: 0xFAFAFA)
+        return cell
     }
 }
 
@@ -106,5 +107,4 @@ extension PostTableView: PostActionCellDelegate {
     func didTapLikeButton(_ likeButton: UIButton, on cell: PostTableCell) {
         tableViewDelegate?.didTapLikeButton(likeButton, on: cell)
     }
-
 }

@@ -25,14 +25,12 @@ protocol HomeFeedPresenterInterface: PresenterInterface {
     func viewReloaded()
     func pressedUsernameButton(with username: String)
     func recieved(uuid: String, isFollowed: Bool)
-    var posts: [Post] { get }
+    var posts: [Post]? { get set}
     func likedPost(isLiked: Bool, post: Post, completion: @escaping (Bool) -> Void)
-    
 }
 
 protocol HomeFeedInteractorInterface: InteractorInterface {
     func getTimeline()
     func getUUID(from username: String)
     func likedPost(isLiked: Bool, post: Post, completion: @escaping (Bool) -> Void)
-
 }

@@ -16,7 +16,7 @@ protocol EditProfileItemWireframeInterface: WireframeInterface {
 
 protocol EditProfileItemViewInterface: ViewInterface {
     func setCurrentInformation(labelText: String, information: String, count: Int)
-    func setChangeUserName(username: String, count: Int) 
+    func setChangeUserName(username: String, count: Int)
 }
 
 protocol EditProfileItemPresenterInterface: PresenterInterface {

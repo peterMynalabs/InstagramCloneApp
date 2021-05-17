@@ -32,11 +32,11 @@ class HomeFeedWireframe: BaseWireframe {
 // MARK: - Extensions -
 
 extension HomeFeedWireframe: HomeFeedWireframeInterface {
-    func routeToProfile(with uuid: String, isFollowed: Bool){
+    func routeToProfile(with uuid: String, isFollowed: Bool) {
         let wireframe = ProfileScreenWireframe(uuid: uuid)
         self.navigationController?.pushWireframe(wireframe)
     }
-    
+
     func routeToLogIn() {
         let module = LoginWireframe()
         navigationController?.pushWireframeWithoutAnimation(module)

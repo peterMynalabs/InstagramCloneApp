@@ -15,16 +15,16 @@ class UsersTableViewCell: UITableViewCell {
     var nameLabel = UILabel()
     var backgroundViewForImage = UIView()
     var followUnfollowButton = FollowUnfollowButton()
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubview(backgroundViewForImage)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func prepareForReuse() {
     }
 }

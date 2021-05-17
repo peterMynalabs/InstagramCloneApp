@@ -33,23 +33,20 @@ extension LoginPresenter: LoginPresenterInterface {
     func pressedButton() {
         view.setupFirebaseAuth()
         view.removeAllViews()
-        
     }
 
     func checkUser(user: FIRUser) {
         interactor.getUserState(user: user)
     }
-    
+
     func userExists() {
         wireframe.transitionToProfile()
     }
+
     func setupFirebaseAuth() {
-        
     }
-    
+
     func transitionToNewUser() {
         wireframe.transitionToNewUser()
     }
 }
-    
-

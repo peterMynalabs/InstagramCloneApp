@@ -64,9 +64,7 @@ open class ImagePicker: NSObject {
             alertController.popoverPresentationController?.permittedArrowDirections = [.down, .up]
         }
 
-       // self.presentationController?.present(alertController, animated: true)
         self.pickerController.sourceType = .photoLibrary
-        
         self.presentationController?.present(self.pickerController, animated: true)
 
     }

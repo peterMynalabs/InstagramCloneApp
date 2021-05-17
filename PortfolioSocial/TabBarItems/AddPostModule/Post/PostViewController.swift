@@ -13,31 +13,37 @@ class PostViewController: UIViewController {
         view.backgroundColor = .white
         presenter.viewLoaded()
     }
-    
+
     var imageView: UIImageView = {
         var imageView = UIImageView()
         return imageView
     }()
-    
+
     var textView = TextView()
-    
+
     func setupNavigationBar() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Back", comment: "Back"), style: .plain, target: self, action: #selector(pressedBack))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Share", comment: "Share"), style: .plain, target: self, action: #selector(pressedShare))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Back", comment: "Back"),
+                                                           style: .plain,
+                                                           target: self,
+                                                           action: #selector(pressedBack))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Share", comment: "Share"),
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(pressedShare))
     }
-    
+
     @objc func pressedBack() {
         presenter.pressedBack()
     }
-    
+
     @objc func pressedShare() {
         navigationItem.rightBarButtonItem?.action = nil
         removeAllViews()
         presenter.pressedShare(with: imageView.image!, and: textView.textView.text)
-        
+
     }
     func removeAllViews() {
-        for view in self.view.subviews{
+        for view in self.view.subviews {
             view.removeFromSuperview()
         }
         self.showSpinner(onView: view)
@@ -60,7 +66,10 @@ extension PostViewController: PostViewInterface {
             imageView.frame = CGRect(x: 15, y: navBarHeight + 35, width: 75, height: 75)
             textView.frame = CGRect(x: 100, y: 0, width: view.frame.width - 110, height: view.frame.height)
         }
-        textView.setInformation(labelText: "Write A Caption", information: nil, count: 180, navigationBarHeight: Int(navBarHeight))
+        textView.setInformation(labelText: "Write A Caption",
+                                information: nil,
+                                count: 180,
+                                navigationBarHeight: Int(navBarHeight))
         view.addSubview(textView)
         view.addSubview(imageView)
     }

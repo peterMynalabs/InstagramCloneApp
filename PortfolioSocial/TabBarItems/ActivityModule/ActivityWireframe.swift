@@ -38,10 +38,10 @@ extension ActivityWireframe: ActivityWireframeInterface {
     func transitionToProfile(with uuid: String) {
         navigationController?.pushWireframe(ProfileScreenWireframe(uuid: uuid))
     }
-    
+
     func transitioToPost(with post: [Post]) {
-        let vc = ProfilePostViewController()
-        vc.postList = post
-        navigationController?.pushViewController(vc, animated: true)
+        let viewController = ProfilePostViewController()
+        viewController.postList = post
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }

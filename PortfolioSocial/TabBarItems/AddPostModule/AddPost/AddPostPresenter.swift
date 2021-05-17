@@ -18,7 +18,7 @@ class AddPostPresenter {
     private unowned let view: AddPostViewInterface
     private let interactor: AddPostInteractorInterface
     private let wireframe: AddPostWireframeInterface
-    var posts: [PHAsset]?
+    var postList: [PHAsset]?
 
     // MARK: - Lifecycle -
 
@@ -32,24 +32,19 @@ class AddPostPresenter {
 // MARK: - Extensions -
 
 extension AddPostPresenter: AddPostPresenterInterface {
-    var postList: [PHAsset]? {
-        get {
-            return posts
-        }
-    }
- 
+
     func viewLoaded() {
-        posts = interactor.requestImages()
+        postList = interactor.requestImages()
     }
-    
+
     func pressedCancel() {
         wireframe.routeBack()
     }
-    
+
     func pressedNext(with image: NSObject) {
         wireframe.routeToPost(with: image)
     }
-    
+
     func imageLoaded(with asset: PHAsset, size: CGSize, completion: @escaping (NSObject) -> Void) {
         interactor.getSpecificImage(with: asset, size: size, completion: { (result) in
             completion(result)

@@ -26,20 +26,18 @@ class LoginWireframe: BaseWireframe {
         interactor.userService = UserService()
         moduleViewController.presenter = presenter
     }
-
 }
 
 // MARK: - Extensions -
 
 extension LoginWireframe: LoginWireframeInterface {
-   
+
     func transitionToNewUser() {
       let register = CreateUserWireframe()
         navigationController?.pushWireframeWithoutAnimation(register)
     }
-    
+
     func transitionToProfile() {
         navigationController?.popToRootViewController(animated: false)
-
     }
 }

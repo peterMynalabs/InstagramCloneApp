@@ -16,17 +16,17 @@ struct UserInformation {
 }
 
 class UserInformationStack: UIView {
-    
+
     var information: UserInformation?
     let nameLabel = UILabel()
     let occupationLabel = UILabel()
     let bioLabel = UILabel()
     var height: CGFloat = 0
-    
+
    override init(frame: CGRect) {
         super.init(frame: frame)
     }
-    
+
     convenience init(frame: CGRect, withInformation information: UserInformation) {
         self.init(frame: frame)
         self.information = information
@@ -34,18 +34,18 @@ class UserInformationStack: UIView {
         addOccupationLabel()
         addBioLabel()
     }
-    
+
     override var intrinsicContentSize: CGSize {
         return CGSize(width: frame.width, height: height)
     }
-    
+
     func updateInformationStack(info: UserInformation) {
         height = 0
         updateNameLabel(with: info.name, and: nameLabel.font)
         updateOccupationLabel(with: info.occupation, and: occupationLabel.font)
         updateBioLabel(with: info.bio, and: bioLabel.font)
     }
-    
+
     func addNameLabel() {
         let nameLabelFont = UIFont.boldSystemFont(ofSize: 12)
         nameLabel.font = nameLabelFont
@@ -54,7 +54,7 @@ class UserInformationStack: UIView {
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(nameLabel)
     }
- 
+
     func updateNameLabel(with text: String?, and font: UIFont) {
         nameLabel.text = text!
         nameLabel.frame.size.width = frame.width
@@ -73,7 +73,7 @@ class UserInformationStack: UIView {
         occupationLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(occupationLabel)
     }
-    
+
     func updateOccupationLabel(with text: String?, and font: UIFont) {
         occupationLabel.text = text!
         occupationLabel.frame.size.width = frame.width
@@ -83,7 +83,7 @@ class UserInformationStack: UIView {
         occupationLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5).isActive = true
         occupationLabel.widthAnchor.constraint(equalTo: widthAnchor, constant: -36).isActive = true
     }
-    
+
     func addBioLabel() {
         let bioLabelFont = UIFont.systemFont(ofSize: 12)
         bioLabel.font = bioLabelFont
@@ -93,7 +93,7 @@ class UserInformationStack: UIView {
         bioLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(bioLabel)
     }
-    
+
     func updateBioLabel(with text: String?, and font: UIFont) {
         bioLabel.text = text!
         bioLabel.frame.size.width = frame.width

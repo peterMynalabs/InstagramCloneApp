@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-
 class TextView: UIView {
     private let maxHeight: CGFloat = 100
     private let minHeight: CGFloat = 50
@@ -23,18 +22,16 @@ class TextView: UIView {
         label.font = UIFont.boldSystemFont(ofSize: 13)
         return label
     }()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         textView.font = UIFont.systemFont(ofSize: 13)
-       
-
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     func setInformation(labelText: String, information: String?, count: Int, navigationBarHeight: Int) {
         numCount = count
         textView.text = information ?? ""
@@ -56,15 +53,14 @@ class TextView: UIView {
         mainLabel.frame.size.width = 30
         addSubview(mainLabel)
     }
-    
-   
 }
+
 extension TextView: UITextViewDelegate {
     func textViewShouldReturn(_ textField: UITextView) -> Bool {
-        textField.resignFirstResponder();
-        return true;
+        textField.resignFirstResponder()
+        return true
     }
-    
+
     func textViewDidChange(_ textView: UITextView) {
         var height = self.minHeight
         if textView.contentSize.height <= self.minHeight {
@@ -74,7 +70,7 @@ extension TextView: UITextViewDelegate {
         } else {
             height = textView.contentSize.height
         }
-        
+
         if textView.text.widthOfString(usingFont: UIFont.systemFont(ofSize: 13)) - 10 > textView.frame.width {
             textView.frame.size.height = height
             seperatorLine.frame.origin.y = textView.frame.maxY + 5
@@ -83,17 +79,17 @@ extension TextView: UITextViewDelegate {
             seperatorLine.frame.origin.y = textView.frame.maxY - 5
             mainLabel.frame.origin.y = textView.frame.maxY - 8
         }
-      
+
         UIView.animate(withDuration: 0.1) {
             self.layoutIfNeeded()
         }
     }
+
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let currentText = textView.text ?? ""
         guard let stringRange = Range(range, in: currentText) else { return false }
         let updatedText = currentText.replacingCharacters(in: stringRange, with: text)
         mainLabel.text = String(numCount - updatedText.count)
-        
         return updatedText.count < numCount
     }
 }
